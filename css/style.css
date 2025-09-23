@@ -186,13 +186,18 @@ p.lead {
 
 .nav-menu.is-scrolling,
 .nav-menu.menu-is-open {
-    background-color: rgb(74, 13, 143);
-    background: -moz-linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
-    background: -webkit-linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
-    background: linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
-    -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #f9a825, #2e7d32); /* yellow to green */
+
+:root {
+  --bs-navbar-color: rgba(255, 255, 255, 0.85);      /* white text */
+  --bs-navbar-hover-color: #ffffff;                  /* solid white on hover */
+  --bs-navbar-disabled-color: rgba(255, 255, 255, 0.5);
+  --bs-navbar-active-color: #ffffff;                 /* active = white */
+  --bs-navbar-brand-color: #ffffff;                  /* brand in white */
+  --bs-navbar-brand-hover-color: #f1f1f1;            /* softer white */
+  --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.3);
+}
+
 }
 
 .nav-menu.is-scrolling {
@@ -249,7 +254,7 @@ header {
 .tagline {
     font-size: 23px;
     font-weight: 300;
-    color: #ffb8f6;
+    color: #f9a825; /* strong golden yellow */
     max-width: 800px;
     margin: 0 auto;
 }

@@ -13,11 +13,14 @@ URI     : https://colorlib.com
  -->
 
 <head>
-    <title>MobApp - App Landing Page Template</title>
+    <title>Asly International College Inc.</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="ASLYLOGO3.png">
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Mobland - Mobile App Landing Page Template">
+    <meta name="description" content="Asly International College Inc.">
     <meta name="keywords" content="HTML5, bootstrap, mobile, app, landing, ios, android, responsive">
 
     <!-- Font -->
@@ -39,6 +42,7 @@ URI     : https://colorlib.com
     <link href="css/style.css" rel="stylesheet">
 </head>
 
+
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
 
     <!-- Nav Menu -->
@@ -48,7 +52,7 @@ URI     : https://colorlib.com
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
-                        <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="img-fluid"
+                        <a class="navbar-brand" href="index.html"><img src="images/AICI.png" class="img-fluid"
                                 alt="logo"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
                             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span
@@ -75,15 +79,16 @@ URI     : https://colorlib.com
     <header class="bg-gradient" id="home">
         <div class="container mt-5">
             <h1>Mobile App Landing Page Template</h1>
-            <p class="tagline">The one and only solution for any kind of mobila app landing needs. Just change the
-                screenshots and texts and you are good to go. </p>
+            <p class="tagline">A school where education meets technology for the digital age.</p>
         </div>
-        <div class="img-holder mt-3"><img src="images/iphonex.png" alt="phone" class="img-fluid"></div>
+        <div class="img-holder mt-3"><img src="images/ASLYLOGO3.png" alt="phone" class="img-fluid"></div>
     </header>
 
     <div class="client-logos my-5">
         <div class="container text-center">
-            <img src="images/client-logos.png" alt="client logos" class="img-fluid">
+            <img src="images/deped.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
+            <img src="images/ched-logo.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
+            <img src="images/tesda.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
         </div>
     </div>
 
@@ -93,8 +98,7 @@ URI     : https://colorlib.com
         <div class="container">
 
             <div class="section-title">
-                <small>HIGHLIGHTS</small>
-                <h3>Features you love</h3>
+                <h3>What we offer</h3>
             </div>
 
 
@@ -105,7 +109,7 @@ URI     : https://colorlib.com
                             <div class="media">
                                 <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
                                 <div class="media-body">
-                                    <h4 class="card-title">Simple</h4>
+                                    <h4 class="card-title">Senior High School</h4>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         Integer rutrum, urna eu pellentesque </p>
                                 </div>
@@ -119,7 +123,7 @@ URI     : https://colorlib.com
                             <div class="media">
                                 <span class="ti-settings gradient-fill ti-3x mr-3"></span>
                                 <div class="media-body">
-                                    <h4 class="card-title">Customize</h4>
+                                    <h4 class="card-title">College</h4>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         Integer rutrum, urna eu pellentesque </p>
                                 </div>
@@ -133,7 +137,7 @@ URI     : https://colorlib.com
                             <div class="media">
                                 <span class="ti-lock gradient-fill ti-3x mr-3"></span>
                                 <div class="media-body">
-                                    <h4 class="card-title">Secure</h4>
+                                    <h4 class="card-title">Tesda Training</h4>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         Integer rutrum, urna eu pellentesque </p>
                                 </div>
@@ -158,7 +162,7 @@ URI     : https://colorlib.com
                     <h2>Discover our App</h2>
                     <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel
                         exercitationem eveniet vero maxime ratione </p>
-                    <a href="#" class="btn btn-primary">Read more</a>
+                    <a href="#communication" class="btn btn-primary">Read more</a>
                 </div>
             </div>
             <div class="perspective-phone">
@@ -639,4 +643,3 @@ URI     : https://colorlib.com
 </body>
 
 </html>
-
