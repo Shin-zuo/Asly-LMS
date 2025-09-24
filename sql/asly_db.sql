@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `course` varchar(100) NOT NULL,
   PRIMARY KEY (`courseId`),
   KEY `educationId` (`educationId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table asly_db.course: 0 rows
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `educationlevel` (
   `id` int NOT NULL,
   `educationLabel` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table asly_db.educationlevel: 0 rows
 /*!40000 ALTER TABLE `educationlevel` DISABLE KEYS */;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `enrollees` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `courseId` (`courseId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table asly_db.enrollees: 0 rows
 /*!40000 ALTER TABLE `enrollees` DISABLE KEYS */;
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table asly_db.users: 1 rows
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;

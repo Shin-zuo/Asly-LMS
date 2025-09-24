@@ -1,7 +1,17 @@
 <?php
+// session_start();
 
+// // Debug: check session contents
+// // Check if user is logged in
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: ../../../auth/login.php");
+//     exit();
+// }
 
+// // Store username from session
+// $username = $_SESSION['username'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +58,9 @@
 </head>
 <body>
     <!-- Header -->
+
+    
+  
         <header class="admin-header">
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                 <div class="container-fluid">
@@ -145,14 +158,17 @@
                                      width="24" 
                                      height="24" 
                                      class="rounded-circle me-2">
-                                <span class="d-none d-md-inline">John Doe</span>
+                                <span class="d-none d-md-inline">
+    <?= htmlspecialchars($_SESSION['username'] ?? 'Guest') ?>
+</span>
+
                                 <i class="bi bi-chevron-down ms-1"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                                <li><a class="dropdown-item" href="../../../auth/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -166,7 +182,7 @@
                 <nav class="sidebar-nav">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="./index.html">
+                            <a class="nav-link active" href="./index.php">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -190,9 +206,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./orders.html">
+                            <a class="nav-link" href="./userManagement.php">
                                 <i class="bi bi-bag-check"></i>
-                                <span>Orders</span>
+                                <span>Users Management</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./courseManagement.php">
+                                <i class="bi bi-ui-checks"></i>
+                                <span>Course Management</span>
+                                
                             </a>
                         </li>
                         <li class="nav-item">

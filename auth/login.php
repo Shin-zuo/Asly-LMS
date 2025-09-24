@@ -1,11 +1,11 @@
 <?php
 require_once '../config/database.php';
-
-session_start(); // start session at the top
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+    $username   = trim($_POST['username']);
+    $password   = trim($_POST['password']);
+    $rememberMe = isset($_POST['remember']); // checkbox
 
     // Check if username exists in database
     $sql = "SELECT id, userType, username, password FROM users WHERE username = ?";
@@ -23,11 +23,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['username']  = $user['username'];
             $_SESSION['userType']  = $user['userType'];
+            $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
 
-            // Redirect to dashboard (you can change per userType if needed)
-            header("Location: /mobapp-master/mobapp-master/admin/Bootstrap-Admin-Template/dist-modern/index.php");
-exit();
+            // Handle Remember Me
+            if ($rememberMe) {
+                $token = bin2hex(random_bytes(32)); // secure token
+                $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
 
+                // Store in DB
+                $insert = $conn->prepare("INSERT INTO user_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
+                $insert->bind_param("iss", $user['id'], $token, $expires);
+                $insert->execute();
+
+                // Store in cookie (30 days)
+                setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true);
+            }
+
+            // Redirect based on user type
+            switch ($user['userType']) {
+                case 'Admin':
+                    header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
+                    break;
+                case 'Student':
+                    header("Location: ../student/dashboard.php");
+                    break;
+                case 'Teacher':
+                    header("Location: ../teacher/dashboard.php");
+                    break;
+                default:
+                    header("Location: ../auth/login.php"); // fallback
+                    break;
+            }
+            exit();
         } else {
             $error = "Invalid username or password.";
         }
@@ -36,6 +63,7 @@ exit();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +75,7 @@ exit();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 
 
@@ -60,8 +89,14 @@ exit();
 </head>
 
 <body>
+
   <div class="login-dark">
+
      <form method="post">
+      
+<a href="../index.php" class="btn btn-link text-decoration-none" style="color:#234C6A;">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
       <h2 class="sr-only">Login Form</h2>
       <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
       <?php if (!empty($error)): ?>
@@ -73,6 +108,11 @@ exit();
       <div class="form-group">
         <input class="form-control" type="password" name="password" placeholder="Password" required>
       </div>
+      <div class="form-group">
+  <input type="checkbox" name="remember" id="remember">
+  <label for="remember">Remember Me</label>
+</div>
+
       <div class="form-group">
         <button class="btn btn-primary btn-block" type="submit">Log In</button>
       </div>

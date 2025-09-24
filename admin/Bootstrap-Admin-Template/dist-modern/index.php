@@ -1,5 +1,35 @@
 <?php
+session_start();
+require_once '../../../config/database.php'; // make sure path is correct
 
+// If no active session, try auto-login with remember_token
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
+    $token = $_COOKIE['remember_token'];
+
+    $sql = "SELECT ut.user_id, u.username, u.userType
+            FROM user_tokens ut
+            JOIN users u ON ut.user_id = u.id
+            WHERE ut.token = ? AND ut.expires_at > NOW()";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        // Restore session
+        $_SESSION['user_id']  = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['userType'] = $user['userType'];
+    }
+}
+
+// If still no session, force login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../../auth/login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
@@ -48,6 +78,14 @@
             </div>
         </div>
     </div>
+
+    
+  <?php if (isset($_SESSION['welcome_msg'])): ?>
+    <script>
+      alert("<?= htmlspecialchars($_SESSION['welcome_msg']); ?>");
+    </script>
+    <?php unset($_SESSION['welcome_msg']); // clear after showing ?>
+  <?php endif; ?>
 
     <!-- Main Wrapper -->
     <div class="admin-wrapper" id="admin-wrapper">
