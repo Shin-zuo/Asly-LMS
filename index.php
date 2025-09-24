@@ -16,7 +16,7 @@ URI     : https://colorlib.com
     <title>Asly International College Inc.</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="ASLYLOGO3.png">
-    
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,7 +39,7 @@ URI     : https://colorlib.com
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style15.css" rel="stylesheet">
 </head>
 
 
@@ -78,7 +78,10 @@ URI     : https://colorlib.com
 
     <header class="bg-gradient" id="home">
         <div class="container mt-5">
-            <h1>Mobile App Landing Page Template</h1>
+            </br>
+            </br>
+            </br>
+            </br>
             <p class="tagline">A school where education meets technology for the digital age.</p>
         </div>
         <div class="img-holder mt-3"><img src="images/ASLYLOGO3.png" alt="phone" class="img-fluid"></div>
@@ -89,6 +92,10 @@ URI     : https://colorlib.com
             <img src="images/deped.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
             <img src="images/ched-logo.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
             <img src="images/tesda.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
+            </br>
+            </br>
+            </br>
+            </br>
         </div>
     </div>
 
@@ -98,7 +105,7 @@ URI     : https://colorlib.com
         <div class="container">
 
             <div class="section-title">
-                <h3>What we offer</h3>
+                <h3 style="color: #f9a825;">What we offer</h3>
             </div>
 
 
@@ -107,11 +114,15 @@ URI     : https://colorlib.com
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
+                                <span class="mr-3">
+                                    <img src="images/deped.png" alt="DepEd Logo" style="height:25px; width:auto;">
+                                </span>
                                 <div class="media-body">
                                     <h4 class="card-title">Senior High School</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
+                                    <p class="card-text">Asly International College Inc. offers the Information and Communications Technology strand under
+                                        its Senior High School program. The ICT strand provides students with a strong foundation in computer systems,
+                                        programming, networking, and digital applications. It is designed to equip learners with both theoretical knowledge
+                                        and practical skills that are essential in today’s technology-driven world.</p>
                                 </div>
                             </div>
                         </div>
@@ -121,11 +132,15 @@ URI     : https://colorlib.com
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-settings gradient-fill ti-3x mr-3"></span>
+                                <span class="mr-3">
+                                    <img src="images/ched-logo.png" alt="CHED Logo" style="height:35px; width:auto;">
+                                </span>
                                 <div class="media-body">
                                     <h4 class="card-title">College</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
+                                    <p class="card-text">Asly International College Inc. also offers computer-related courses in college,
+                                        designed to provide students with advanced knowledge and practical skills in the field of information technology.
+                                        These programs focus on areas such as computer systems, programming, networking, and software development,
+                                        ensuring that graduates are well-prepared to meet the demands of the modern digital workplace.</p>
                                 </div>
                             </div>
                         </div>
@@ -135,11 +150,15 @@ URI     : https://colorlib.com
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-lock gradient-fill ti-3x mr-3"></span>
+                                <span class="mr-3">
+                                    <img src="images/tesda.png" alt="CHED Logo" style="height:35px; width:auto;">
+                                </span>
                                 <div class="media-body">
                                     <h4 class="card-title">Tesda Training</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
+                                    <p class="card-text">Asly International College Inc. offers a variety of TESDA-accredited training programs
+                                        that provide students with practical skills and nationally recognized certifications. Among these programs
+                                        are Web Development, Java Programming, Computer Systems Servicing, and Central Sterile Services. Each course
+                                        is designed to equip learners with industry-relevant competencies through hands-on training.</p>
                                 </div>
                             </div>
                         </div>
@@ -159,14 +178,14 @@ URI     : https://colorlib.com
             <div class="row">
                 <div class="col-lg-6 offset-lg-6">
                     <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
-                    <h2>Discover our App</h2>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel
-                        exercitationem eveniet vero maxime ratione </p>
-                    <a href="#communication" class="btn btn-primary">Read more</a>
+                    <h2>Learning Today, Leading Tomorrow</h2>
+                    <p class="mb-4">At Asly International College Inc., this belief inspires our
+                         Vision and Mission to shape learners into future leaders. </p>
+                    <a href="#featuress" class="btn btn-primary">Read more</a>
                 </div>
             </div>
             <div class="perspective-phone">
-                <img src="images/perspective.png" alt="perspective phone" class="img-fluid">
+                <img src="images/Graduation.png" alt="perspective phone" class="img-fluid" style="width:600px; height:auto;">
             </div>
         </div>
 
@@ -174,32 +193,33 @@ URI     : https://colorlib.com
     <!-- // end .section -->
 
 
-    <div class="section light-bg">
+    <div class="section light-bg" id="featuress">
         <div class="container">
             <div class="section-title">
-                <small>FEATURES</small>
-                <h3>Do more with our app</h3>
+        
+                <h3>Driven by values, </br>defined by excellence.</h3>
             </div>
 
             <ul class="nav nav-tabs nav-justified" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#communication">Communication</a>
+                    <a class="nav-link active" data-toggle="tab" href="#OurVision">Our </br> Vision</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#schedule">Scheduling</a>
+                    <a class="nav-link" data-toggle="tab" href="#OurMission">Our </br> Mission</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
+                    <a class="nav-link" data-toggle="tab" href="#TesdaTraining"> Tesda </br> Training</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#livechat">Live Chat</a>
+                    <a class="nav-link" data-toggle="tab" href="#SHSStrand"> SHS </br> Strand</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="communication">
+                <div class="tab-pane fade show active" id="OurVision">
                     <div class="d-flex flex-column flex-lg-row">
-                        <img src="images/graphic.png" alt="graphic"
-                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <img src="images/Our Vision.png" alt="graphic"
+                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
+                            style="width: 223px; height: auto;">
                         <div>
 
                             <h2>Communicate with ease</h2>
@@ -220,7 +240,7 @@ URI     : https://colorlib.com
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="schedule">
+                <div class="tab-pane fade" id="OurMission">
                     <div class="d-flex flex-column flex-lg-row">
                         <div>
                             <h2>Scheduling when you want</h2>
@@ -239,11 +259,12 @@ URI     : https://colorlib.com
                                 aliquet vulputate aliquam.
                             </p>
                         </div>
-                        <img src="images/graphic.png" alt="graphic"
-                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <img src="images/OurMission.png" alt="graphic"
+                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
+                            style="width: 223px; height: auto;">
                     </div>
                 </div>
-                <div class="tab-pane fade" id="messages">
+                <div class="tab-pane fade" id="TesdaTraining">
                     <div class="d-flex flex-column flex-lg-row">
                         <img src="images/graphic.png" alt="graphic"
                             class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
@@ -266,7 +287,7 @@ URI     : https://colorlib.com
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="livechat">
+                <div class="tab-pane fade" id="SHSStrand">
                     <div class="d-flex flex-column flex-lg-row">
                         <div>
                             <h2>Live chat when you needed</h2>
@@ -301,15 +322,14 @@ URI     : https://colorlib.com
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="images/dualphone.png" alt="dual phone" class="img-fluid">
+                    <img src="images/walking.png" alt="dual phone" class="img-fluid" style="width:600px; height:auto;">
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div>
-                        <div class="box-icon"><span class="ti-rocket gradient-fill ti-3x"></span></div>
-                        <h2>Launch your App</h2>
+                        <h2>Unlock your full potential with us - your future starts here!</h2>
                         <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel
                             exercitationem eveniet vero maxime ratione </p>
-                        <a href="#" class="btn btn-primary">Read more</a>
+                        <a href="#steps" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -322,14 +342,14 @@ URI     : https://colorlib.com
 
     <div class="section light-bg">
 
-        <div class="container">
+        <div class="container" id ="steps">
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
                     <ul class="list-unstyled ui-steps">
                         <li class="media">
                             <div class="circle-icon mr-4">1</div>
                             <div class="media-body">
-                                <h5>Create an Account</h5>
+                                <h5>Learn with us</h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
                                     pellentesque pretium obcaecati vel exercitationem </p>
                             </div>
@@ -337,7 +357,7 @@ URI     : https://colorlib.com
                         <li class="media my-4">
                             <div class="circle-icon mr-4">2</div>
                             <div class="media-body">
-                                <h5>Share with friends</h5>
+                                <h5>Build your future</h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
                                     pellentesque pretium obcaecati vel exercitationem eveniet</p>
                             </div>
@@ -345,7 +365,7 @@ URI     : https://colorlib.com
                         <li class="media">
                             <div class="circle-icon mr-4">3</div>
                             <div class="media-body">
-                                <h5>Enjoy your life</h5>
+                                <h5>Achieve your dreams</h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
                                     pellentesque pretium obcaecati vel exercitationem </p>
                             </div>
@@ -353,7 +373,7 @@ URI     : https://colorlib.com
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <img src="images/iphonex.png" alt="iphone" class="img-fluid">
+                    <img src="images/Marin_Kitagawa_Anime_Infobox.png" alt="school" class="img-fluid">
                 </div>
 
             </div>
@@ -367,8 +387,8 @@ URI     : https://colorlib.com
     <div class="section">
         <div class="container">
             <div class="section-title">
-                <small>TESTIMONIALS</small>
-                <h3>What our Customers Says</h3>
+</br>
+                <h3>Our Students Feedback</h3>
             </div>
 
             <div class="testimonials owl-carousel">
@@ -407,15 +427,15 @@ URI     : https://colorlib.com
     <div class="section light-bg" id="gallery">
         <div class="container">
             <div class="section-title">
-                <small>GALLERY</small>
-                <h3>App Screenshots</h3>
+                <h3>Our Facilities
+                </h3>
             </div>
 
             <div class="img-gallery owl-carousel owl-theme">
-                <img src="images/screen1.jpg" alt="image">
-                <img src="images/screen2.jpg" alt="image">
-                <img src="images/screen3.jpg" alt="image">
-                <img src="images/screen1.jpg" alt="image">
+                <img src="images/1.png" alt="image">
+                <img src="images/2.png" alt="image">
+                <img src="images/3.png" alt="image">
+                <img src="images/4.png" alt="image">
             </div>
 
         </div>

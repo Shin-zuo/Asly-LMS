@@ -55,13 +55,13 @@ h1 {
 h2 {
     font-size: 45px;
     font-weight: 300;
-    color: #633991;
+    color: #f9a825;
     letter-spacing: -1px;
     margin-bottom: 1rem;
 }
 
 h3 {
-    color: #633991;
+    color: #f9a825;
     font-size: 33px;
     font-weight: 500;
 }
@@ -69,13 +69,13 @@ h3 {
 h4 {
     font-size: 20px;
     font-weight: 500;
-    color: #633991;
+    color: #f9a825;
 }
 
 h5 {
     font-size: 28px;
     font-weight: 300;
-    color: #633991;
+    color: #f9a825;
     margin-bottom: 0.7rem;
 }
 
@@ -110,10 +110,10 @@ p.lead {
 
 .btn-primary {
     border-radius: 3px;
-    background-image: -moz-linear-gradient( 122deg, #e54595 0%, #fd378e 100%);
-    background-image: -webkit-linear-gradient( 122deg, #e54595 0%, #fd378e 100%);
-    background-image: -ms-linear-gradient( 122deg, #e54595 0%, #fd378e 100%);
-    background-image: linear-gradient( 122deg, #e54595 0%, #fd378e 100%);
+    background-image: -moz-linear-gradient( 122deg, #fddb3a 0%, #28a745 100%);
+    background-image: -webkit-linear-gradient( 122deg, #fddb3a 0%, #28a745 100%);
+    background-image: -ms-linear-gradient( 122deg, #fddb3a 0%, #28a745 100%);
+    background-image: linear-gradient( 122deg, #fddb3a 0%, #28a745 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
     font-weight: 500;
     padding: 0.6rem 2rem;
@@ -126,7 +126,7 @@ p.lead {
 .btn-primary:not([disabled]):not(.disabled).active,
 .btn-primary:not([disabled]):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
-    background-image: linear-gradient( 122deg, #fd378e 0%, #e54595 100%);
+    background-image: linear-gradient( 122deg, #fddb3a 0%, #28a745 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
     color: #FFF;
 }
@@ -150,7 +150,7 @@ p.lead {
 }
 
 .light-bg {
-    background-color: #faf6fb;
+    background-color: #fffef1;
 }
 
 .section {
@@ -258,6 +258,10 @@ header {
     max-width: 800px;
     margin: 0 auto;
 }
+/* recolor class */
+.recolor {
+  filter: hue-rotate(200deg) saturate(200%) brightness(90%);
+}
 
 .img-holder {
     height: 0;
@@ -283,12 +287,11 @@ header {
 
 /* FEATURES
 ----------------------*/
-
 .gradient-fill:before {
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    color: #ffeb3b; /* fallback yellow */
+    background: -moz-linear-gradient(top, #ffeb3b 0%, #4caf50 100%);
+    background: -webkit-linear-gradient(top, #ffeb3b 0%, #4caf50 100%);
+    background: linear-gradient(to bottom, #ffeb3b 0%, #4caf50 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -312,15 +315,15 @@ header {
 
 .card.features:before {
     content: "";
-    position: absolute;
-    width: 3px;
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
-    top: 0;
-    bottom: 0;
-    left: 0;
+position: absolute;
+width: 3px;
+color: #ffeb3b; /* fallback */
+background: -moz-linear-gradient(top, #ffeb3b 0%, #4caf50 100%);
+background: -webkit-linear-gradient(top, #ffeb3b 0%, #4caf50 100%);
+background: linear-gradient(to bottom, #ffeb3b 0%, #4caf50 100%);
+top: 0;
+bottom: 0;
+left: 0;
 }
 
 .card-text {
@@ -388,6 +391,7 @@ header {
 .perspective-phone {
     position: relative;
     z-index: -1;
+    top: -70px; /* move 30px higher */
 }
 
 @media (min-width:992px) {
@@ -430,17 +434,17 @@ header {
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     padding: 1rem 1rem;
-    border-color: #faf6fb #faf6fb #FFF;
-    font-size: 19px;
-    color: #b5a4c8;
-    background: #f5eff7;
+border-color: #faf6fb #faf6fb #FFF;
+font-size: 19px;
+color: #f7a649;         /* soft green text */
+background: #fff9c4;    /* pastel yellow background */
 }
 
 .nav-tabs .nav-link.active {
-    background: #FFF;
-    border-top-width: 3px;
-    border-color: #ce75b4 #faf6fb #FFF;
-    color: #633991;
+ background: #ffffff; /* keep clean white */
+border-top-width: 3px;
+border-color: #aed581 #faf6fb #ffffff; /* pastel green top border */
+color: #7cb342; /* soft green text */
 }
 
 
@@ -617,7 +621,11 @@ header {
 ----------------------*/
 
 .social-icons {
-    text-align: right;
+    position: absolute;   /* take it out of the content flow */
+    right: 20px;          /* push to the far right edge */
+    top: 10px;            /* adjust this value to place it where you want */
+    display: flex;        /* arrange icons in a row */
+    gap: 10px;            /* space between icons */
 }
 
 .social-icons a {
@@ -625,13 +633,14 @@ header {
     box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.05);
     width: 50px;
     height: 50px;
-    display: inline-block;
-    text-align: center;
-    line-height: 50px;
-    margin: 0 0.3rem;
+    display: flex;                /* centers icon inside box */
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
     color: #f4c9e2;
     transition: all 0.3s ease;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 .social-icons a:hover {

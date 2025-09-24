@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['userType']  = $user['userType'];
 
             // Redirect to dashboard (you can change per userType if needed)
-            header("Location: /mobapp-master/mobapp-master/admin/Bootstrap-Admin-Template/dist-modern/index.php");
+            header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
 exit();
 
         } else {
