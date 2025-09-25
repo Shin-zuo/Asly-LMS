@@ -39,7 +39,7 @@ URI     : https://colorlib.com
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <link href="css/style15.css" rel="stylesheet">
+    <link href="css/style152.css" rel="stylesheet">
 </head>
 
 
@@ -208,10 +208,10 @@ URI     : https://colorlib.com
                     <a class="nav-link" data-toggle="tab" href="#OurMission">Our </br> Mission</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#TesdaTraining"> Tesda </br> Training</a>
+                    <a class="nav-link" data-toggle="tab" href="#TesdaTraining"> Our  </br> Philosophy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#SHSStrand"> SHS </br> Strand</a>
+                    <a class="nav-link" data-toggle="tab" href="#SHSStrand"> Our </br> Core Values</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -259,15 +259,16 @@ URI     : https://colorlib.com
                                 aliquet vulputate aliquam.
                             </p>
                         </div>
-                        <img src="images/OurMission.png" alt="graphic"
+                        <img src="images/Ourmission.png" alt="graphic"
                             class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
-                            style="width: 223px; height: auto;">
+                            style="width: 225px; height: auto;">
                     </div>
                 </div>
                 <div class="tab-pane fade" id="TesdaTraining">
                     <div class="d-flex flex-column flex-lg-row">
-                        <img src="images/graphic.png" alt="graphic"
-                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                           <img src="images/CoreValues.png" alt="graphic"
+                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
+                            style="width: 223px; height: auto;">
                         <div>
                             <h2>Realtime Messaging service</h2>
                             <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills.
@@ -276,7 +277,7 @@ URI     : https://colorlib.com
                                 pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                                 Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
                                 congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent
-                                quis facilisis elit. Sed condimentum neque quis ex porttitor,
+                                quis facilisis elit. Sed cwondimentum neque quis ex porttitor,
                             </p>
                             <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros.
                                 Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu
@@ -306,8 +307,9 @@ URI     : https://colorlib.com
                                 aliquet vulputate aliquam.
                             </p>
                         </div>
-                        <img src="images/graphic.png" alt="graphic"
-                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                           <img src="images/philosophy.png" alt="graphic"
+                            class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
+                            style="width: 223px; height: auto;">
                     </div>
                 </div>
             </div>
@@ -629,9 +631,9 @@ URI     : https://colorlib.com
                 </div>
                 <div class="col-lg-6">
                     <div class="social-icons">
-                        <a href="#"><span class="ti-facebook"></span></a>
-                        <a href="#"><span class="ti-twitter-alt"></span></a>
-                        <a href="#"><span class="ti-instagram"></span></a>
+                        <a href="https://www.facebook.com/edu.aitci"><span class="ti-facebook"></span></a>
+                        <a href="https://twitter.com/edu_aitci"><span class="ti-twitter-alt"></span></a>
+                        <a href="https://www.instagram.com/edu.aitci"><span class="ti-instagram"></span></a>
                     </div>
                 </div>
             </div>
