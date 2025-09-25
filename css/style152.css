@@ -37,12 +37,12 @@ body {
 }
 
 a {
-    color: #e38cb7;
+    color: #f3bb61;
 }
 
 a:hover,
 a:focus {
-    color: #d6619c;
+    color: #f9a825;
 }
 
 h1 {
@@ -84,12 +84,20 @@ p {
 }
 
 p.lead {
-    color: #e38cb7;
+    background: linear-gradient(to right, orange, green);
+    -webkit-background-clip: text; /* For Safari/Chrome */
+    -webkit-text-fill-color: transparent;
+    background-clip: text; /* Standard */
+    color: transparent; /* fallback */
     margin-bottom: 2rem;
 }
 
 .text-primary {
-    color: #e38cb7 !important;
+    background: linear-gradient(to right, orange, green) !important;
+    -webkit-background-clip: text !important;  /* for Chrome/Safari */
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;          /* for Firefox */
+    color: transparent !important;
 }
 
 .light-font {
@@ -133,15 +141,17 @@ p.lead {
 
 .btn-light {
     border-radius: 3px;
-    background: #FFF;
+    background: linear-gradient(90deg, orange, green);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
     font-size: 14px;
     font-weight: 500;
-    color: #633991;
+    color: #fff; /* white text looks better on gradient */
     margin: 0.5rem;
     padding: 0.7rem 1.6rem;
     line-height: 1.8;
+    border: none; /* optional: cleaner look */
 }
+
 
 .btn-group-lg>.btn,
 .btn-lg {
@@ -216,7 +226,7 @@ p.lead {
     }
     .navbar-nav>.nav-item>.nav-link.active:after {
         content: "";
-        border-bottom: 2px solid #cd99d4;
+        border-bottom: 2px solid #f9a825;
         left: 1rem;
         right: 1rem;
         bottom: 5px;
@@ -354,7 +364,7 @@ left: 0;
     border-radius: 50%;
     margin-bottom: 1.5rem;
     background-color: #FFF;
-    color: #f5378e;
+    color: #f9a825;
     font-size: 48px;
     text-align: center;
     line-height: 80px;
@@ -372,10 +382,10 @@ left: 0;
 }
 
 .ui-steps li:hover .circle-icon {
-    background-image: -moz-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -webkit-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -ms-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
+    background-image: -moz-linear-gradient(122deg, orange 0%, green 100%);
+    background-image: -webkit-linear-gradient(122deg, orange 0%, green 100%);
+    background-image: -ms-linear-gradient(122deg, orange 0%, green 100%);
+    background-image: linear-gradient(122deg, orange 0%, green 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.09);
     color: #FFF;
 }
@@ -502,11 +512,11 @@ color: #7cb342; /* soft green text */
 }
 
 .owl-theme .owl-dots .owl-dot:hover span {
-    background: #ff487e;
+    background: #f7a649;
 }
 
 .owl-theme .owl-dots .owl-dot.active span {
-    background: #ff487e;
+    background: #f7a649;
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
 }
 
@@ -544,7 +554,7 @@ color: #7cb342; /* soft green text */
 
 .card.pricing.popular {
     border-top-width: 3px;
-    border-color: #ce75b4 #faf6fb #FFF;
+    border-color: #ffd900 #faf6fb #FFF;
     box-shadow: 0px 12px 59px 0px rgba(36, 7, 31, 0.11);
     color: #633991;
 }
@@ -606,7 +616,7 @@ color: #7cb342; /* soft green text */
 .call-to-action .tagline {
     font-size: 16px;
     font-weight: 300;
-    color: #ffb8f6;
+    color: #ff9100;
     max-width: 650px;
     margin: 0 auto;
 }
@@ -621,11 +631,13 @@ color: #7cb342; /* soft green text */
 ----------------------*/
 
 .social-icons {
-    position: absolute;   /* take it out of the content flow */
-    right: 20px;          /* push to the far right edge */
-    top: 10px;            /* adjust this value to place it where you want */
-    display: flex;        /* arrange icons in a row */
-    gap: 10px;            /* space between icons */
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;         /* keep icons above other content */
+    pointer-events: auto;  /* ensure they are clickable */
 }
 
 .social-icons a {
@@ -637,7 +649,7 @@ color: #7cb342; /* soft green text */
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    color: #f4c9e2;
+    color: #f3bb61;
     transition: all 0.3s ease;
     font-size: 20px;
     text-decoration: none;
@@ -645,7 +657,7 @@ color: #7cb342; /* soft green text */
 
 .social-icons a:hover {
     text-decoration: none;
-    color: #e38cb7;
+    color: #f3bb61;
 }
 
 @media (max-width:991px) {
