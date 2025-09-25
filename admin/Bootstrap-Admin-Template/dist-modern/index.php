@@ -1,6 +1,11 @@
 <?php
-session_start();
-require_once '../../../config/database.php'; // make sure path is correct
+
+$requiredRole = 'Admin'; // only Admins can access this page
+require_once '../../../auth/auth_check.php';
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 // If no active session, try auto-login with remember_token
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
@@ -495,5 +500,23 @@ if (!isset($_SESSION['user_id'])) {
         }
       });
     </script>
+    <script>
+
+        //clear cache on browser
+if (window.history && window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
+  window.onpopstate = function() {
+    window.location.href = '../../../auth/login.php'; // redirect to login
+  };
+}
+</script>
 </body>
-</html> 
+<script>
+// Force reload on browser back navigation to trigger PHP session check
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+        window.location.reload();
+    }   
+});
+</script>
+</html>

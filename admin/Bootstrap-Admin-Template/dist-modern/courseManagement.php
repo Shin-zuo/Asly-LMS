@@ -1,6 +1,11 @@
 <?php
 
-session_start();
+$requiredRole = 'Admin'; // only Admins can access this page
+require_once '../../../auth/auth_check.php';
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 require_once '../../../config/database.php';
 
 // Handle Add Course
@@ -455,6 +460,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                 document.getElementById('deleteCourseId').value = courseId;
             });
         </script>
+
+        <script>
+// Force reload on browser back navigation to trigger PHP session check
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+        window.location.reload();
+    }   
+});
+</script>
     </body>
 </body>
 

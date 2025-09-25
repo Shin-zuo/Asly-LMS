@@ -2,29 +2,17 @@
 session_start();
 require_once '../config/database.php';
 
-// If user has a remember_me cookie, delete it from DB
-if (isset($_COOKIE['remember_me'])) {
-    $token = $_COOKIE['remember_me'];
+// If user has a remember_token cookie, delete it from DB
+if (isset($_COOKIE['remember_token'])) {
+    $token = $_COOKIE['remember_token'];
 
-    // Find matching token in DB
-    $sql = "SELECT id, token FROM user_tokens";
-    $result = $conn->query($sql);
+    // Delete token record from DB
+    $stmt = $conn->prepare("DELETE FROM user_tokens WHERE token = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
 
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            if (password_verify($token, $row['token'])) {
-                // Delete token record from DB
-                $deleteSql = "DELETE FROM user_tokens WHERE id = ?";
-                $stmt = $conn->prepare($deleteSql);
-                $stmt->bind_param("i", $row['id']);
-                $stmt->execute();
-                break;
-            }
-        }
-    }
-
-    // Expire the cookie
-    setcookie("remember_me", "", time() - 3600, "/", "", false, true);
+    // Expire the cookie in the browser
+    setcookie("remember_token", "", time() - 3600, "/", "", false, true);
 }
 
 // Destroy session completely

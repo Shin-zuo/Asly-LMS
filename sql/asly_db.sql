@@ -16,9 +16,8 @@
 
 
 -- Dumping database structure for asly_db
-DROP DATABASE IF EXISTS `asly_db`;
-CREATE DATABASE IF NOT EXISTS `asly_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `asly_db`;
+CREATE DATABASE IF NOT EXISTS `aicirxwe_asly_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `aicirxwe_asly_db`;
 
 -- Dumping structure for table asly_db.course
 DROP TABLE IF EXISTS `course`;
@@ -29,22 +28,28 @@ CREATE TABLE IF NOT EXISTS `course` (
   `course` varchar(100) NOT NULL,
   PRIMARY KEY (`courseId`),
   KEY `educationId` (`educationId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table asly_db.course: 0 rows
+-- Dumping data for table asly_db.course: 1 rows
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
+REPLACE INTO `course` (`courseId`, `educationId`, `courseCode`, `course`) VALUES
+	(2, 1, 'Dev01', 'Web Development');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 
 -- Dumping structure for table asly_db.educationlevel
 DROP TABLE IF EXISTS `educationlevel`;
 CREATE TABLE IF NOT EXISTS `educationlevel` (
   `id` int NOT NULL,
-  `educationLabel` int NOT NULL,
+  `educationLevel` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table asly_db.educationlevel: 0 rows
+-- Dumping data for table asly_db.educationlevel: 3 rows
 /*!40000 ALTER TABLE `educationlevel` DISABLE KEYS */;
+REPLACE INTO `educationlevel` (`id`, `educationLevel`) VALUES
+	(1, 'Senior High School'),
+	(2, 'College'),
+	(3, 'TESDA');
 /*!40000 ALTER TABLE `educationlevel` ENABLE KEYS */;
 
 -- Dumping structure for table asly_db.enrollees
@@ -62,14 +67,13 @@ CREATE TABLE IF NOT EXISTS `enrollees` (
   `dateEnrolled` date NOT NULL,
   `courseId` int NOT NULL,
   `educationalAttainment` varchar(100) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `courseId` (`courseId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table asly_db.enrollees: 0 rows
 /*!40000 ALTER TABLE `enrollees` DISABLE KEYS */;
-/*!40000 ALTER TABLE `enrollees` ENABLE KEYS */;
 
 -- Dumping structure for table asly_db.users
 DROP TABLE IF EXISTS `users`;
@@ -79,13 +83,29 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table asly_db.users: 1 rows
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `userType`, `username`, `password`) VALUES
+REPLACE INTO `users` (`id`, `userType`, `username`, `password`) VALUES
 	(1, 'Admin', 'shinzuo', 'shinzuo123');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dumping structure for table asly_db.user_tokens
+DROP TABLE IF EXISTS `user_tokens`;
+CREATE TABLE IF NOT EXISTS `user_tokens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table asly_db.user_tokens: 0 rows
+/*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

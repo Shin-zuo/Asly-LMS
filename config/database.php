@@ -4,7 +4,7 @@
 $host     = "localhost";     // Database server
 $username = "root";          // Database username
 $password = "";              // Database password
-$dbname   = "asly_db"; // Database name
+$dbname   = "aiciwrxe_asly_db"; // Database name
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $dbname);

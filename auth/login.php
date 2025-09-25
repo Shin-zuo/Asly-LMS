@@ -1,6 +1,14 @@
 <?php
+
+
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 require_once '../config/database.php';
 session_start();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username   = trim($_POST['username']);
@@ -17,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // Plain-text password check (basic)
+        // ⚠️ Replace with password_verify() if passwords are hashed
         if ($password === $user['password']) {
             // Save user info in session
             $_SESSION['user_id']   = $user['id'];
@@ -27,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Handle Remember Me
             if ($rememberMe) {
-                $token = bin2hex(random_bytes(32)); // secure token
+                $token = bin2hex(random_bytes(32)); // secure random token
                 $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
 
                 // Store in DB
@@ -119,6 +127,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="#" class="forgot">Forgot your email or password?</a>
     </form>
 </div>
+
+<script>
+window.addEventListener("pageshow", function(event) {
+  if (event.persisted || 
+      (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+    window.location.reload();
+  }
+});
+</script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
