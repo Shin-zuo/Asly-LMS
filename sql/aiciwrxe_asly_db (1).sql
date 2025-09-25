@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 25, 2025 at 05:44 AM
+-- Generation Time: Sep 25, 2025 at 06:12 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `aiciwrxe_asly_db`
 --
-CREATE DATABASE IF NOT EXISTS `aiciwrxe_asly_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `aiciwrxe_asly_db`;
 
 -- --------------------------------------------------------
 
