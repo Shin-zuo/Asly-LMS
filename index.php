@@ -41,7 +41,7 @@ URI     : https://colorlib.com
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <link href="css/style152.css" rel="stylesheet">
+    <link href="css/style15.css" rel="stylesheet">
 </head>
 
 
@@ -84,16 +84,20 @@ URI     : https://colorlib.com
     </div>
 
 
-    <header class="bg-gradient" id="home">
-        <div class="container mt-5">
-            </br>
-            </br>
-            </br>
-            </br>
-            <p class="tagline">A school where education meets technology for the digital age.</p>
-        </div>
-        <div class="img-holder mt-3"><img src="images/ASLYLOGO3.png" alt="phone" class="img-fluid"></div>
-    </header>
+    <header id="home" style="background: linear-gradient(90deg, #f9a825, #2e7d32); color: white;">
+    <div class="container mt-5">
+        </br>
+   
+        <p class="tagline">A school where education meets technology for the digital age.</p>
+              </br>
+        </br>
+              </br>
+        
+    </div>
+    <div class="img-holder mt-3">
+        <img src="images/ASLYLOGO3.png" alt="Asly" class="img-fluid">
+    </div>
+</header>
 
     <div class="client-logos my-5">
         <div class="container text-center">
@@ -101,9 +105,8 @@ URI     : https://colorlib.com
             <img src="images/ched-logo.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
             <img src="images/tesda.png" alt="client logos" class="img-fluid" style="margin-right: 20px;">
             </br>
-            </br>
-            </br>
-            </br>
+
+
         </div>
     </div>
 
@@ -185,7 +188,7 @@ URI     : https://colorlib.com
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-6">
-                    <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
+</br>
                     <h2>Learning Today, Leading Tomorrow</h2>
                     <p class="mb-4">At Asly International College Inc., this belief inspires our
                          Vision and Mission to shape learners into future leaders. </p>
@@ -337,8 +340,8 @@ URI     : https://colorlib.com
                 <div class="col-md-6 d-flex align-items-center">
                     <div>
                         <h2>Unlock your full potential with us - your future starts here!</h2>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel
-                            exercitationem eveniet vero maxime ratione </p>
+                        <p class="mb-4">Lorem Unlock your full potential with us, where learning meets innovation, and every 
+                            step takes you closer to shaping a brighter tomorrow filled with success. </p>
                         <a href="#steps" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
@@ -360,24 +363,24 @@ URI     : https://colorlib.com
                             <div class="circle-icon mr-4">1</div>
                             <div class="media-body">
                                 <h5>Learn with us</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem </p>
+                                <p>"Learn with us and discover a community where knowledge, innovation,
+                                     and growth come together to prepare you for the future." </p>
                             </div>
                         </li>
                         <li class="media my-4">
                             <div class="circle-icon mr-4">2</div>
                             <div class="media-body">
                                 <h5>Build your future</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem eveniet</p>
+                                <p>Build your future with us through quality education, innovation, and
+                                     technology that empower you to achieve success in the digital age.</p>
                             </div>
                         </li>
                         <li class="media">
                             <div class="circle-icon mr-4">3</div>
                             <div class="media-body">
                                 <h5>Achieve your dreams</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem </p>
+                                <p>"Achieve your dreams through a learning journey that combines excellence, technology,
+                                     and opportunities designed to shape your brighter tomorrow." </p>
                             </div>
                         </li>
                     </ul>
@@ -578,22 +581,22 @@ URI     : https://colorlib.com
 
             <div class="row pt-4">
                 <div class="col-md-6">
-                    <h4 class="mb-3">Can I try before I buy?</h4>
+                    <h4 class="mb-3">What do I need to enroll at Asly?</h4>
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
-                    <h4 class="mb-3">What payment methods do you accept?</h4>
+                    <h4 class="mb-3">Will I receive an allowance during TESDA training?</h4>
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
 
                 </div>
                 <div class="col-md-6">
-                    <h4 class="mb-3">Can I change my plan later?</h4>
+                    <h4 class="mb-3">Will I have access to computers if I study at Asly?</h4>
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
-                    <h4 class="mb-3">Do you have a contract?</h4>
+                    <h4 class="mb-3">How long does TESDA training take?</h4>
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
@@ -611,7 +614,7 @@ URI     : https://colorlib.com
         <div class="container">
             <div class="call-to-action">
 
-                <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
+                    </br>
                 <h2>Download Anywhere</h2>
                 <p class="tagline">Available for all major mobile and desktop platforms. Rapidiously visualize optimal
                     ROI rather than enterprise-wide methods of empowerment. </p>
@@ -627,25 +630,28 @@ URI     : https://colorlib.com
     </div>
     <!-- // end .section -->
 
-    <div class="light-bg py-5" id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 text-center text-lg-left">
-                    <p class="mb-2"> <span class="ti-location-pin mr-2"></span> 1485 Pacific St, Brooklyn, NY 11216 USA
-                    </p>
-                    <div class=" d-block d-sm-inline-block">
-                        <p class="mb-2">
-                            <span class="ti-email mr-2"></span> <a class="mr-4"
-                                href="mailto:support@mobileapp.com">support@mobileapp.com</a>
-                        </p>
-                    </div>
-                    <div class="d-block d-sm-inline-block">
-                        <p class="mb-0">
-                            <span class="ti-headphone-alt mr-2"></span> <a href="tel:51836362800">518-3636-2800</a>
-                        </p>
-                    </div>
-
-                </div>
+<div class="light-bg py-5" id="contact">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <!-- Contact Info -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
+        <p class="mb-2">
+          <span class="ti-location-pin mr-2"></span>
+          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+        </p>
+        <p class="mb-2">
+          <span class="ti-email mr-2"></span>
+          <a href="mailto:support@mobileapp.com">admin.aici@edu.ph</a>
+        </p>
+        <p class="mb-1">
+          <span class="ti-headphone-alt mr-2"></span> 044-2400353
+        </p>
+        <p class="mb-0">
+          <span class="ti-headphone-alt mr-2"></span> +63955-8523707
+        </p>
+      </div>
                 <div class="col-lg-6">
                     <div class="social-icons">
                         <a href="https://www.facebook.com/edu.aitci"><span class="ti-facebook"></span></a>
@@ -661,8 +667,7 @@ URI     : https://colorlib.com
     <!-- // end .section -->
     <footer class="my-5 text-center">
         <!-- Copyright removal is not prohibited! -->
-        <p class="mb-2"><small>COPYRIGHT © 2017. ALL RIGHTS RESERVED. MOBAPP TEMPLATE BY <a
-                    href="https://colorlib.com">COLORLIB</a></small></p>
+        <p class="mb-2"><small>Copyright © Asly International College Inc. All Rights Reserved. (2025)</small></p>
 
         <small>
             <a href="#" class="m-2">PRESS</a>
