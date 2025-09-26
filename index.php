@@ -1,6 +1,8 @@
 <?php
 require 'config/database.php';
 
+// Fetch education levels
+$educationLevels = $conn->query("SELECT id, educationLevel FROM educationlevel");
 ?>
 <html lang="en">
 <!--
@@ -44,7 +46,13 @@ URI     : https://colorlib.com
 
 
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success">Enrollment successful!</div>
+<?php endif; ?>
 
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger">Error: <?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
     <!-- Nav Menu -->
 
     <div class="nav-menu fixed-top">
@@ -449,99 +457,108 @@ URI     : https://colorlib.com
 
 
     <!-- // end .section -->
-    <div class="section" id="pricing">
+    <div class="section" id="enroll">
         <div class="container">
             <div class="section-title">
                 <!-- <small>PRICING</small> -->
                 <h3>Enroll Now</h3>
             </div>
 
+     <!-- ✅ Display Messages -->
+    <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($_GET['error']) ?>
+        </div>
+    <?php endif; ?>
 
-            <form action="enroll.php" method="POST">
-                <div class="mb-3 row">
-                    <!-- First Name -->
-                    <div class="col-md-5">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" required>
+    <?php if (isset($_GET['success'])): ?>
+        <div class="alert alert-success">
+            Enrollment successful!
+        </div>
+    <?php endif; ?>
+
+    <!-- ✅ Enrollment Form -->
+    <form action="functions/enroll.php" method="POST" id="enrollmentForm">
+        <div class="mb-3 row">
+            <div class="col-md-5">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+                <label for="middleInitial">M.I.</label>
+                <input type="text" id="middleInitial" name="middleInitial" class="form-control text-center" maxlength="2">
+            </div>
+            <div class="col-md-5">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="col-md-6">
+                <label for="contact" class="form-label">Contact Number</label>
+                <input type="text" name="contact" class="form-control" id="contact">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <label for="applyFor" class="form-label">Apply For</label>
+                <select id="applyFor" name="applyFor" class="form-select" required>
+                    <option value="" disabled selected>-- Select Admission --</option>
+                    <?php while ($row = $educationLevels->fetch_assoc()): ?>
+                        <option value="<?= $row['id'] ?>">
+                            <?= htmlspecialchars($row['educationLevel']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="course" class="form-label">Course</label>
+                <select id="course" name="course" class="form-select" required>
+                    <option value="" disabled selected>-- Select Course --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <label for="lastSchool" class="form-label">Last School Attended</label>
+                <input type="text" name="lastSchool" class="form-control" id="lastSchool">
+            </div>
+            <div class="col-md-6">
+                <label for="schoolYear" class="form-label">Last School Year</label>
+                <input type="text" name="schoolYear" class="form-control" id="schoolYear">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <label for="birthdate" class="form-label">Birth Date</label>
+                <input type="date" name="birthdate" class="form-control" id="birthdate">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Gender</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                        <label class="form-check-label" for="male">Male</label>
                     </div>
-
-                    <!-- Middle Initial -->
-                    <div class="col-md-2">
-                        <label for="middleInitial">M.I.</label>
-                        <input type="text" id="middleInitial" name="middleInitial" class="form-control text-center" maxlength="2">
-                    </div>
-
-                    <!-- Last Name -->
-                    <div class="col-md-5">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" required>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+                        <label class="form-check-label" for="female">Female</label>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-control" id="email" required>
-                    </div>
+            </div>
+        </div>
 
-                    <div class="col-md-6">
-                        <label for="contact" class="form-label">Contact Number</label>
-                        <input type="text" name="contact" class="form-control" id="contact">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="applyFor" class="form-label">Apply For</label>
-                        <select id="applyFor" name="applyFor" class="form-select" required>
-                            <option selected disabled>-- Select Application Type --</option>
-                            <option value="college">College Admission</option>
-                            <option value="scholarship">Scholarship</option>
-                            <option value="transfer">Transfer Student</option>
-                        </select>
-                    </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-                    <div class="col-md-6">
-                        <label for="course" class="form-label">Course</label>
-                        <select id="course" name="course" class="form-select" required>
-                            <option selected disabled>-- Select Course --</option>
-                            <option value="bsit">BS Information Technology</option>
-                            <option value="bsba">BS Business Administration</option>
-                            <option value="bshm">BS Hospitality Management</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="lastSchool" class="form-label">Last School Attended</label>
-                        <input type="text" name="lastSchool" class="form-control" id="lastSchool">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="schoolYear" class="form-label">Last School Year</label>
-                        <input type="text" name="schoolYear" class="form-control" id="schoolYear">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="birthdate" class="form-label">Birth Date</label>
-                        <input type="date" name="birthdate" class="form-control" id="birthdate">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Gender</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
-                                <label class="form-check-label" for="male">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
-                                <label class="form-check-label" for="female">Female</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
 
             <!-- // end .pricing -->
 
@@ -653,6 +670,26 @@ URI     : https://colorlib.com
             <a href="#" class="m-2">PRIVACY</a>
         </small>
     </footer>
+
+<!-- JavaScript to dynamically load courses -->
+<script>
+document.getElementById('applyFor').addEventListener('change', function () {
+    let educationId = this.value;
+
+    fetch('functions/get_courses.php?educationId=' + educationId)
+        .then(response => response.json())
+        .then(data => {
+            let courseSelect = document.getElementById('course');
+            courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
+            data.forEach(course => {
+                let option = document.createElement('option');
+                option.value = course.courseId;
+                option.textContent = course.courseCode + " - " + course.course;
+                courseSelect.appendChild(option);
+            });
+        });
+});
+</script>
 
     <!-- jQuery and Bootstrap -->
     <script src="js/jquery-3.2.1.min.js"></script>
