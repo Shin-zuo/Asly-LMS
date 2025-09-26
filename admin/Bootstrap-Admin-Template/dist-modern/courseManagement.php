@@ -125,9 +125,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                             </thead>
                             <tbody>
                                 <?php
+
+                                // Pagination setup
+                                $limit = 10; // rows per page
+                                $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+                                $offset = ($page - 1) * $limit;
+
+                                // Get total count
+                                $countSql = "SELECT COUNT(*) as total FROM course";
+                                $countResult = $conn->query($countSql);
+                                $totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_assoc()['total'] : 0;
+                                $totalPages = ceil($totalRows / $limit);
+
+                                // Fetch paginated courses
                                 $sql = "SELECT c.courseId, e.educationLevel, c.courseCode, c.course, c.educationId 
-                FROM course c
-                JOIN educationlevel e ON c.educationId = e.id";
+                                    FROM course c
+                                    JOIN educationlevel e ON c.educationId = e.id
+                                    ORDER BY c.courseId DESC
+                                    LIMIT $limit OFFSET $offset";
                                 $result = $conn->query($sql);
 
                                 if ($result && $result->num_rows > 0):
@@ -208,66 +223,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
         <div class="modal fade" id="iconDemoModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="bi bi-palette me-2"></i>
-                            Icon System Demo
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body" x-data="iconDemo">
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <h6>Current Provider: <span class="badge bg-primary" x-text="currentProvider"></span></h6>
-                                <div class="btn-group" role="group">
-                                    <button type="button"
-                                        class="btn btn-outline-primary"
-                                        @click="switchProvider('bootstrap')"
-                                        :class="{ 'active': currentProvider === 'bootstrap' }">
-                                        Bootstrap Icons
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-outline-primary"
-                                        @click="switchProvider('lucide')"
-                                        :class="{ 'active': currentProvider === 'lucide' }">
-                                        Lucide Icons
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row g-3">
-                            <div class="col-md-3 text-center">
-                                <div class="p-3 border rounded">
-                                    <i class="bi bi-speedometer2 icon-xl text-primary mb-2"></i>
-                                    <br><small>Dashboard</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="p-3 border rounded">
-                                    <i class="bi bi-people icon-xl text-success mb-2"></i>
-                                    <br><small>Users</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="p-3 border rounded">
-                                    <i class="bi bi-graph-up icon-xl text-info mb-2"></i>
-                                    <br><small>Analytics</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="p-3 border rounded">
-                                    <i class="bi bi-gear icon-xl text-warning mb-2"></i>
-                                    <br><small>Settings</small>
-                                </div>
-                            </div>
-                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course ID</th>
+                                    <th>Education Level</th>
+                                    <th>Course Code</th>
+                                    <th>Course</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($result && $result->num_rows > 0):
+                                    while ($row = $result->fetch_assoc()):
+                                ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
+                                            <td><?= htmlspecialchars($row['educationLevel']) ?></td>
+                                            <td><?= htmlspecialchars($row['courseCode']) ?></td>
+                                            <td><?= htmlspecialchars($row['course']) ?></td>
+                                            <td>
+                                                <!-- Edit button -->
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-primary editBtn"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editCourseModal"
+                                                    data-id="<?= $row['courseId'] ?>"
+                                                    data-education="<?= $row['educationId'] ?>"
+                                                    data-code="<?= htmlspecialchars($row['courseCode']) ?>"
+                                                    data-course="<?= htmlspecialchars($row['course']) ?>">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </button>
 
-                        <h6 class="mt-4">Icon Animations</h6>
-                        <div class="row g-3">
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-arrow-clockwise icon-xl icon-spin text-primary"></i>
-                                <br><small>Spin</small>
+                                                <!-- Delete button (opens modal) -->
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    title="Delete"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteCourseModal"
+                                                    data-id="<?= $row['courseId'] ?>">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    endwhile;
+                                else:
+                                    ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center">No courses found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+
+                        <!-- Pagination Controls -->
+                        <?php if ($totalPages > 1): ?>
+                        <nav aria-label="Course table pagination">
+                            <ul class="pagination justify-content-center">
+                                <!-- Previous -->
+                                <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+                                </li>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                                <!-- Next -->
+                                <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <?php endif; ?>
                             </div>
                             <div class="col-md-3 text-center">
                                 <i class="bi bi-heart icon-xl icon-pulse text-danger"></i>

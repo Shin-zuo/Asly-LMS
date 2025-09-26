@@ -9,8 +9,32 @@ header("Pragma: no-cache");
 require_once '../../../config/database.php';
 
 // Fetch enrollees
-$sql = "SELECT id, firstName, middleInitial, lastName, email, courseId, dateEnrolled 
-        FROM enrollees";
+
+// Pagination setup
+$limit = 10; // rows per page
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $limit;
+
+
+// Search logic
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$where = '';
+if ($search !== '') {
+    $searchEsc = $conn->real_escape_string($search);
+    $where = "WHERE (CONCAT(e.firstName, ' ', e.middleInitial, '. ', e.lastName) LIKE '%$searchEsc%' ";
+    $where .= "OR e.email LIKE '%$searchEsc%' ";
+    $where .= "OR c.course LIKE '%$searchEsc%' ";
+    $where .= "OR e.dateEnrolled LIKE '%$searchEsc%')";
+}
+
+// Get total count (with search)
+$countSql = "SELECT COUNT(*) as total FROM enrollees e LEFT JOIN course c ON e.courseId = c.courseId $where";
+$countResult = $conn->query($countSql);
+$totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_assoc()['total'] : 0;
+$totalPages = ceil($totalRows / $limit);
+
+// Fetch paginated enrollees (with search)
+$sql = "SELECT e.id, e.firstName, e.middleInitial, e.lastName, e.email, e.contactNumber, e.lastSchoolAttended, e.lastSchoolYr, e.birthDate, e.gender, e.dateEnrolled, e.courseId, c.course AS courseName, e.educationalAttainment, e.status FROM enrollees e LEFT JOIN course c ON e.courseId = c.courseId $where ORDER BY e.id DESC LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 
 
@@ -47,10 +71,13 @@ $result = $conn->query($sql);
                 <div class="container-fluid p-4 p-lg-5">
                     <!-- Page Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <h1 class="h3 mb-0">Dashboard</h1>
-                            <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
-                        </div>
+
+                        <!-- Search Bar for Enrollees -->
+
+                        <form class="d-flex" method="get" action="userManagement.php">
+                            <input class="form-control me-2" style="min-width:350px; max-width:600px;" type="search" name="search" placeholder="Search enrollees by name or email" aria-label="Search" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                            <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i> Search</button>
+                        </form>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-primary">
                                 <i class="bi bi-plus-lg me-2"></i>
@@ -80,6 +107,7 @@ $result = $conn->query($sql);
 
 
                         <span>Enrollees</span>
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -88,33 +116,70 @@ $result = $conn->query($sql);
                                     <th>Email</th>
                                     <th>Course</th>
                                     <th>Date Enrolled</th>
-                                    <th>Actions</th> <!-- New column -->
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if ($result && $result->num_rows > 0): ?>
-                                    <?php while ($row = $result->fetch_assoc()): ?>
+                                    <?php 
+                                    $modals = '';
+                                    while ($row = $result->fetch_assoc()): ?>
                                         <tr>
                                             <td><?= htmlspecialchars($row['id']) ?></td>
                                             <td>
                                                 <?= htmlspecialchars($row['firstName'] . ' ' . $row['middleInitial'] . '. ' . $row['lastName']) ?>
                                             </td>
                                             <td><?= htmlspecialchars($row['email']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
+                                            <td><?= htmlspecialchars($row['courseName']) ?></td>
                                             <td><?= htmlspecialchars($row['dateEnrolled']) ?></td>
                                             <td>
                                                 <!-- Accept Button -->
-                                                <a href="accept.php?id=<?= $row['id'] ?>" class="btn btn-success btn-sm">
-                                                    Accept
-                                                </a>
+                                                <button type="button" class="btn btn-sm btn-outline-success" title="Accept" onclick="window.location.href='accept.php?id=<?= $row['id'] ?>'">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </button>
                                                 <!-- Delete Button -->
-                                                <a href="delete.php?id=<?= $row['id'] ?>"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this enrollee?');">
-                                                    Delete
-                                                </a>
+                                                <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="if(confirm('Are you sure you want to delete this enrollee?')) window.location.href='delete.php?id=<?= $row['id'] ?>';">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                                <!-- View Button -->
+                                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal<?= $row['id'] ?>" title="View">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
                                             </td>
                                         </tr>
+                                        <?php 
+                                        $modals .= '<div class="modal fade" id="viewModal'.$row['id'].'" tabindex="-1" aria-labelledby="viewModalLabel'.$row['id'].'" aria-hidden="true">';
+                                        $modals .= '<div class="modal-dialog modal-dialog-centered">';
+                                        $modals .= '<div class="modal-content">';
+                                        $modals .= '<div class="modal-header">';
+                                        $modals .= '<h5 class="modal-title" id="viewModalLabel'.$row['id'].'">Enrollee Information</h5>';
+                                        $modals .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                                        $modals .= '</div>';
+                                        $modals .= '<div class="modal-body">';
+                                        $modals .= '<ul class="list-group list-group-flush">';
+                                        $modals .= '<li class="list-group-item"><strong>ID:</strong> '.htmlspecialchars($row['id']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>First Name:</strong> '.htmlspecialchars($row['firstName']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Middle Initial:</strong> '.htmlspecialchars($row['middleInitial']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Last Name:</strong> '.htmlspecialchars($row['lastName']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Email:</strong> '.htmlspecialchars($row['email']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Contact Number:</strong> '.htmlspecialchars($row['contactNumber']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Last School Attended:</strong> '.htmlspecialchars($row['lastSchoolAttended']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Last School Year:</strong> '.htmlspecialchars($row['lastSchoolYr']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Birth Date:</strong> '.htmlspecialchars($row['birthDate']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Gender:</strong> '.htmlspecialchars($row['gender']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Date Enrolled:</strong> '.htmlspecialchars($row['dateEnrolled']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Course ID:</strong> '.htmlspecialchars($row['courseId']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Educational Attainment:</strong> '.htmlspecialchars($row['educationalAttainment']).'</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Status:</strong> '.htmlspecialchars($row['status']).'</li>';
+                                        $modals .= '</ul>';
+                                        $modals .= '</div>';
+                                        $modals .= '<div class="modal-footer">';
+                                        $modals .= '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>';
+                                        $modals .= '</div>';
+                                        $modals .= '</div>';
+                                        $modals .= '</div>';
+                                        $modals .= '</div>';
+                                        ?>
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
@@ -124,12 +189,35 @@ $result = $conn->query($sql);
                             </tbody>
                         </table>
 
+                        <!-- Pagination Controls -->
+                        <?php if ($totalPages > 1): ?>
+                        <nav aria-label="Enrollee table pagination">
+                            <ul class="pagination justify-content-center">
+                                <!-- Previous -->
+                                <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+                                </li>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                                <!-- Next -->
+                                <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <?php endif; ?>
 
+                        <?php if (!empty($modals)) echo $modals; ?>
                     </div>
 
 
                 </div>
             </main>
+
+            
 
             <!-- Footer -->
             <footer class="admin-footer">
