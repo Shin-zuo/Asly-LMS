@@ -181,47 +181,53 @@
             <div class="sidebar-content">
                 <nav class="sidebar-nav">
                     <ul class="nav flex-column">
+                        <?php
+                        $currentPage = basename($_SERVER['PHP_SELF']);
+                        function isActive($file) {
+                            global $currentPage;
+                            return $currentPage === $file ? 'active' : '';
+                        }
+                        ?>
                         <li class="nav-item">
-                            <a class="nav-link active" href="./index.php">
+                            <a class="nav-link <?= isActive('index.php') ?>" href="./index.php">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./analytics.php">
+                            <a class="nav-link <?= isActive('analytics.php') ?>" href="./analytics.php">
                                 <i class="bi bi-graph-up"></i>
                                 <span>Analytics</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./users.php">
+                            <a class="nav-link <?= isActive('users.php') ?>" href="./users.php">
                                 <i class="bi bi-people"></i>
                                 <span>Users</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./products.php">
+                            <a class="nav-link <?= isActive('products.php') ?>" href="./products.php">
                                 <i class="bi bi-box"></i>
                                 <span>Products</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./userManagement.php">
+                            <a class="nav-link <?= isActive('userManagement.php') ?>" href="./userManagement.php">
                                 <i class="bi bi-bag-check"></i>
                                 <span>Users Management</span>
                             </a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link" href="./subjectManagement.php">
+                        <li class="nav-item">
+                            <a class="nav-link <?= isActive('subjectManagement.php') ?>" href="./subjectManagement.php">
                                 <i class="bi bi-bag-check"></i>
                                 <span>Subject Management</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./courseManagement.php">
+                            <a class="nav-link <?= isActive('courseManagement.php') ?>" href="./courseManagement.php">
                                 <i class="bi bi-ui-checks"></i>
                                 <span>Course Management</span>
-                                
                             </a>
                         </li>
                         <li class="nav-item">
