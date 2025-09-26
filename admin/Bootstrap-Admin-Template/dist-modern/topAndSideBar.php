@@ -188,19 +188,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./analytics.html">
+                            <a class="nav-link" href="./analytics.php">
                                 <i class="bi bi-graph-up"></i>
                                 <span>Analytics</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./users.html">
+                            <a class="nav-link" href="./users.php">
                                 <i class="bi bi-people"></i>
                                 <span>Users</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./products.html">
+                            <a class="nav-link" href="./products.php">
                                 <i class="bi bi-box"></i>
                                 <span>Products</span>
                             </a>
@@ -209,6 +209,12 @@
                             <a class="nav-link" href="./userManagement.php">
                                 <i class="bi bi-bag-check"></i>
                                 <span>Users Management</span>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="./subjectManagement.php">
+                                <i class="bi bi-bag-check"></i>
+                                <span>Subject Management</span>
                             </a>
                         </li>
                         <li class="nav-item">
