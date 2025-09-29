@@ -225,6 +225,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link <?= isActive('centralSterile.php') ?>" href="./centralSterile.php">
+                                <i class="bi bi-bag-check"></i>
+                                <span>Central Sterile Management</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link <?= isActive('courseManagement.php') ?>" href="./courseManagement.php">
                                 <i class="bi bi-ui-checks"></i>
                                 <span>Course Management</span>

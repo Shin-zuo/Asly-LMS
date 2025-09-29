@@ -1,7 +1,4 @@
 <?php
-
-
-
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -9,14 +6,13 @@ header("Pragma: no-cache");
 require_once '../config/database.php';
 session_start();
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username   = trim($_POST['username']);
     $password   = trim($_POST['password']);
     $rememberMe = isset($_POST['remember']); // checkbox
 
     // Check if username exists in database
-    $sql = "SELECT id, userType, username, password FROM users WHERE username = ?";
+    $sql = "SELECT id, userType, username, password, userId FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -25,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // ⚠️ Replace with password_verify() if passwords are hashed
-        if ($password === $user['password']) {
+        // ✅ Password check (support plain text + hashed)
+        if ($password === $user['password'] || password_verify($password, $user['password'])) {
             // Save user info in session
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['username']  = $user['username'];
@@ -52,12 +48,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 case 'Admin':
                     header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
                     break;
-                case 'Student':
-                    header("Location: ../student/dashboard.php");
-                    break;
+
                 case 'Teacher':
                     header("Location: ../teacher/dashboard.php");
                     break;
+
+                case 'Student':
+                    // 🔎 Get student's education level
+                    $studentId = $user['userId'];
+
+                    $sqlEdu = "
+                        SELECT e.educationLevel
+                        FROM students s
+                        JOIN course c ON s.courseId = c.courseId
+                        JOIN educationlevel e ON c.educationId = e.id
+                        WHERE s.id = ?
+                    ";
+                    $stmtEdu = $conn->prepare($sqlEdu);
+                    $stmtEdu->bind_param("i", $studentId);
+                    $stmtEdu->execute();
+                    $resEdu = $stmtEdu->get_result();
+
+                    if ($resEdu->num_rows > 0) {
+                        $eduRow = $resEdu->fetch_assoc();
+                        $educationLevel = $eduRow['educationLevel'];
+
+                        if (strcasecmp($educationLevel, "TESDA") === 0) {
+                            header("Location: ../students/tesda/dist-modern/");
+                        } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
+                            header("Location: ../students/seniorHigh/");
+                        } else {
+                            header("Location: ../students/dashboard.php"); // fallback
+                        }
+                    } else {
+                        header("Location: ../auth/login.php?error=" . urlencode("Education level not found"));
+                    }
+                    break;
+
                 default:
                     header("Location: ../auth/login.php"); // fallback
                     break;
@@ -71,6 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -114,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input class="form-control" type="text" name="username" placeholder="Username" required>
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" name="password" placeholder="Password" required>
+        <input class="form-control" type="password" name="password" placeholder="Password" required >
       </div>
       <div class="form-group">
   <input type="checkbox" name="remember" id="remember">

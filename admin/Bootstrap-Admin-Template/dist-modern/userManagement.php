@@ -108,86 +108,101 @@ $result = $conn->query($sql);
 
                         <span>Enrollees</span>
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Course</th>
-                                    <th>Date Enrolled</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if ($result && $result->num_rows > 0): ?>
-                                    <?php 
-                                    $modals = '';
-                                    while ($row = $result->fetch_assoc()): ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($row['id']) ?></td>
-                                            <td>
-                                                <?= htmlspecialchars($row['firstName'] . ' ' . $row['middleInitial'] . '. ' . $row['lastName']) ?>
-                                            </td>
-                                            <td><?= htmlspecialchars($row['email']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseName']) ?></td>
-                                            <td><?= htmlspecialchars($row['dateEnrolled']) ?></td>
-                                            <td>
-                                                <!-- Accept Button -->
-                                                <button type="button" class="btn btn-sm btn-outline-success" title="Accept" onclick="window.location.href='accept.php?id=<?= $row['id'] ?>'">
-                                                    <i class="bi bi-check-circle"></i>
-                                                </button>
-                                                <!-- Delete Button -->
-                                                <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="if(confirm('Are you sure you want to delete this enrollee?')) window.location.href='delete.php?id=<?= $row['id'] ?>';">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <!-- View Button -->
-                                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal<?= $row['id'] ?>" title="View">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?php 
-                                        $modals .= '<div class="modal fade" id="viewModal'.$row['id'].'" tabindex="-1" aria-labelledby="viewModalLabel'.$row['id'].'" aria-hidden="true">';
-                                        $modals .= '<div class="modal-dialog modal-dialog-centered">';
-                                        $modals .= '<div class="modal-content">';
-                                        $modals .= '<div class="modal-header">';
-                                        $modals .= '<h5 class="modal-title" id="viewModalLabel'.$row['id'].'">Enrollee Information</h5>';
-                                        $modals .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-                                        $modals .= '</div>';
-                                        $modals .= '<div class="modal-body">';
-                                        $modals .= '<ul class="list-group list-group-flush">';
-                                        $modals .= '<li class="list-group-item"><strong>ID:</strong> '.htmlspecialchars($row['id']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>First Name:</strong> '.htmlspecialchars($row['firstName']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Middle Initial:</strong> '.htmlspecialchars($row['middleInitial']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Last Name:</strong> '.htmlspecialchars($row['lastName']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Email:</strong> '.htmlspecialchars($row['email']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Contact Number:</strong> '.htmlspecialchars($row['contactNumber']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Last School Attended:</strong> '.htmlspecialchars($row['lastSchoolAttended']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Last School Year:</strong> '.htmlspecialchars($row['lastSchoolYr']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Birth Date:</strong> '.htmlspecialchars($row['birthDate']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Gender:</strong> '.htmlspecialchars($row['gender']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Date Enrolled:</strong> '.htmlspecialchars($row['dateEnrolled']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Course ID:</strong> '.htmlspecialchars($row['courseId']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Educational Attainment:</strong> '.htmlspecialchars($row['educationalAttainment']).'</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Status:</strong> '.htmlspecialchars($row['status']).'</li>';
-                                        $modals .= '</ul>';
-                                        $modals .= '</div>';
-                                        $modals .= '<div class="modal-footer">';
-                                        $modals .= '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>';
-                                        $modals .= '</div>';
-                                        $modals .= '</div>';
-                                        $modals .= '</div>';
-                                        $modals .= '</div>';
-                                        ?>
-                                    <?php endwhile; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="6" class="text-center">No enrollees found</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                      <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Date Enrolled</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($result && $result->num_rows > 0): ?>
+            <?php 
+            $modals = '';
+            while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['id']) ?></td>
+                    <td>
+                        <?= htmlspecialchars($row['firstName'] . ' ' . $row['middleInitial'] . '. ' . $row['lastName']) ?>
+                    </td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['courseName']) ?></td>
+                    <td><?= htmlspecialchars($row['dateEnrolled']) ?></td>
+                    <td>
+                        <?php if ($row['status'] === 'Accepted'): ?>
+                            <!-- Disabled Accept Button -->
+                            <button type="button" class="btn btn-sm btn-success" title="Already Accepted" disabled>
+                                <i class="bi bi-check-circle"></i>
+                            </button>
+                        <?php else: ?>
+                            <!-- Accept Button -->
+                            <button type="button" class="btn btn-sm btn-outline-success" title="Accept"
+                                onclick="window.location.href='functions/acceptEnrollees.php?id=<?= $row['id'] ?>'">
+                                <i class="bi bi-check-circle"></i>
+                            </button>
+                        <?php endif; ?>
+
+                        <!-- Delete Button -->
+                        <button type="button" class="btn btn-sm btn-outline-danger" title="Delete"
+                            onclick="if(confirm('Are you sure you want to delete this enrollee?')) window.location.href='delete.php?id=<?= $row['id'] ?>';">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                        <!-- View Button -->
+                        <button type="button" class="btn btn-outline-primary btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#viewModal<?= $row['id'] ?>" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+                <?php 
+                // Build modal content for each enrollee
+                $modals .= '<div class="modal fade" id="viewModal'.$row['id'].'" tabindex="-1" aria-labelledby="viewModalLabel'.$row['id'].'" aria-hidden="true">';
+                $modals .= '<div class="modal-dialog modal-dialog-centered">';
+                $modals .= '<div class="modal-content">';
+                $modals .= '<div class="modal-header">';
+                $modals .= '<h5 class="modal-title" id="viewModalLabel'.$row['id'].'">Enrollee Information</h5>';
+                $modals .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                $modals .= '</div>';
+                $modals .= '<div class="modal-body">';
+                $modals .= '<ul class="list-group list-group-flush">';
+                $modals .= '<li class="list-group-item"><strong>ID:</strong> '.htmlspecialchars($row['id']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>First Name:</strong> '.htmlspecialchars($row['firstName']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Middle Initial:</strong> '.htmlspecialchars($row['middleInitial']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Last Name:</strong> '.htmlspecialchars($row['lastName']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Email:</strong> '.htmlspecialchars($row['email']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Contact Number:</strong> '.htmlspecialchars($row['contactNumber']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Last School Attended:</strong> '.htmlspecialchars($row['lastSchoolAttended']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Last School Year:</strong> '.htmlspecialchars($row['lastSchoolYr']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Birth Date:</strong> '.htmlspecialchars($row['birthDate']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Gender:</strong> '.htmlspecialchars($row['gender']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Date Enrolled:</strong> '.htmlspecialchars($row['dateEnrolled']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Course ID:</strong> '.htmlspecialchars($row['courseId']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Educational Attainment:</strong> '.htmlspecialchars($row['educationalAttainment']).'</li>';
+                $modals .= '<li class="list-group-item"><strong>Status:</strong> '.htmlspecialchars($row['status']).'</li>';
+                $modals .= '</ul>';
+                $modals .= '</div>';
+                $modals .= '<div class="modal-footer">';
+                $modals .= '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>';
+                $modals .= '</div>';
+                $modals .= '</div>';
+                $modals .= '</div>';
+                $modals .= '</div>';
+                ?>
+            <?php endwhile; ?>
+            <?= $modals ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="6" class="text-center">No enrollees found</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
 
                         <!-- Pagination Controls -->
                         <?php if ($totalPages > 1): ?>
