@@ -113,7 +113,7 @@ p.lead {
 }
 
 .btn-outline-light:hover {
-    color: #d6619c;
+    color: #f9a825;
 }
 
 .btn-primary {
@@ -265,7 +265,7 @@ header {
 .tagline {
     font-size: 23px;
     font-weight: 300;
-    color: #ffffff; /* strong golden yellow */
+    color:#959094; /* strong golden yellow */
     max-width: 800px;
     margin: 0 auto;
 }
@@ -339,6 +339,7 @@ left: 0;
 
 .card-text {
     font-size: 14px;
+    color: #959094;
 }
 
 .card.features:hover {

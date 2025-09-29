@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName     = $_POST['firstName'] ?? '';
     $middleInitial = $_POST['middleInitial'] ?? '';
     $lastName      = $_POST['lastName'] ?? '';
+    $prefix        = $_POST['prefix'] ?? '';
     $email         = $_POST['email'] ?? '';
     $contactNumber = $_POST['contact'] ?? '';
     $lastSchool    = $_POST['lastSchool'] ?? '';
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status        = "Pending";
 
     // ✅ Basic validation
-    if (empty($firstName) || empty($lastName) || empty($email) || empty($gender)) {
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($prefix) || empty($gender)) {
         header("Location: ../index.php?error=" . urlencode("Please fill in all required fields.") . "#enroll");
         exit();
     }
@@ -36,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // ✅ Insert into database
     $sql = "INSERT INTO enrollees 
-        (firstName, middleInitial, lastName, email, contactNumber, lastSchoolAttended, lastSchoolYr, 
+        (firstName, middleInitial, lastName, prefix, email, contactNumber, lastSchoolAttended, lastSchoolYr, 
          birthDate, gender, dateEnrolled, courseId, educationalAttainment, status) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -46,10 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->bind_param(
-        "sssssssssiis",   // 9 strings, 2 ints, 1 string
+        "ssssssssssiis",   // 10 strings, 2 ints, 1 string
         $firstName,
         $middleInitial,
         $lastName,
+        $prefix,
         $email,
         $contactNumber,
         $lastSchool,
