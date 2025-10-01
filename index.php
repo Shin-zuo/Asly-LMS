@@ -41,7 +41,7 @@ URI     : https://colorlib.com
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <link href="css/style1.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 
@@ -174,12 +174,14 @@ URI     : https://colorlib.com
         </div>
     </div>
     <!-- // end .section -->
-    <div class="container my-5">
-        <h3 style="color: #f9a825; text-align: center;">What we offer</h3>
-        </br>
-        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
-            <!-- Card 1 -->
-            <div class="col">
+<div class="container my-5">
+    <h3 style="color: #f9a825; text-align: center;">What we offer</h3>
+    <br>
+    <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
+        
+        <!-- Card 1 -->
+        <div class="col">
+            <a href="sterile1.php" class="text-decoration-none">
                 <div class="card h-100 hover-scale text-center gradient-bg border-0">
                     <img src="images/images.jpg" class="card-img-top rounded-top-4" alt="Central Sterile Processing Technology">
                     <div class="card-body">
@@ -187,21 +189,25 @@ URI     : https://colorlib.com
                         <p class="card-text">An advanced program that provides in-depth knowledge of sterile processing, infection control, and healthcare standards. This course prepares students for leadership roles in hospital central service departments, both locally and internationally.</p>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <!-- Card 2 -->
-            <div class="col">
+        <!-- Card 2 -->
+        <div class="col">
+            <a href="sterile2.php" class="text-decoration-none">
                 <div class="card h-100 hover-scale text-center gradient-bg border-0">
-                    <img src="images/images2.png" class="card-img-top rounded-top-4" alt="Central Sterile Processing Technology">
+                    <img src="images/images2.png" class="card-img-top rounded-top-4" alt="Central Sterile Services">
                     <div class="card-body">
                         <h5 class="card-title">Central Sterile Services</h5>
                         <p class="card-text">Specialized training focused on the proper sterilization, handling, and maintenance of medical instruments. Graduates are prepared to support safe healthcare practices in hospitals and medical facilities.</p>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <!-- Card 3 -->
-            <div class="col">
+        <!-- Card 3 -->
+        <div class="col">
+            <a href="computer-systems.php" class="text-decoration-none">
                 <div class="card h-100 hover-scale text-center gradient-bg border-0">
                     <img src="images/image3.jpg" class="card-img-top rounded-top-4" alt="Computer Systems Servicing">
                     <div class="card-body">
@@ -209,9 +215,12 @@ URI     : https://colorlib.com
                         <p class="card-text">Develop the skills to install, configure, maintain, and troubleshoot computer systems and networks. This course provides the foundation for IT support and technical careers locally and abroad.</p>
                     </div>
                 </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="col">
+            </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col">
+            <a href="web-development.php" class="text-decoration-none">
                 <div class="card h-100 hover-scale text-center gradient-bg border-0">
                     <img src="images/image4.jpg" class="card-img-top rounded-top-4" alt="Web Development NC III">
                     <div class="card-body">
@@ -219,19 +228,25 @@ URI     : https://colorlib.com
                         <p class="card-text">Master the art of designing and building dynamic, user-friendly websites. Students learn both front-end and back-end development, preparing them for careers in the fast-growing digital industry.</p>
                     </div>
                 </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="col">
+            </a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col">
+            <a href="java-programming.php" class="text-decoration-none">
                 <div class="card h-100 hover-scale text-center gradient-bg border-0">
-                    <img src="images/image5.png" class="card-img-top rounded-top-4" alt="Smiling student seated at a computer desk working on a programming assignment in a bright classroom with educational posters on the wall and classmates collaborating nearby">
+                    <img src="images/image5.png" class="card-img-top rounded-top-4" alt="Java Programming NC III">
                     <div class="card-body">
                         <h5 class="card-title">Java Programming NC III</h5>
                         <p class="card-text">Gain expertise in one of the world’s most widely used programming languages. This course equips learners with the skills to develop robust, secure, and scalable applications for business and enterprise needs.</p>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
+
     </div>
+</div>
+
 
     <!-- Additional CSS -->
     <style>
@@ -713,63 +728,39 @@ URI     : https://colorlib.com
 
     </div>
     <!-- // end .section -->
+<div class="light-bg py-5">
+  <div class="container">
+    <div class="row align-items-center text-center text-lg-start">
+      <!-- Contact Info -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
+        <p class="mb-2">
+          <span class="ti-location-pin mr-2"></span>
+          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+        </p>
+        <p class="mb-2">
+          <span class="ti-email mr-2"></span>
+          <a href="mailto:support@mobileapp.com">admin.aici@edu.ph</a>
+        </p>
+        <p class="mb-1">
+          <span class="ti-headphone-alt mr-2"></span> 044-2400353
+        </p>
+        <p class="mb-0">
+          <span class="ti-headphone-alt mr-2"></span> +63955-8523707
+        </p>
+      </div>
 
-
-
-    <div class="section bg-gradient">
-        <div class="container">
-            <div class="call-to-action">
-
-                </br>
-                <h2>Download Anywhere</h2>
-                <p class="tagline">Available for all major mobile and desktop platforms. Rapidiously visualize optimal
-                    ROI rather than enterprise-wide methods of empowerment. </p>
-                <div class="my-4">
-
-                    <a href="#" class="btn btn-light"><img src="images/appleicon.png" alt="icon"> App Store</a>
-                    <a href="#" class="btn btn-light"><img src="images/playicon.png" alt="icon"> Google play</a>
+      <!-- Social Icons -->
+      <div class="col-lg-6" id="contact">
+                <div class="social-icons d-flex justify-content-center justify-content-lg-end gap-3 flex-lg-row flex-column align-items-center align-items-lg-end">
+                    <a href="https://www.facebook.com/edu.aitci"><span class="ti-facebook"></span></a>
+                    <a href="https://twitter.com/edu_aitci"><span class="ti-twitter-alt"></span></a>
+                    <a href="https://www.instagram.com/edu.aitci"><span class="ti-instagram"></span></a>
                 </div>
-                <p class="text-primary"><small><i>*Works on iOS 10.0.5+, Android Kitkat and above. </i></small></p>
-            </div>
-        </div>
-
+      </div>
     </div>
-    <!-- // end .section -->
-
-    <div class="light-bg py-5">
-        <div class="container">
-            <div class="row align-items-center">
-
-                <!-- Contact Info -->
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
-                    <p class="mb-2">
-                        <span class="ti-location-pin mr-2"></span>
-                        Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
-                    </p>
-                    <p class="mb-2">
-                        <span class="ti-email mr-2"></span>
-                        <a href="mailto:support@mobileapp.com">admin.aici@edu.ph</a>
-                    </p>
-                    <p class="mb-1">
-                        <span class="ti-headphone-alt mr-2"></span> 044-2400353
-                    </p>
-                    <p class="mb-0">
-                        <span class="ti-headphone-alt mr-2"></span> +63955-8523707
-                    </p>
-                </div>
-                <div class="col-lg-6" id="contact">
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/edu.aitci"><span class="ti-facebook"></span></a>
-                        <a href="https://twitter.com/edu_aitci"><span class="ti-twitter-alt"></span></a>
-                        <a href="https://www.instagram.com/edu.aitci"><span class="ti-instagram"></span></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
+  </div>
+</div>
 
     <!-- // end .section -->
     <footer class="my-5 text-center">

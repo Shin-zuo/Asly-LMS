@@ -24,17 +24,8 @@ Copyright © All rights Reserved
 7. PRICING
 8. CALL TO ACTION
 9. FOOTER
+*/
 
-------------------------*/
-
-
-/* GLOBAL
-----------------------*/
-
-body {
-    font-family: 'Rubik', sans-serif;
-    position: relative;
-}
 
 a {
     color: #f3bb61;
@@ -633,13 +624,16 @@ color: #7cb342; /* soft green text */
 ----------------------*/
 
 .social-icons {
-    position: absolute;
-    right: 20px;
-    top: 10px;
     display: flex;
+    flex-direction: row !important;
     gap: 10px;
-    z-index: 1000;         /* keep icons above other content */
-    pointer-events: auto;  /* ensure they are clickable */
+    justify-content: flex-end !important;
+    align-items: center;
+    width: 100%;
+    position: static;
+    margin-top: 0;
+    z-index: 1000;
+    pointer-events: auto;
 }
 
 .social-icons a {
@@ -664,7 +658,11 @@ color: #7cb342; /* soft green text */
 
 @media (max-width:991px) {
     .social-icons {
-        text-align: center;
+        justify-content: center !important;
+        flex-direction: row !important;
+        align-items: center;
         margin-top: 2rem;
+        width: 100%;
+        position: static;
     }
 }
