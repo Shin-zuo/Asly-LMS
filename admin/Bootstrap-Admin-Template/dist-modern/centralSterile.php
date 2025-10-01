@@ -9,7 +9,44 @@ header("Pragma: no-cache");
 require_once '../../../config/database.php';
 
 
+// --- Pagination Settings ---
+$limit = 10; // rows per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+$offset = ($page - 1) * $limit;
 
+// Count total chapters
+$totalResult = $conn->query("SELECT COUNT(*) as total FROM sterilechapters");
+$totalRow = $totalResult->fetch_assoc();
+$totalChapters = $totalRow['total'];
+$totalPages = ceil($totalChapters / $limit);
+
+// Fetch paginated chapters
+$sql = "SELECT id, chapterNum, title, description, discussion, status 
+        FROM sterilechapters 
+        ORDER BY chapterNum ASC 
+        LIMIT $limit OFFSET $offset";
+$result = $conn->query($sql);
+
+
+// Exams Pagination
+$limit = 5; // how many exams per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max($page, 1); // no negative page
+$offset = ($page - 1) * $limit;
+
+// Count total exams
+$totalResult = $conn->query("SELECT COUNT(*) as total FROM exams");
+$totalRow = $totalResult->fetch_assoc();
+$totalExams = $totalRow['total'];
+$totalPages = ceil($totalExams / $limit);
+
+// Fetch exams with limit
+$sql = "SELECT e.*, c.title as chapterTitle 
+        FROM exams e 
+        JOIN sterilechapters c ON e.chapterId=c.id 
+        LIMIT $limit OFFSET $offset";
+$exams = $conn->query($sql);
 
 
 ?>
@@ -47,13 +84,13 @@ require_once '../../../config/database.php';
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <h1 class="h3 mb-0">Central Sterile Management</h1>
-                            <p class="text-muted mb-0">Welcome back!</p>
+
                         </div>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addChapterModal">
-    <i class="bi bi-plus-lg me-2"></i>
-    Add Chapter
-</button>
+                                <i class="bi bi-plus-lg me-2"></i>
+                                Add Chapter
+                            </button>
                             <button type="button" class="btn btn-outline-secondary"
                                 data-bs-toggle="tooltip"
                                 title="Refresh data">
@@ -76,98 +113,236 @@ require_once '../../../config/database.php';
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3"></div>
 
-
-                        <span>Courses</span>
-                        <!-- Success/Error alerts -->
-                        <?php if (isset($_SESSION['success'])): ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= $_SESSION['success'];
-                                unset($_SESSION['success']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php elseif (isset($_SESSION['error'])): ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?= $_SESSION['error'];
-                                unset($_SESSION['error']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
+                        <!-- 
+                    Central Sterile Chapters Management Table -->
 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Course ID</th>
-                                    <th>Education Level</th>
-                                    <th>Course Code</th>
-                                    <th>Course</th>
+                                    <th>Chapter #</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Discussion (PDF)</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-
-                                // Pagination setup
-                                $limit = 10; // rows per page
-                                $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-                                $offset = ($page - 1) * $limit;
-
-                                // Get total count
-                                $countSql = "SELECT COUNT(*) as total FROM course";
-                                $countResult = $conn->query($countSql);
-                                $totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_assoc()['total'] : 0;
-                                $totalPages = ceil($totalRows / $limit);
-
-                                // Fetch paginated courses
-                                $sql = "SELECT c.courseId, e.educationLevel, c.courseCode, c.course, c.educationId 
-                                    FROM course c
-                                    JOIN educationlevel e ON c.educationId = e.id
-                                    ORDER BY c.courseId DESC
-                                    LIMIT $limit OFFSET $offset";
-                                $result = $conn->query($sql);
-
-                                if ($result && $result->num_rows > 0):
-                                    while ($row = $result->fetch_assoc()):
-                                ?>
+                                <?php if ($result && $result->num_rows > 0): ?>
+                                    <?php while ($row = $result->fetch_assoc()): ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                            <td><?= htmlspecialchars($row['educationLevel']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseCode']) ?></td>
-                                            <td><?= htmlspecialchars($row['course']) ?></td>
+                                            <td><?= htmlspecialchars($row['chapterNum']) ?></td>
+                                            <td><?= htmlspecialchars($row['title']) ?></td>
+                                            <td><?= htmlspecialchars($row['description']) ?></td>
                                             <td>
-                                                <!-- Edit button -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-primary editBtn"
+                                                <?php if (!empty($row['discussion'])): ?>
+                                                    <a href="uploads/chapters/<?= htmlspecialchars($row['discussion']) ?>" target="_blank" class="btn btn-sm btn-info">
+                                                        View PDF
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="text-muted">No PDF</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($row['status'] === 'active'): ?>
+                                                    <span class="badge bg-success">Active</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-secondary">Inactive</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <!-- Toggle Status -->
+                                                <form action="functions/toggleChapter.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                    <button type="submit"
+                                                        class="btn btn-sm <?= ($row['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                                                        <?= ($row['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                                                    </button>
+                                                </form>
+
+                                                <!-- Edit -->
+                                                <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                                    data-id="<?= $row['id'] ?>"
+                                                    data-chapternum="<?= htmlspecialchars($row['chapterNum']) ?>"
+                                                    data-title="<?= htmlspecialchars($row['title']) ?>"
+                                                    data-description="<?= htmlspecialchars($row['description']) ?>"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#editCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>"
-                                                    data-education="<?= $row['educationId'] ?>"
-                                                    data-code="<?= htmlspecialchars($row['courseCode']) ?>"
-                                                    data-course="<?= htmlspecialchars($row['course']) ?>">
+                                                    data-bs-target="#editChapterModal">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </button>
 
-                                                <!-- Delete button (opens modal) -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-danger"
-                                                    title="Delete"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-
+                                                <!-- Delete -->
+                                                <form action="functions/deleteChapter.php" method="POST" style="display:inline;"
+                                                    onsubmit="return confirm('Are you sure you want to delete this chapter?');">
+                                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
-                                    <?php
-                                    endwhile;
-                                else:
-                                    ?>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
                                     <tr>
-                                        <td colspan="5" class="text-center">No courses found</td>
+                                        <td colspan="6" class="text-center text-muted">No chapters found</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
+
+                        <!-- Pagination -->
+                        <?php if ($totalPages > 1): ?>
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <!-- Previous -->
+                                    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                                    </li>
+
+                                    <!-- Page numbers -->
+                                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+
+                                    <!-- Next -->
+                                    <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        <?php endif; ?>
+
+
+
+                    </div>
+
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h1 class="h3 mb-0">Exams Management</h1>
+
+                        </div>
+                        <div class="d-flex gap-2 ">
+                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addExamModal">
+                                <i class="bi bi-plus-lg me-2"></i> Add Exam
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Refresh data">
+                                <i class="bi bi-arrow-clockwise icon-hover"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Export data">
+                                <i class="bi bi-download icon-hover"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Settings">
+                                <i class="bi bi-gear icon-hover"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards with Alpine.js -->
+                    <div class="row g-3 align-items-end">
+                        <!-- <div class="col-md-3"></div> -->
+
+                        <!-- 
+                    Central Sterile Chapters Management Table -->
+
+                     
+<table class="table table-striped" id="examTable">
+    <thead>
+        <tr>
+            <th>Chapter</th>
+            <th>Exam Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Questions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $exams = $conn->query("SELECT * FROM exams"); 
+        if ($exams->num_rows > 0):
+            while ($exam = $exams->fetch_assoc()):
+        ?>
+            <tr>
+                <!-- Show "Chapter X" -->
+                <td>Chapter <?= htmlspecialchars($exam['chapterId']) ?></td>
+
+                <td><?= htmlspecialchars($exam['title']) ?></td>
+                <td><?= htmlspecialchars($exam['description']) ?></td>
+                <td>
+                    <?php if ($exam['status'] === 'active'): ?>
+                        <span class="badge bg-success">Active</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary">Inactive</span>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <a href="questions.php?examId=<?= $exam['id'] ?>" class="btn btn-sm btn-outline-info">
+                        Manage Questions
+                    </a>
+                </td>
+                <td>
+                    <form action="functions/toggleExam.php" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                        <button type="submit"
+                            class="btn btn-sm <?= ($exam['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                            <?= ($exam['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                        </button>
+                    </form>
+
+                    <form action="functions/deleteExam.php" method="POST" style="display:inline;"
+                        onsubmit="return confirm('Delete this exam?');">
+                        <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        <?php endwhile; else: ?>
+            <tr>
+                <td colspan="6" class="text-center">No exams found</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
+
+
+<!-- Pagination -->
+<?php if ($totalPages > 1): ?>
+<nav>
+  <ul class="pagination">
+    <!-- Previous -->
+    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+      <a class="page-link" href="?page=<?= $page - 1 ?>#examTable">Previous</a>
+    </li>
+
+    <!-- Page Numbers -->
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+      <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+        <a class="page-link" href="?page=<?= $i ?>#examTable"><?= $i ?></a>
+      </li>
+    <?php endfor; ?>
+
+    <!-- Next -->
+    <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+      <a class="page-link" href="?page=<?= $page + 1 ?>#examTable">Next</a>
+    </li>
+  </ul>
+</nav>
+<?php endif; ?>
 
 
 
@@ -204,64 +379,64 @@ require_once '../../../config/database.php';
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Course ID</th>
-                                    <th>Education Level</th>
-                                    <th>Course Code</th>
-                                    <th>Course</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if ($result && $result->num_rows > 0):
-                                    while ($row = $result->fetch_assoc()):
-                                ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                            <td><?= htmlspecialchars($row['educationLevel']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseCode']) ?></td>
-                                            <td><?= htmlspecialchars($row['course']) ?></td>
-                                            <td>
-                                                <!-- Edit button -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-primary editBtn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>"
-                                                    data-education="<?= $row['educationId'] ?>"
-                                                    data-code="<?= htmlspecialchars($row['courseCode']) ?>"
-                                                    data-course="<?= htmlspecialchars($row['course']) ?>">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </button>
-
-                                                <!-- Delete button (opens modal) -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-danger"
-                                                    title="Delete"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endwhile;
-                                else:
-                                    ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Education Level</th>
+                                <th>Course Code</th>
+                                <th>Course</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($result && $result->num_rows > 0):
+                                while ($row = $result->fetch_assoc()):
+                            ?>
                                     <tr>
-                                        <td colspan="5" class="text-center">No courses found</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                        <td><?= htmlspecialchars($row['courseId']) ?></td>
+                                        <td><?= htmlspecialchars($row['educationLevel']) ?></td>
+                                        <td><?= htmlspecialchars($row['courseCode']) ?></td>
+                                        <td><?= htmlspecialchars($row['course']) ?></td>
+                                        <td>
+                                            <!-- Edit button -->
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-primary editBtn"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editCourseModal"
+                                                data-id="<?= $row['courseId'] ?>"
+                                                data-education="<?= $row['educationId'] ?>"
+                                                data-code="<?= htmlspecialchars($row['courseCode']) ?>"
+                                                data-course="<?= htmlspecialchars($row['course']) ?>">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
 
-                        <!-- Pagination Controls -->
-                        <?php if ($totalPages > 1): ?>
+                                            <!-- Delete button (opens modal) -->
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-danger"
+                                                title="Delete"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteCourseModal"
+                                                data-id="<?= $row['courseId'] ?>">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                <?php
+                                endwhile;
+                            else:
+                                ?>
+                                <tr>
+                                    <td colspan="5" class="text-center">No courses found</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination Controls -->
+                    <?php if ($totalPages > 1): ?>
                         <nav aria-label="Course table pagination">
                             <ul class="pagination justify-content-center">
                                 <!-- Previous -->
@@ -279,71 +454,122 @@ require_once '../../../config/database.php';
                                 </li>
                             </ul>
                         </nav>
-                        <?php endif; ?>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-heart icon-xl icon-pulse text-danger"></i>
-                                <br><small>Pulse</small>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-star icon-xl icon-hover text-warning"></i>
-                                <br><small>Hover Effect</small>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-check-circle icon-xl text-success"></i>
-                                <br><small>Static</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="bi bi-x me-2"></i>Close
-                        </button>
-                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-heart icon-xl icon-pulse text-danger"></i>
+                    <br><small>Pulse</small>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-star icon-xl icon-hover text-warning"></i>
+                    <br><small>Hover Effect</small>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-check-circle icon-xl text-success"></i>
+                    <br><small>Static</small>
                 </div>
             </div>
         </div>
+        <div class="modal-footer">
 
-        <!-- Edit Course Modal -->
-        <div class="modal fade" id="editCourseModal" tabindex="-1" aria-hidden="true">
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+        <div class="modal fade" id="addChapterModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="functions/update_course.php" method="POST" class="modal-content">
+                <form action="functions/addChapter.php" method="POST" enctype="multipart/form-data" class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Course</h5>
+                        <h5 class="modal-title">Add Chapter</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="courseId" id="editCourseId">
-
                         <div class="mb-3">
-                            <label for="editEducationId" class="form-label">Education Level</label>
-                            <select name="educationId" id="editEducationId" class="form-select" required>
-                                <?php
-                                $eduRes = $conn->query("SELECT id, educationLevel FROM educationlevel");
-                                while ($edu = $eduRes->fetch_assoc()):
-                                ?>
-                                    <option value="<?= $edu['id'] ?>"><?= htmlspecialchars($edu['educationLevel']) ?></option>
-                                <?php endwhile; ?>
+                            <label class="form-label">Chapter #</label>
+                            <input type="number" name="chapterNum" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Discussion PDF</label>
+                            <input type="file" name="pdfFile" class="form-control" accept="application/pdf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select">
+                                <option value="active">Active</option>
+                                <option value="inactive" selected>Inactive</option>
                             </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="editCourseCode" class="form-label">Course Code</label>
-                            <input type="text" name="courseCode" id="editCourseCode" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="editCourseName" class="form-label">Course Name</label>
-                            <input type="text" name="course" id="editCourseName" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
+
+
+        <!-- Add Exam Modal -->
+        <div class="modal fade" id="addExamModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="functions/addExam.php" method="POST" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Exam</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Chapter Selector -->
+                        <label class="form-label">Chapter Number</label>
+                        <select name="chapterId" class="form-select" required>
+                            <?php
+                            $chapters = $conn->query("SELECT id, chapterNum, status FROM sterilechapters");
+                            if ($chapters && $chapters->num_rows > 0) {
+                                while ($c = $chapters->fetch_assoc()) {
+                                    echo '<option value="' . $c['id'] . '">' . htmlspecialchars($c['chapterNum']) . ' (' . $c['status'] . ')</option>';
+                                }
+                            } else {
+                                echo '<option disabled>No chapters found</option>';
+                            }
+                            ?>
+                        </select>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Exam Title</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select" required>
+                                <option value="inactive" selected>Inactive</option>
+                                <option value="active">Active</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Exam</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         <!-- Delete Course Modal -->
         <div class="modal fade" id="deleteCourseModal" tabindex="-1" aria-hidden="true">
@@ -365,53 +591,44 @@ require_once '../../../config/database.php';
             </div>
         </div>
 
+        <!-- ✅ Single Edit Modal -->
+        <div class="modal fade" id="editChapterModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="functions/editChapter.php" method="POST" enctype="multipart/form-data" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Chapter</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editId">
 
-        <!-- Add Chapter Modal -->
-<div class="modal fade" id="addChapterModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="functions/addChapter.php" method="POST" enctype="multipart/form-data" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Chapter</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <div class="mb-3">
+                            <label class="form-label">Chapter #</label>
+                            <input type="number" name="chapterNum" id="editChapterNum" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" id="editTitle" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" id="editDescription" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Replace PDF (optional)</label>
+                            <input type="file" name="pdfFile" class="form-control" accept="application/pdf">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-
-                <div class="mb-3">
-                    <label for="chapterNum" class="form-label">Chapter Number</label>
-                    <input type="number" name="chapterNum" id="chapterNum" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="chapterTitle" class="form-label">Title</label>
-                    <input type="text" name="title" id="chapterTitle" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="chapterDesc" class="form-label">Description</label>
-                    <textarea name="description" id="chapterDesc" class="form-control" rows="3" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label for="pdfFile" class="form-label">Upload PDF</label>
-                    <input type="file" name="pdfFile" id="pdfFile" class="form-control" accept="application/pdf" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select name="status" id="status" class="form-select" required>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Add Chapter</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 
 
@@ -446,40 +663,25 @@ require_once '../../../config/database.php';
                 }
             });
 
-            // Edit Course Modal Population
-            document.addEventListener('DOMContentLoaded', function() {
-                const editBtns = document.querySelectorAll('.editBtn');
-                const editCourseId = document.getElementById('editCourseId');
-                const editEducationId = document.getElementById('editEducationId');
-                const editCourseCode = document.getElementById('editCourseCode');
-                const editCourseName = document.getElementById('editCourseName');
-
-                editBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        editCourseId.value = this.dataset.id;
-                        editEducationId.value = this.dataset.education;
-                        editCourseCode.value = this.dataset.code;
-                        editCourseName.value = this.dataset.course;
-                    });
+            // Edit Chapter Modal Population
+            document.querySelectorAll('.editBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.getElementById('editId').value = this.dataset.id;
+                    document.getElementById('editChapterNum').value = this.dataset.chapternum;
+                    document.getElementById('editTitle').value = this.dataset.title;
+                    document.getElementById('editDescription').value = this.dataset.description;
                 });
-            });
-
-            const deleteModal = document.getElementById('deleteCourseModal');
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const courseId = button.getAttribute('data-id');
-                document.getElementById('deleteCourseId').value = courseId;
             });
         </script>
 
         <script>
-// Force reload on browser back navigation to trigger PHP session check
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-        window.location.reload();
-    }   
-});
-</script>
+            // Force reload on browser back navigation to trigger PHP session check
+            window.addEventListener("pageshow", function(event) {
+                if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+                    window.location.reload();
+                }
+            });
+        </script>
     </body>
 </body>
 
