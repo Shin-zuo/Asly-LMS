@@ -119,21 +119,63 @@ URI     : https://colorlib.com
         </div>
         <!-- Post Content -->
         <p>
-          The Central Sterile Services Department (CSSD) is a specialized area in hospitals responsible 
-          for cleaning, sterilizing, preparing, and distributing medical and surgical equipment. Its work 
-          is crucial in preventing infections and ensuring patient safety.
+In the Central Sterile Processing Technology (CSPT) program, students study a wide range of subjects that prepare them 
+to become skilled professionals in the healthcare field. The curriculum begins with Microbiology and Infection Control, 
+which teaches the science of microorganisms and the principles of preventing the spread of infection in medical settings. 
+Students also take Decontamination and Cleaning, where they learn safe handling of surgical instruments and effective 
+cleaning methods. Another key subject is sterilization technologies, focusing on the operation and validation of 
+sterilization equipment such as autoclaves, ultrasonic cleaners, and other advanced systems. In Instrument Identification 
+and Assembly, students develop the ability to recognize, sort, and properly assemble surgical instruments for different 
+procedures. This is complemented by Packaging and Storage, which emphasizes the correct methods of wrapping, labeling,
+and storing instruments to maintain sterility until use. The program also includes documentation and tracking, where 
+students practice accurate record-keeping and the use of tracking systems to monitor sterile supplies. Finally, safety and 
+compliance are covered to ensure that students understand and follow national and international standards such as OSHA, 
+AAMI, CDC, and TESDA guidelines. Together, these subjects provide both theoretical knowledge and practical skills, preparing 
+graduates for real-world responsibilities in hospitals and healthcare facilities.
         </p>
+        <div id="Functions">
         <h2>Functions of CSSD</h2>
+        <p>Functions of Central Sterile Processing Technology
+
+The main function of Central Sterile Processing Technology is to ensure that all surgical instruments, medical devices, and equipment are safe, sterile, and ready for patient care. This role is crucial to preventing infections, supporting surgical teams, and maintaining the smooth operation of healthcare facilities.
+
+Key functions include:
         <ul>
-          <li>Cleaning and decontaminating surgical instruments</li>
-          <li>Performing sterilization using steam, gas, or chemical methods</li>
-          <li>Packaging and labeling sterile items for storage</li>
-          <li>Distributing sterile equipment to operating rooms and wards</li>
+          <li>Decontamination and Cleaning – Receiving used medical instruments, removing contaminants such as blood or tissue, 
+             and applying proper cleaning techniques to prepare them for sterilization.</li>
+          <li>Sterilization of Instruments – Operating sterilization equipment such as autoclaves, gas sterilizers, and ultrasonic
+             cleaners to destroy microorganisms and make instruments safe for reuse.</li>
+          <li>Inspection and Assembly – Checking instruments for damage or wear, ensuring functionality, and assembling sets of 
+             instruments required for specific surgical procedures.</li>
+          <li>Packaging and Storage – Wrapping or packaging instruments according to standards, labeling them properly, and storing 
+             them in sterile conditions until needed.</li>
+          <li>Inventory Management—Maintaining accurate records, tracking instruments through barcoding or digital systems, and ensuring
+             a consistent supply of sterile equipment.</li>
+          <li>Distribution—Delivering sterile instruments and equipment to operating rooms, clinics, and other healthcare departments
+            on time and in the correct condition.</li>
+          <li>Compliance with Standards—Following strict infection control protocols and healthcare regulations (TESDA, DOH, OSHA, AAMI, CDC)
+             to guarantee patient safety and institutional quality assurance.</li>  
+          <li>Support for Patient Safety—Serving as the first line of defense against healthcare-associated infections by ensuring every
+             tool used in medical care is safe and sterile.</li>
         </ul>
-        <h2>Importance in Healthcare</h2>
+        </div>
+        <h2 id="Importance">Importance of Central Sterile Processing Technology</h2>
         <p>
-          Every safe surgery and clinical procedure depends on sterile equipment. CSSD ensures hospitals 
-          reduce infection risks and maintain high standards of patient care.
+          Taking the Central Sterile Processing Technology (CSPT) course is highly important because it trains you for a critical role in the healthcare system. While doctors and nurses are often seen at the forefront of patient care, sterile processing technicians work behind the scenes to make sure that every surgical instrument and medical device is clean, safe, and ready to use. Without this role, surgeries and other medical procedures would carry a high risk of infection and complications.
+
+        <h4 class="mt-4" style="color:#959094;">Functions of CSSD</h4>
+        <p>
+          Cleaning and decontaminating surgical instruments<br>
+          Performing sterilization using steam, gas, or chemical methods<br>
+          Packaging and labeling sterile items for storage<br>
+          Distributing sterile equipment to operating rooms and wards
+        </p>
+        <h4 class="mt-4" style="color:#959094;">Importance of Central Sterile Processing Technology</h4>
+        <p>
+          By studying this course, you will understand the science of infection control, learn how to operate sterilization equipment, and gain the skills to handle medical instruments with precision. This ensures that you can directly contribute to patient safety and the smooth operation of hospitals and clinics.<br><br>
+          The importance of this course also lies in the growing demand for sterile processing technicians worldwide. As healthcare facilities continue to expand, there is an increasing need for trained professionals who can ensure compliance with international safety standards. Graduating from this program not only gives you the technical expertise to support surgical teams but also provides career opportunities in hospitals, surgical centers, and other healthcare institutions locally and abroad.<br><br>
+          In short, taking Central Sterile Processing Technology is important because it equips you with the knowledge and skills to protect patients, support healthcare workers, and build a stable career in the medical field.
+        </p>
         </p>
       </div>
       <div class="col-md-3">
@@ -142,7 +184,18 @@ URI     : https://colorlib.com
             <div class="card-body">
               <h5 class="card-title" style="color:#959094;">Course Links</h5>
               <ul class="list-unstyled">
-                <li><a href="sterile1.php" class="text-decoration-none active-course">Central Sterile Processing Technology</a></li>
+                <li>
+                  <a href="sterile1.php" class="text-decoration-none active-course" style="font-size:1.1rem;">Central Sterile Processing Technology</a>
+                  <ul class="list-unstyled ms-3">
+                    <li><a href="#Functions" style="color:#959094; font-size:0.98rem; text-decoration:none;">Functions of CSSD</a></li>
+                    <li><a href="#Importance" style="color:#959094; font-size:0.98rem; text-decoration:none;">Importance of Central Sterile Processing Technology</a></li>
+    <style>
+      .ms-3 a:hover {
+        font-weight: bold;
+      }
+    </style>
+                  </ul>
+                </li>
                 <li><a href="sterile2.php" class="text-decoration-none">Central Sterile Services</a></li>
                 <li><a href="computer-systems.php" class="text-decoration-none">Computer Systems Servicing NC II</a></li>
                 <li><a href="web-development.php" class="text-decoration-none">Web Development NC III</a></li>
@@ -163,7 +216,7 @@ URI     : https://colorlib.com
         <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
         <p class="mb-2">
           <span class="ti-location-pin mr-2"></span>
-          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+         City of San Jose Del Monte, Bulacan, Philippines
         </p>
         <p class="mb-2">
           <span class="ti-email mr-2"></span>

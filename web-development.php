@@ -105,8 +105,8 @@ URI     : https://colorlib.com
   <div class="container my-5 pt-5">
     <div class="row">
       <div class="col-md-9">
-        <h1 class="fw-bold">Central Sterile Processing Technology</h1>
-        <h2 class="fw-bold" style="color: black;">(2years Course)</h2>
+        <h1 class="fw-bold">Web Development</h1>
+        <h2 class="fw-bold" style="color: black;">(NC III)</h2>
         <!-- Picture Container before CSSD section -->
         <div class="container my-5">
           <div class="row justify-content-center">
@@ -118,23 +118,56 @@ URI     : https://colorlib.com
           </div>
         </div>
         <!-- Post Content -->
-        <p>
-          The Central Sterile Services Department (CSSD) is a specialized area in hospitals responsible 
-          for cleaning, sterilizing, preparing, and distributing medical and surgical equipment. Its work 
-          is crucial in preventing infections and ensuring patient safety.
-        </p>
-        <h2>Functions of CSSD</h2>
-        <ul>
-          <li>Cleaning and decontaminating surgical instruments</li>
-          <li>Performing sterilization using steam, gas, or chemical methods</li>
-          <li>Packaging and labeling sterile items for storage</li>
-          <li>Distributing sterile equipment to operating rooms and wards</li>
-        </ul>
-        <h2>Importance in Healthcare</h2>
-        <p>
-          Every safe surgery and clinical procedure depends on sterile equipment. CSSD ensures hospitals 
-          reduce infection risks and maintain high standards of patient care.
-        </p>
+<p><strong>Web Development NC III</strong> is a TESDA-registered qualification designed to equip learners with the skills needed to <strong>create, develop, and maintain professional websites and web applications</strong>. This program covers both <strong>front-end development</strong>, which focuses on designing visually appealing and user-friendly interfaces, and <strong>back-end development</strong>, which ensures that websites are functional, secure, and capable of handling data and user interactions.</p>
+
+<p>Through this course, students gain a strong foundation in programming languages, coding practices, and design principles that are essential for building responsive and interactive websites. Learners are also trained in industry-standard tools, frameworks, and technologies used by web developers worldwide, preparing them for real-world projects and professional opportunities.</p>
+
+<p>More than just coding, the program emphasizes <strong>problem-solving, creativity, and innovation</strong>, allowing graduates to design websites that are not only technically sound but also engaging and aligned with client or business goals. Whether for companies, organizations, or personal projects, students will develop the ability to bring ideas to life online.</p>
+
+<p>By completing this program, learners are prepared to pursue careers as <strong>web developers, web designers, UI/UX specialists, or freelance professionals</strong>, with skills that are in demand both locally and internationally.</p>
+
+
+
+<h2 id="ProgramCoverage">Program Coverage and Competencies</h2>
+<h5>Through hands-on training, learners will develop skills in:</h5>
+
+<ul style="color: #959094;">
+  <li><strong>Computer Hardware Servicing</strong> – Assembling, disassembling, and troubleshooting computer components efficiently.</li>
+  <li><strong>Networking</strong> – Installing, configuring, and maintaining computer networks (LAN/WAN) for stable and secure connectivity.</li>
+  <li><strong>Software Installation and Configuration</strong> – Installing operating systems, applications, and security software for optimal performance.</li>
+  <li><strong>System Maintenance</strong> – Performing preventive and corrective maintenance on computers and peripherals to ensure longevity.</li>
+  <li><strong>Technical Support</strong> – Providing customer service and technical assistance for ICT-related issues, troubleshooting problems effectively.</li>
+</ul>
+
+<h2 id="Career">Career Paths and Opportunities</h2>
+<h5>Graduates of Web Development NC III can pursue careers as:</h5>
+<ul style="color: #959094;">
+  <li><strong>Front-End Web Developer</strong></li>
+  <li><strong>Back-End Web Developer</strong></li>
+  <li><strong>Full-Stack Developer</strong></li>
+  <li><strong>Web Designer</strong></li>
+  <li><strong>Freelance Web Developer</strong></li>
+  <li><strong>CMS Developer/Administrator</strong></li>
+</ul>
+<p>They can work in IT companies, digital marketing agencies, corporate IT departments, or as freelancers serving clients worldwide.</p>
+<h2 id="Certification">Certification and Recognition</h2>
+<p>After completing the Web Development NC III program, trainees will have the opportunity to undergo the <strong>national assessment</strong> conducted by <strong>TESDA (Technical Education and Skills Development Authority)</strong>. This assessment evaluates their proficiency in essential web development skills, including <strong>front-end development</strong> using HTML, CSS, and JavaScript, <strong>back-end development</strong> with PHP and MySQL, <strong>database integration</strong>, <strong>content management system customization</strong> such as WordPress or Joomla, <strong>testing and debugging</strong> across multiple browsers and devices, and <strong>website deployment and maintenance</strong>. The assessment ensures that trainees have acquired both the technical knowledge and practical hands-on experience necessary to meet industry standards in professional web development.</p>
+
+<p>Those who successfully pass the assessment will be awarded the <strong>National Certificate III (NC III)</strong>, a credential that is <strong>recognized locally and internationally</strong> as proof of competence and readiness in the ICT industry. This certification is acknowledged by TESDA’s partner organizations, IT companies, digital agencies, and freelance clients, giving graduates credibility and validation of their web development expertise. It demonstrates that they are fully capable of handling complex web development projects, providing technical support, and contributing effectively in professional environments.</p>
+
+<p>Holding the <strong>NC III certification</strong> enhances a graduate’s <strong>employability and professional reputation</strong>, giving them a competitive edge in securing roles such as <strong>front-end developer</strong>, <strong>back-end developer</strong>, <strong>full-stack developer</strong>, <strong>web designer</strong>, <strong>CMS developer/administrator</strong>, or as an independent <strong>freelance web developer</strong>. Additionally, the certification provides a strong foundation for pursuing <strong>advanced ICT qualifications</strong> or further studies in web technologies, empowering graduates to continuously grow in their careers and stay updated with evolving industry standards.</p>
+
+<h2 id="WhyEnroll">Why Enroll in This Program?</h2>
+<h5>The Web Development NC III program is ideal for those who want to:</h5>
+
+<p>Start a career in the fast-growing <strong>web development industry</strong>, gaining expertise in designing, building, and maintaining modern websites and applications. By enrolling in this program, you will acquire <strong>hands-on skills</strong> in both <strong>front-end and back-end development</strong>, enabling you to create responsive, user-friendly, and professional web solutions that meet industry standards.</p>
+
+<p>This program prepares you to work as a <strong>front-end developer</strong>, <strong>back-end developer</strong>, <strong>full-stack developer</strong>, <strong>web designer</strong>, or <strong>CMS administrator</strong>. These competencies are highly valued by <strong>IT companies</strong>, <strong>digital marketing agencies</strong>, and <strong>corporate IT departments</strong>, and they also provide opportunities for <strong>freelance work serving global clients</strong>.</p>
+
+<p>Additionally, <strong>Web Development NC III</strong> empowers learners interested in <strong>entrepreneurship</strong> or building their own online presence. Whether you aim to launch a <strong>personal website</strong>, develop <strong>e-commerce platforms</strong>, or create <strong>digital solutions for small businesses</strong>, this program equips you with the <strong>practical skills and technical confidence</strong> to bring your ideas to life and succeed in the digital marketplace.</p>
+
+<p>By completing this program, you gain a <strong>competitive edge</strong> in the ICT workforce, develop <strong>professional confidence</strong>, and open doors to a variety of <strong>career paths</strong> in the rapidly evolving technology-driven world. It is not only about mastering coding and web design—it is about preparing yourself for a <strong>future filled with opportunities</strong>, <strong>growth</strong>, and <strong>success in the web development field</strong>.</p>
+
       </div>
       <div class="col-md-3">
         <aside style="position:sticky; top:80px; z-index:1020;">
@@ -145,7 +178,14 @@ URI     : https://colorlib.com
                 <li><a href="sterile1.php" class="text-decoration-none">Central Sterile Processing Technology</a></li>
                 <li><a href="sterile2.php" class="text-decoration-none">Central Sterile Services</a></li>
                 <li><a href="computer-systems.php" class="text-decoration-none">Computer Systems Servicing NC II</a></li>
-                <li><a href="web-development.php" class="text-decoration-none active-course">Web Development NC III</a></li>
+                <li>
+                  <a href="web-development.php" class="text-decoration-none active-course" style="font-size:1.1rem;">Web Development NC III</a>
+                  <ul class="list-unstyled ms-3">
+                    <li><a href="#ProgramCoverage" style="color:#959094; font-size:0.98rem; text-decoration:none;">Program Coverage and Competencies</a></li>
+                    <li><a href="#Career" style="color:#959094; font-size:0.98rem; text-decoration:none;">Career Paths and Opportunities</a></li>
+                     <li><a href="#Certification" style="color:#959094; font-size:0.98rem; text-decoration:none;">Certification and Recognition</a></li>
+                    <li><a href="#WhyEnroll" style="color:#959094; font-size:0.98rem; text-decoration:none;">Why Enroll in this Program?</a></li>
+                  </ul>
                 <li><a href="java-programming.php" class="text-decoration-none">Java Programming NC III</a></li>
               </ul>
             </div>
@@ -163,7 +203,7 @@ URI     : https://colorlib.com
         <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
         <p class="mb-2">
           <span class="ti-location-pin mr-2"></span>
-          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+          City of San Jose Del Monte, Bulacan, Philippines
         </p>
         <p class="mb-2">
           <span class="ti-email mr-2"></span>

@@ -105,8 +105,8 @@ URI     : https://colorlib.com
   <div class="container my-5 pt-5">
     <div class="row">
       <div class="col-md-9">
-        <h1 class="fw-bold">Central Sterile Processing Technology</h1>
-        <h2 class="fw-bold" style="color: black;">(2years Course)</h2>
+        <h1 class="fw-bold">Java-Programming</h1>
+        <h2 class="fw-bold" style="color: black;">(NC III)</h2>
         <!-- Picture Container before CSSD section -->
         <div class="container my-5">
           <div class="row justify-content-center">
@@ -146,7 +146,13 @@ URI     : https://colorlib.com
                 <li><a href="sterile2.php" class="text-decoration-none">Central Sterile Services</a></li>
                 <li><a href="computer-systems.php" class="text-decoration-none">Computer Systems Servicing NC II</a></li>
                 <li><a href="web-development.php" class="text-decoration-none">Web Development NC III</a></li>
-                <li><a href="java-programming.php" class="text-decoration-none active-course">Java Programming NC III</a></li>
+                <li>
+                  <a href="java-programming.php" class="text-decoration-none active-course" style="font-size:1.1rem;">Java Programming NC III</a>
+                  <ul class="list-unstyled ms-3">
+                    <li><a href="#Functions" style="color:#959094; font-size:0.98rem; text-decoration:none;">Functions of CSSD</a></li>
+                    <li><a href="#Importance" style="color:#959094; font-size:0.98rem; text-decoration:none;">Importance in Healthcare</a></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -163,7 +169,7 @@ URI     : https://colorlib.com
         <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
         <p class="mb-2">
           <span class="ti-location-pin mr-2"></span>
-          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+          City of San Jose Del Monte, Bulacan, Philippines
         </p>
         <p class="mb-2">
           <span class="ti-email mr-2"></span>
