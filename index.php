@@ -294,7 +294,7 @@ URI     : https://colorlib.com
                 </div>
             </div>
             <div class="perspective-phone">
-                <img src="images/Graduation.png" alt="perspective phone" class="img-fluid" style="width:600px; height:auto;">
+                <img src="images/DSC_1037.jpg" alt="perspective phone" class="img-fluid" style="width:600px; height:auto;">
             </div>
         </div>
 
@@ -437,7 +437,7 @@ URI     : https://colorlib.com
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="images/walking.png" alt="dual phone" class="img-fluid" style="width:600px; height:auto;">
+                    <img src="images/DSC_1055.jpg" alt="dual phone" class="img-fluid" style="width:600px; height:auto;">
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div>
@@ -488,7 +488,7 @@ URI     : https://colorlib.com
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <img src="images/Marin_Kitagawa_Anime_Infobox.png" alt="school" class="img-fluid">
+                    <img src="images/bossatanorig.png" alt="school" class="img-fluid">
                 </div>
 
             </div>
@@ -736,7 +736,7 @@ URI     : https://colorlib.com
         <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
         <p class="mb-2">
           <span class="ti-location-pin mr-2"></span>
-          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+          City of San Jose Del Monte, Bulacan, Philippines
         </p>
         <p class="mb-2">
           <span class="ti-email mr-2"></span>
@@ -766,14 +766,8 @@ URI     : https://colorlib.com
     <footer class="my-5 text-center">
         <!-- Copyright removal is not prohibited! -->
         <p class="mb-2"><small>Copyright © Asly International College Inc. All Rights Reserved. (2025)</small></p>
-
-        <small>
-            <a href="#" class="m-2">PRESS</a>
-            <a href="#" class="m-2">TERMS</a>
-            <a href="#" class="m-2">PRIVACY</a>
-        </small>
-    </footer>
-
+        <H1 style="color: white;">KANEKI(FE)</H1>
+        <h1 style="color: white;">ShinzuoDEV</h1>
     <!-- JavaScript to dynamically load courses -->
     <script>
         document.getElementById('applyFor').addEventListener('change', function() {

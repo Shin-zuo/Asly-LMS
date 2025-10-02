@@ -105,8 +105,8 @@ URI     : https://colorlib.com
   <div class="container my-5 pt-5">
     <div class="row">
       <div class="col-md-9">
-        <h1 class="fw-bold">Central Sterile Processing Technology</h1>
-        <h2 class="fw-bold" style="color: black;">(2years Course)</h2>
+        <h1 class="fw-bold">Computer System Servicing</h1>
+        <h2 class="fw-bold" style="color: black;">(NC II)</h2>
         <!-- Picture Container before CSSD section -->
         <div class="container my-5">
           <div class="row justify-content-center">
@@ -118,23 +118,51 @@ URI     : https://colorlib.com
           </div>
         </div>
         <!-- Post Content -->
-        <p>
-          The Central Sterile Services Department (CSSD) is a specialized area in hospitals responsible 
-          for cleaning, sterilizing, preparing, and distributing medical and surgical equipment. Its work 
-          is crucial in preventing infections and ensuring patient safety.
-        </p>
-        <h2>Functions of CSSD</h2>
-        <ul>
-          <li>Cleaning and decontaminating surgical instruments</li>
-          <li>Performing sterilization using steam, gas, or chemical methods</li>
-          <li>Packaging and labeling sterile items for storage</li>
-          <li>Distributing sterile equipment to operating rooms and wards</li>
+<p><strong>Computer System Servicing NC II (CSS NC II)</strong> is a TESDA-accredited technical-vocational course that trains students to install, configure, maintain, and repair computer systems and networks. The "NC II" means <strong>National Certificate Level II</strong>, which is a certification issued by TESDA to confirm that a graduate has met the national competency standards for this field.</p>
+
+<p>This course focuses on giving students <strong>practical, hands-on skills</strong> in areas such as assembling and disassembling computers, installing operating systems and software, setting up and troubleshooting computer networks, and maintaining computer hardware and peripherals. It also includes lessons on safety procedures and proper documentation of technical work.</p>
+
+<p>In simple terms, Computer System Servicing NC II prepares learners to become <strong>competent computer technicians</strong> who can work in schools, offices, businesses, and service centers. It provides them with both the technical know-how and the certification needed for employment or entrepreneurship in the ICT (Information and Communications Technology) industry.</p>
+
+<p>With the rapid growth of technology and the increasing demand for skilled IT professionals, taking this course gives learners a strong advantage and opens doors to both local and international opportunities in the ICT sector.</p>
+
+
+
+        <h2 id="Skills">Skills You'll Gain</h2>
+        <h5>Learners under CSS NC II will gain practical knowledge and hands-on skills in areas such as</h5>
+        <ul style="color: #959094;">
+          <li><strong>Computer Hardware Servicing</strong> – Assembling, disassembling, and troubleshooting computer components.</li>
+          <li><strong>Networking</strong> – Installing, configuring, and maintaining computer networks (LAN/WAN).</li>
+          <li><strong>Software Installation and Configuration</strong> – Installing operating systems, applications, and security software.</li>
+          <li><strong>System Maintenance</strong> – Performing preventive and corrective maintenance of computers and peripherals.</li>
+          <li><strong>Technical Support </strong> – Providing customer service and technical assistance for ICT-related issues.</strong></li>
         </ul>
-        <h2>Importance in Healthcare</h2>
-        <p>
-          Every safe surgery and clinical procedure depends on sterile equipment. CSSD ensures hospitals 
-          reduce infection risks and maintain high standards of patient care.
-        </p>
+<h2 id="Career">Career Paths and Opportunities</h2>
+<h5>Graduates of CSS NC II can work as:</h5>
+<ul style="color: #959094;">
+  <li><strong>Computer Technician</strong></li>
+  <li><strong>Network Support Technician</strong></li>
+  <li><strong>Technical Support Specialist</strong></li>
+  <li><strong>IT Service Crew</strong></li>
+  <li><strong>Computer Hardware Servicing Professional</strong></li>
+</ul>
+
+        <h2 id="Certification">Certification and Achievements</h2>
+       <p>Upon completing the program, learners will have the opportunity to take the <strong>national assessment</strong> conducted by <strong>TESDA (Technical Education and Skills Development Authority)</strong>. This assessment evaluates the learners’ mastery of the technical and practical skills they acquired during the course, including <strong>computer hardware servicing</strong>, <strong>software installation</strong>, <strong>networking</strong>, <strong>system maintenance</strong>, and <strong>troubleshooting</strong>.</p>
+
+<p>Those who successfully pass the assessment will be awarded the <strong>National Certificate II (NC II)</strong>, a credential that is <strong>recognized nationwide</strong> as proof of competency and professional readiness. This certification is also acknowledged by TESDA’s partner institutions, organizations, and companies, ensuring that graduates meet <strong>industry standards</strong> and are fully qualified to perform IT-related tasks in a professional environment.</p>
+
+<p>Holding the <strong>NC II certification</strong> not only validates your <strong>technical expertise</strong> but also enhances your <strong>employability</strong>, giving you a competitive advantage in the job market. It opens doors to a wide range of career opportunities <strong>locally and abroad</strong>, whether as a <strong>computer technician</strong>, <strong>network support specialist</strong>, <strong>technical support professional</strong>, or <strong>IT entrepreneur</strong>. Furthermore, it serves as a strong foundation for pursuing <strong>higher-level certifications</strong> or further education in <strong>information and communications technology (ICT)</strong>, empowering graduates to continually grow in their chosen careers.</p>
+
+      <h2 id="WhyEnroll">Why Enroll in This Program?</h2>
+  <p>The <strong>Computer Systems Servicing NC II (CSS NC II)</strong> program is an excellent choice for students, graduates, and professionals who want to develop a strong foundation in <strong>information and communications technology (ICT)</strong>. By enrolling in this program, you will acquire <strong>hands-on, practical skills</strong> that are highly sought after in today’s <strong>digital world</strong>.</p>
+
+<p>This program prepares you to build a <strong>rewarding career in the ICT industry</strong>, equipping you with the <strong>knowledge</strong> and <strong>technical expertise</strong> needed to work as a <strong>computer technician</strong>, <strong>network support specialist</strong>, <strong>technical support professional</strong>, or <strong>IT service crew member</strong>. These skills are not only applicable in <strong>local businesses</strong> but are also <strong>recognized internationally</strong>, providing opportunities for <strong>overseas employment</strong>.</p>
+
+<p>Additionally, <strong>CSS NC II</strong> empowers learners who are interested in <strong>entrepreneurship</strong> or starting their own <strong>IT-related business</strong>. Whether you dream of running a <strong>computer repair shop</strong>, offering <strong>technical support services</strong>, or providing <strong>network setup solutions</strong> for small businesses, this program gives you the <strong>practical know-how</strong> to confidently launch and manage your own venture.</p>
+
+<p>By completing this program, you gain a <strong>competitive edge</strong> in the workforce, develop <strong>professional confidence</strong>, and open doors to a variety of <strong>career paths</strong> in an ever-growing <strong>technology-driven world</strong>. It is not just about learning technical skills—it is about preparing yourself for a <strong>future of opportunities</strong>, <strong>growth</strong>, and <strong>success in the ICT field</strong>.</p>
+
       </div>
       <div class="col-md-3">
         <aside style="position:sticky; top:80px; z-index:1020;">
@@ -144,7 +172,15 @@ URI     : https://colorlib.com
               <ul class="list-unstyled">
                 <li><a href="sterile1.php" class="text-decoration-none">Central Sterile Processing Technology</a></li>
                 <li><a href="sterile2.php" class="text-decoration-none">Central Sterile Services</a></li>
-                <li><a href="computer-systems.php" class="text-decoration-none active-course">Computer Systems Servicing NC II</a></li>
+                <li>
+                  <a href="computer-systems.php" class="text-decoration-none active-course" style="font-size:1.1rem;">Computer Systems Servicing NC II</a>
+                  <ul class="list-unstyled ms-3">
+                    <li><a href="#Skills" style="color:#959094; font-size:0.98rem; text-decoration:none;">Skills You'll Gain</a></li>
+                    <li><a href="#Career" style="color:#959094; font-size:0.98rem; text-decoration:none;">Career path and Opportunities</a></li>
+                     <li><a href="#Certification" style="color:#959094; font-size:0.98rem; text-decoration:none;">Certification and Achievements</a></li>
+                    <li><a href="#WhyEnroll" style="color:#959094; font-size:0.98rem; text-decoration:none;">Why Enroll in this Program?</a></li>
+                  </ul>
+                </li>
                 <li><a href="web-development.php" class="text-decoration-none">Web Development NC III</a></li>
                 <li><a href="java-programming.php" class="text-decoration-none">Java Programming NC III</a></li>
               </ul>
@@ -163,7 +199,7 @@ URI     : https://colorlib.com
         <h6 class="mb-3" style="color:#f9a825;">Contact Us</h6>
         <p class="mb-2">
           <span class="ti-location-pin mr-2"></span>
-          Purok 7, Brgy. Bagong Buhay I, City of San Jose Del Monte, Bulacan, Philippines
+          City of San Jose Del Monte, Bulacan, Philippines
         </p>
         <p class="mb-2">
           <span class="ti-email mr-2"></span>
