@@ -316,9 +316,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="bi bi-x me-2"></i>Close
-                        </button>
+                        
                     </div>
                 </div>
             </div>

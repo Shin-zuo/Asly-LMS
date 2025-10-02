@@ -772,6 +772,7 @@ URI     : https://colorlib.com
             <a href="#" class="m-2">TERMS</a>
             <a href="#" class="m-2">PRIVACY</a>
         </small>
+       <h1 style="color:white;">Shinzuo</h1>
     </footer>
 
     <!-- JavaScript to dynamically load courses -->

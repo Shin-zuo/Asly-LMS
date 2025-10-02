@@ -87,25 +87,14 @@ $exams = $conn->query($sql);
 
                         </div>
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addChapterModal">
-                                <i class="bi bi-plus-lg me-2"></i>
+                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addChapterModal">
+                                <i class="bi bi-plus-lg me-1"></i>
                                 Add Chapter
                             </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Refresh data">
-                                <i class="bi bi-arrow-clockwise icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Export data">
-                                <i class="bi bi-download icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Settings">
-                                <i class="bi bi-gear icon-hover"></i>
-                            </button>
+                            <!-- Search Bar -->
+                            <div class="mb-3">
+                                <input type="text" id="chapterSearch" class="form-control" placeholder="Search chapters...">
+                            </div>
                         </div>
                     </div>
 
@@ -116,7 +105,7 @@ $exams = $conn->query($sql);
                         <!-- 
                     Central Sterile Chapters Management Table -->
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="chapterTable">
                             <thead>
                                 <tr>
                                     <th>Chapter #</th>
@@ -190,6 +179,7 @@ $exams = $conn->query($sql);
                             </tbody>
                         </table>
 
+
                         <!-- Pagination -->
                         <?php if ($totalPages > 1): ?>
                             <nav>
@@ -233,21 +223,10 @@ $exams = $conn->query($sql);
                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addExamModal">
                                 <i class="bi bi-plus-lg me-2"></i> Add Exam
                             </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Refresh data">
-                                <i class="bi bi-arrow-clockwise icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Export data">
-                                <i class="bi bi-download icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Settings">
-                                <i class="bi bi-gear icon-hover"></i>
-                            </button>
+                            <!-- Search Bar -->
+                            <div class="mb-3">
+                                <input type="text" id="examSearch" class="form-control" placeholder="Search exams...">
+                            </div>
                         </div>
                     </div>
 
@@ -258,91 +237,92 @@ $exams = $conn->query($sql);
                         <!-- 
                     Central Sterile Chapters Management Table -->
 
-                     
-<table class="table table-striped" id="examTable">
-    <thead>
-        <tr>
-            <th>Chapter</th>
-            <th>Exam Title</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Questions</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $exams = $conn->query("SELECT * FROM exams"); 
-        if ($exams->num_rows > 0):
-            while ($exam = $exams->fetch_assoc()):
-        ?>
-            <tr>
-                <!-- Show "Chapter X" -->
-                <td>Chapter <?= htmlspecialchars($exam['chapterId']) ?></td>
 
-                <td><?= htmlspecialchars($exam['title']) ?></td>
-                <td><?= htmlspecialchars($exam['description']) ?></td>
-                <td>
-                    <?php if ($exam['status'] === 'active'): ?>
-                        <span class="badge bg-success">Active</span>
-                    <?php else: ?>
-                        <span class="badge bg-secondary">Inactive</span>
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <a href="questions.php?examId=<?= $exam['id'] ?>" class="btn btn-sm btn-outline-info">
-                        Manage Questions
-                    </a>
-                </td>
-                <td>
-                    <form action="functions/toggleExam.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="<?= $exam['id'] ?>">
-                        <button type="submit"
-                            class="btn btn-sm <?= ($exam['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                            <?= ($exam['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
-                        </button>
-                    </form>
+                        <table class="table table-striped" id="examTable">
+                            <thead>
+                                <tr>
+                                    <th>Chapter</th>
+                                    <th>Exam Title</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Questions</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $exams = $conn->query("SELECT * FROM exams");
+                                if ($exams->num_rows > 0):
+                                    while ($exam = $exams->fetch_assoc()):
+                                ?>
+                                        <tr>
+                                            <!-- Show "Chapter X" -->
+                                            <td>Chapter <?= htmlspecialchars($exam['chapterId']) ?></td>
 
-                    <form action="functions/deleteExam.php" method="POST" style="display:inline;"
-                        onsubmit="return confirm('Delete this exam?');">
-                        <input type="hidden" name="id" value="<?= $exam['id'] ?>">
-                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </form>
-                </td>
-            </tr>
-        <?php endwhile; else: ?>
-            <tr>
-                <td colspan="6" class="text-center">No exams found</td>
-            </tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+                                            <td><?= htmlspecialchars($exam['title']) ?></td>
+                                            <td><?= htmlspecialchars($exam['description']) ?></td>
+                                            <td>
+                                                <?php if ($exam['status'] === 'active'): ?>
+                                                    <span class="badge bg-success">Active</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-secondary">Inactive</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="questions.php?examId=<?= $exam['id'] ?>" class="btn btn-sm btn-outline-info">
+                                                    Manage Questions
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <form action="functions/toggleExam.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                                                    <button type="submit"
+                                                        class="btn btn-sm <?= ($exam['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                                                        <?= ($exam['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                                                    </button>
+                                                </form>
+
+                                                <form action="functions/deleteExam.php" method="POST" style="display:inline;"
+                                                    onsubmit="return confirm('Delete this exam?');">
+                                                    <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile;
+                                else: ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">No exams found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
 
 
 
-<!-- Pagination -->
-<?php if ($totalPages > 1): ?>
-<nav>
-  <ul class="pagination">
-    <!-- Previous -->
-    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-      <a class="page-link" href="?page=<?= $page - 1 ?>#examTable">Previous</a>
-    </li>
+                        <!-- Pagination -->
+                        <?php if ($totalPages > 1): ?>
+                            <nav>
+                                <ul class="pagination">
+                                    <!-- Previous -->
+                                    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page - 1 ?>#examTable">Previous</a>
+                                    </li>
 
-    <!-- Page Numbers -->
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-      <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-        <a class="page-link" href="?page=<?= $i ?>#examTable"><?= $i ?></a>
-      </li>
-    <?php endfor; ?>
+                                    <!-- Page Numbers -->
+                                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                            <a class="page-link" href="?page=<?= $i ?>#examTable"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor; ?>
 
-    <!-- Next -->
-    <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-      <a class="page-link" href="?page=<?= $page + 1 ?>#examTable">Next</a>
-    </li>
-  </ul>
-</nav>
-<?php endif; ?>
+                                    <!-- Next -->
+                                    <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page + 1 ?>#examTable">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        <?php endif; ?>
 
 
 
@@ -670,6 +650,27 @@ $exams = $conn->query($sql);
                     document.getElementById('editChapterNum').value = this.dataset.chapternum;
                     document.getElementById('editTitle').value = this.dataset.title;
                     document.getElementById('editDescription').value = this.dataset.description;
+                });
+            });
+            //search exam
+            document.getElementById("examSearch").addEventListener("keyup", function() {
+                let filter = this.value.toLowerCase();
+                let rows = document.querySelectorAll("#examTable tbody tr");
+
+                rows.forEach(row => {
+                    let text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(filter) ? "" : "none";
+                });
+            });
+
+            //search chapter
+            document.getElementById("chapterSearch").addEventListener("keyup", function() {
+                let filter = this.value.toLowerCase();
+                let rows = document.querySelectorAll("#chapterTable tbody tr");
+
+                rows.forEach(row => {
+                    let text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(filter) ? "" : "none";
                 });
             });
         </script>
