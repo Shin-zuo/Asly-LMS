@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status        = "Pending";
 
     // ✅ Basic validation
-    if (empty($firstName) || empty($lastName) || empty($email) || empty($prefix) || empty($gender)) {
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($gender)) {
         header("Location: ../index.php?error=" . urlencode("Please fill in all required fields.") . "#enroll");
         exit();
     }

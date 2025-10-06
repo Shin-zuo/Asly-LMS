@@ -20,32 +20,33 @@ $where = '';
 if ($search !== '') {
     $searchEsc = $conn->real_escape_string($search);
     $where = "WHERE (
-        CONCAT(e.firstName, ' ', e.middleInitial, '. ', e.lastName) LIKE '%$searchEsc%' 
-        OR e.email LIKE '%$searchEsc%' 
-        OR c.course LIKE '%$searchEsc%' 
-        OR e.dateEnrolled LIKE '%$searchEsc%'
+        s.firstName LIKE '%$searchEsc%' OR
+        s.middleName LIKE '%$searchEsc%' OR
+        s.lastName LIKE '%$searchEsc%' OR
+        c.course LIKE '%$searchEsc%' OR
+        s.section LIKE '%$searchEsc%' OR
+        s.yearLevel LIKE '%$searchEsc%'
     )";
 }
 
 // Get total count (with search)
 $countSql = "SELECT COUNT(*) as total 
-             FROM enrollees e 
-             LEFT JOIN course c ON e.courseId = c.courseId 
+             FROM students s 
+             LEFT JOIN course c ON s.courseId = c.courseId 
              $where";
 $countResult = $conn->query($countSql);
 $totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_assoc()['total'] : 0;
 $totalPages = ceil($totalRows / $limit);
 
-// Fetch paginated enrollees (with search + pending first + newest)
-$sql = "SELECT e.id, e.firstName, e.middleInitial, e.lastName, e.email, e.contactNumber, 
-               e.lastSchoolAttended, e.lastSchoolYr, e.birthDate, e.gender, e.dateEnrolled, 
-               e.courseId, c.course AS courseName, e.educationalAttainment, e.status 
-        FROM enrollees e 
-        LEFT JOIN course c ON e.courseId = c.courseId 
+// Fetch paginated students (with search + join for course name)
+$sql = "SELECT 
+            s.id, s.firstName, s.middleName, s.lastName, 
+            s.section, s.yearLevel, 
+            c.course AS courseName
+        FROM students s
+        LEFT JOIN course c ON s.courseId = c.courseId
         $where
-        ORDER BY 
-            CASE WHEN e.status = 'Pending' THEN 0 ELSE 1 END, 
-            e.dateEnrolled DESC 
+        ORDER BY s.id DESC 
         LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 ?>
@@ -118,7 +119,7 @@ $result = $conn->query($sql);
                         <div class="col-md-3"></div>
 
 <!-- Enrollee's table -->
-                        <span>Enrollees</span>
+                        <span>Students</span>
 
                         <table class="table table-striped" id="enrolleeTable">
                             <thead>
