@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['username']  = $user['username'];
             $_SESSION['userType']  = $user['userType'];
+            $_SESSION['userId']  = $user['userId'];
             $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
 
             // Handle Remember Me

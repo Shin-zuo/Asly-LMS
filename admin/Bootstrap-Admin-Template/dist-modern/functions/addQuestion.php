@@ -68,6 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // 🆕 Update totalItems in exams after inserting a question
+    $result = $conn->query("SELECT COUNT(*) AS total FROM questions WHERE examId = $examId");
+    $row = $result->fetch_assoc();
+    $total = $row['total'] ?? 0;
+
+    $update = $conn->prepare("UPDATE exams SET totalItems = ? WHERE id = ?");
+    $update->bind_param("ii", $total, $examId);
+    $update->execute();
+    $update->close();
+
     header("Location: ../questions.php?examId=$examId&success=1");
     exit();
 } else {

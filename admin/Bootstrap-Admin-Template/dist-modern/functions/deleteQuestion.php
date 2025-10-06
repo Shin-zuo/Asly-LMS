@@ -10,11 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Invalid request");
     }
 
-    // Delete question (cascades to choices/matching_pairs if you use ON DELETE CASCADE in DB)
+    // Delete question
     $stmt = $conn->prepare("DELETE FROM questions WHERE id = ?");
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
+        // ✅ Update totalItems after deletion
+        $conn->query("
+            UPDATE exams 
+            SET totalItems = (
+                SELECT COUNT(*) FROM questions WHERE examId = $examId
+            )
+            WHERE id = $examId
+        ");
+
         header("Location: ../questions.php?examId=$examId&deleted=1");
         exit();
     } else {
