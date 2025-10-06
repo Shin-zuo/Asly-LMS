@@ -140,15 +140,20 @@ URI     : https://colorlib.com
 </ul>
 
 <h2 id="Career">Career Paths and Opportunities</h2>
-<h5>Graduates of Web Development NC III can pursue careers as:</h5>
+<h5>Graduates of Java Programming NC III can pursue careers as:</h5>
+
 <ul style="color: #959094;">
-  <li><strong>Front-End Web Developer</strong></li>
-  <li><strong>Back-End Web Developer</strong></li>
-  <li><strong>Full-Stack Developer</strong></li>
-  <li><strong>Web Designer</strong></li>
-  <li><strong>Freelance Web Developer</strong></li>
-  <li><strong>CMS Developer/Administrator</strong></li>
+  <li><strong>Java Programmer / Software Developer</strong></li>
+  <li><strong>Application Support Specialist</strong></li>
+  <li><strong>Junior Java Developer</strong></li>
+  <li><strong>Database Programmer</strong></li>
+  <li><strong>IT Programmer</strong></li>
+  <li><strong>Systems Analyst</strong></li>
+  <li><strong>Software Tester / QA Specialist</strong></li>
 </ul>
+
+<p>They may also explore <strong>freelance opportunities</strong> in web application development, mobile app creation (especially Android), and enterprise software projects for both local and international clients.</p>
+
 <p>They can work in IT companies, digital marketing agencies, corporate IT departments, or as freelancers serving clients worldwide.</p>
 <h2 id="Certification">Certification and Recognition</h2>
 <p>After completing the Web Development NC III program, trainees will have the opportunity to undergo the <strong>national assessment</strong> conducted by <strong>TESDA (Technical Education and Skills Development Authority)</strong>. This assessment evaluates their proficiency in essential web development skills, including <strong>front-end development</strong> using HTML, CSS, and JavaScript, <strong>back-end development</strong> with PHP and MySQL, <strong>database integration</strong>, <strong>content management system customization</strong> such as WordPress or Joomla, <strong>testing and debugging</strong> across multiple browsers and devices, and <strong>website deployment and maintenance</strong>. The assessment ensures that trainees have acquired both the technical knowledge and practical hands-on experience necessary to meet industry standards in professional web development.</p>
