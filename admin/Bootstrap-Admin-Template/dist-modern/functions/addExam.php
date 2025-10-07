@@ -2,22 +2,19 @@
 require_once '../../../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $chapterId  = intval($_POST['chapterId']);
-    $title      = trim($_POST['title']);
-    $description= trim($_POST['description']);
-    $status     = $_POST['status'];
-
-    $stmt = $conn->prepare("INSERT INTO exams (chapterId, title, description, status) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $chapterId, $title, $description, $status);
+    $chapterId = $_POST['chapterId'];
+    $title = trim($_POST['title']);
+    $description = trim($_POST['description']);
+    $status = $_POST['status'];
+    $timeLimit = intval($_POST['timeLimit']);
+    
+    $stmt = $conn->prepare("INSERT INTO exams (chapterId, title, description, status, timeLimit, totalItems, created_at)
+                            VALUES (?, ?, ?, ?, ?, 0, NOW())");
+    $stmt->bind_param("isssi", $chapterId, $title, $description, $status, $timeLimit);
 
     if ($stmt->execute()) {
-        header("Location: ../centralSterile.php?success=Exam added successfully");
-        exit();
+        header("Location: ../centralSterile.php?success=1");
     } else {
-        header("Location: ../centralSterile.php?error=" . urlencode("Failed to add exam"));
-        exit();
+        echo "Error: " . $stmt->error;
     }
-} else {
-    header("Location: ../centralSterile.php?error=" . urlencode("Invalid request"));
-    exit();
 }

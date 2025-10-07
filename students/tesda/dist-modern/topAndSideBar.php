@@ -235,10 +235,11 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('analytics.php') ?>" href="./analytics.php">
+                        <a class="nav-link <?= isActive('modules.php') ?>" href="./modules.php">
                             <i class="bi bi-graph-up"></i>
-                            <span>Analytics</span>
+                            <span>Modules</span>
                         </a>
                     </li>
                     <li class="nav-item">
