@@ -348,7 +348,7 @@ URI     : https://colorlib.com
                                 • Inspiring learners through
                                 guided, hands-on instruction
                                 </br>
-                                •Creating a support and
+                                • Creating a support and
                                 student-centered learning
                                 environment
                                 </br>
@@ -386,38 +386,64 @@ URI     : https://colorlib.com
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="SHSStrand">
-                    <div class="d-flex flex-column flex-lg-row">
-                        <div>
-                            <h2>Our Core Values</h2>
-                            <p class="lead">At AITCI, our core values guide everything we do-from how we teach
-                                how we learn and grow together. These values form the foundation of
-                                our culture and represent what we stand for as an institution.
-                            </p>
-                            <p class="lead">A- Aspire</p>
-                            <p>We strive for excellence in all aspects of teaching and learning. Students and staff are encouraged to set high goals, push boundaries, and pursue continuous growth-academically, professionally, and personally.
-                            </p>
-                            <p class="lead">I- Integrity</p>
-                            <p>We believe that strong character and ethical behavior are essential to lifelong success. We promote honesty, accountability, and respect in our classrooms, workplaces, and communities.
-                            </p>
-                            <p class="lead">T-Technology Integration</p>
-                            <p>We are committed to blending modern technology with hands-on
-                                instruction. Our learning environment reflects the tools, platforms, and
-                                practices of today's digital world to prepare students for tomorrow's
-                                careers.
-                            </p>
-                            <p class="lead">C- Competent</p>
-                            <p>We empower learners to become capable, confident, and career-ready
-                                individuals. Our commitment to competence ensures that every student is not only knowledgeable but also able to apply what they've learned effectively in professional settings.
-                            </p>
-                            <p class="lead">I-Innovatlon</p>
-                            <p>We embrace creativity and encourage new ideas that improve learning and training outcomes. Innovation is at the heart of our approach-driving us to adapt, evolve, and lead in an ever-changing digital landscape.
-                                <img src="images/philosophy.png" alt="graphic"
-                                    class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor"
-                                    style="width: 223px; height: auto;">
-                        </div>
-                    </div>
+<div class="tab-pane fade" id="SHSStrand">
+    <div class="container mt-4 p-5 rounded" style="border-radius: 15px; background-color: #ffffffff;">
+
+        <!-- Section Title with single image -->
+        <div class="d-flex flex-column flex-lg-row align-items-center mb-4" style="gap: 15px;">
+            <img src="images/philosophy.png" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0 recolor" alt="Philosophy" style="width: 225px; height: auto;">
+            <h2 style="color: #f9a825; margin: 0;">Our Core Values</h2>
+        </div>
+
+        <p class="lead">
+            At AITCI, our core values guide everything we do—from how we teach, how we learn, and how we grow together. These values form the foundation of our culture and represent what we stand for as an institution.
+        </p>
+
+        <div class="row g-4 mt-3">
+            <!-- A - Aspire -->
+            <div class="col-12 col-md-6">
+                <div class="card h-100 p-3 border-0 shadow-sm bg-transparent">
+                    <h5 class="card-title" style="color: #f9a825;">A - Aspire</h5>
+                    <p class="card-text">We strive for excellence in all aspects of teaching and learning. Students and staff are encouraged to set high goals, push boundaries, and pursue continuous growth—academically, professionally, and personally.</p>
                 </div>
+            </div>
+
+            <!-- I - Integrity -->
+            <div class="col-12 col-md-6">
+                <div class="card h-100 p-3 border-0 shadow-sm bg-transparent">
+                    <h5 class="card-title" style="color: #f9a825;">I - Integrity</h5>
+                    <p class="card-text">We believe that strong character and ethical behavior are essential to lifelong success. We promote honesty, accountability, and respect in our classrooms, workplaces, and communities.</p>
+                </div>
+            </div>
+
+            <!-- T - Technology Integration -->
+            <div class="col-12 col-md-6">
+                <div class="card h-100 p-3 border-0 shadow-sm bg-transparent">
+                    <h5 class="card-title" style="color: #f9a825;">T - Technology Integration</h5>
+                    <p class="card-text">We are committed to blending modern technology with hands-on instruction. Our learning environment reflects the tools, platforms, and practices of today's digital world to prepare students for tomorrow's careers.</p>
+                </div>
+            </div>
+
+            <!-- C - Competent -->
+            <div class="col-12 col-md-6">
+                <div class="card h-100 p-3 border-0 shadow-sm bg-transparent">
+                    <h5 class="card-title" style="color: #f9a825;">C - Competent</h5>
+                    <p class="card-text">We empower learners to become capable, confident, and career-ready individuals. Our commitment to competence ensures that every student is not only knowledgeable but also able to apply what they've learned effectively in professional settings.</p>
+                </div>
+            </div>
+
+            <!-- I - Innovation -->
+            <div class="col-12">
+                <div class="card h-100 p-3 border-0 shadow-sm bg-transparent">
+                    <h5 class="card-title" style="color: #f9a825;">I - Innovation</h5>
+                    <p class="card-text">We embrace creativity and encourage new ideas that improve learning and training outcomes. Innovation is at the heart of our approach—driving us to adapt, evolve, and lead in an ever-changing digital landscape.</p>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- end container -->
+</div> <!-- end tab-pane -->
+
+
 
         </div>
             </div>
