@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // ✅ Contact number validation (optional but strict if given)
-    if (!empty($contactNumber) && !preg_match('/^[0-10]{11,15}$/', $contactNumber)) {
+    if (!empty($contactNumber) && !preg_match('/^[0-9]{11,15}$/', $contactNumber)) {
         header("Location: ../index.php?error=" . urlencode("Invalid contact number format.") . "#enroll");
         exit();
     }
