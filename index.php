@@ -582,7 +582,7 @@ URI     : https://colorlib.com
                 <?php endif; ?>
 
                 <!-- ✅ Enrollment Form -->
-            <form action="functions/enrolldummy.php" method="POST" id="enrollmentForm">
+            <form action="functions/enroll.php" method="POST" id="enrollmentForm">
                 <div class="mb-3 row">
                     <div class="col-md-5">
                         <label for="firstName">First Name</label>
