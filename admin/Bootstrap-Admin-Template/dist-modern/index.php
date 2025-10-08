@@ -7,6 +7,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
+require_once '../../../config/database.php';
+
 // If no active session, try auto-login with remember_token
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
     $token = $_COOKIE['remember_token'];
@@ -38,6 +40,7 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
+
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
@@ -45,33 +48,33 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="description" content="Modern Bootstrap 5 Admin Template - Clean, responsive dashboard">
     <meta name="keywords" content="bootstrap, admin, dashboard, template, modern, responsive">
     <meta name="author" content="Bootstrap Admin Template">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Modern Bootstrap Admin Template">
     <meta property="og:description" content="Clean and modern admin dashboard template built with Bootstrap 5">
     <meta property="og:type" content="website">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./assets/favicon-CvUZKS4z.svg">
     <link rel="icon" type="image/png" href="./assets/favicon-B_cwPWBd.png">
-    
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Title -->
     <title>Dashboard - Modern Bootstrap Admin</title>
-    
+
     <!-- Theme Color -->
     <meta name="theme-color" content="#6366f1">
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
-  <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
+    <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
 </head>
 
 <body data-page="dashboard" class="admin-layout">
@@ -84,17 +87,18 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    
-  <?php if (isset($_SESSION['welcome_msg'])): ?>
-    <script>
-      alert("<?= htmlspecialchars($_SESSION['welcome_msg']); ?>");
-    </script>
-    <?php unset($_SESSION['welcome_msg']); // clear after showing ?>
-  <?php endif; ?>
+
+    <?php if (isset($_SESSION['welcome_msg'])): ?>
+        <script>
+            alert("<?= htmlspecialchars($_SESSION['welcome_msg']); ?>");
+        </script>
+        <?php unset($_SESSION['welcome_msg']); // clear after showing 
+        ?>
+    <?php endif; ?>
 
     <!-- Main Wrapper -->
     <div class="admin-wrapper" id="admin-wrapper">
-        
+
         <?php include 'topAndSidebar.php'; ?>
 
         <!-- Main Content -->
@@ -111,19 +115,19 @@ if (!isset($_SESSION['user_id'])) {
                             <i class="bi bi-plus-lg me-2"></i>
                             New Item
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" 
-                                data-bs-toggle="tooltip" 
-                                title="Refresh data">
+                        <button type="button" class="btn btn-outline-secondary"
+                            data-bs-toggle="tooltip"
+                            title="Refresh data">
                             <i class="bi bi-arrow-clockwise icon-hover"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" 
-                                data-bs-toggle="tooltip" 
-                                title="Export data">
+                        <button type="button" class="btn btn-outline-secondary"
+                            data-bs-toggle="tooltip"
+                            title="Export data">
                             <i class="bi bi-download icon-hover"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" 
-                                data-bs-toggle="tooltip" 
-                                title="Settings">
+                        <button type="button" class="btn btn-outline-secondary"
+                            data-bs-toggle="tooltip"
+                            title="Settings">
                             <i class="bi bi-gear icon-hover"></i>
                         </button>
                     </div>
@@ -141,10 +145,39 @@ if (!isset($_SESSION['user_id'])) {
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Total Users</h6>
-                                        <h3 class="mb-0" x-text="value.toLocaleString()" data-stat-value>12,426</h3>
-                                        <small class="text-success">
-                                            <i class="bi bi-arrow-up"></i> +12.5%
+                                        <h6 class="mb-0 text-muted">Total Current Enrollees</h6>
+                                        <h3 class="mb-0">
+                                            <?php
+                                            // adjust path if needed
+
+                                            // Get current and previous year
+                                            $currentYear = date('Y');
+                                            $lastYear = $currentYear - 1;
+
+                                            // --- Count total enrollees for current year ---
+                                            $sqlCurrent = "SELECT COUNT(*) AS total FROM enrollees WHERE YEAR(dateEnrolled) = '$currentYear'";
+                                            $resultCurrent = $conn->query($sqlCurrent);
+                                            $totalCurrent = ($resultCurrent && $row = $resultCurrent->fetch_assoc()) ? (int)$row['total'] : 0;
+
+                                            // --- Count total enrollees for previous year ---
+                                            $sqlLast = "SELECT COUNT(*) AS total FROM enrollees WHERE YEAR(dateEnrolled) = '$lastYear'";
+                                            $resultLast = $conn->query($sqlLast);
+                                            $totalLast = ($resultLast && $row2 = $resultLast->fetch_assoc()) ? (int)$row2['total'] : 0;
+
+                                            // --- Calculate growth percentage ---
+                                            if ($totalLast > 0) {
+                                                $growth = (($totalCurrent - $totalLast) / $totalLast) * 100;
+                                            } else {
+                                                $growth = 0; // avoid division by zero
+                                            }
+
+                                            echo number_format($totalCurrent);
+                                            ?>
+                                        </h3>
+
+                                        <small class="<?php echo ($growth >= 0) ? 'text-success' : 'text-danger'; ?>">
+                                            <i class="bi <?php echo ($growth >= 0) ? 'bi-arrow-up' : 'bi-arrow-down'; ?>"></i>
+                                            <?php echo sprintf("%+.1f%%", $growth); ?>
                                         </small>
                                     </div>
                                 </div>
@@ -162,10 +195,38 @@ if (!isset($_SESSION['user_id'])) {
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Revenue</h6>
-                                        <h3 class="mb-0">$54,320</h3>
-                                        <small class="text-success">
-                                            <i class="bi bi-arrow-up"></i> +8.2%
+                                        <h6 class="mb-0 text-muted">Total Enrollees</h6>
+                                        <h3 class="mb-0">
+                                            <?php
+                                            // adjust if needed
+
+                                            // Get current and previous year
+                                            $currentYear = date('Y');
+                                            $lastYear = $currentYear - 1;
+
+                                            // --- Count total enrollees for current year ---
+                                            $sqlCurrent = "SELECT COUNT(*) AS total FROM enrollees WHERE YEAR(dateEnrolled) = '$currentYear'";
+                                            $resultCurrent = $conn->query($sqlCurrent);
+                                            $totalCurrent = ($resultCurrent && $row = $resultCurrent->fetch_assoc()) ? (int)$row['total'] : 0;
+
+                                            // --- Count total enrollees for previous year ---
+                                            $sqlLast = "SELECT COUNT(*) AS total FROM enrollees WHERE YEAR(dateEnrolled) = '$lastYear'";
+                                            $resultLast = $conn->query($sqlLast);
+                                            $totalLast = ($resultLast && $row2 = $resultLast->fetch_assoc()) ? (int)$row2['total'] : 0;
+
+                                            // --- Calculate growth percentage ---
+                                            if ($totalLast > 0) {
+                                                $growth = (($totalCurrent - $totalLast) / $totalLast) * 100;
+                                            } else {
+                                                $growth = 0; // avoid division by zero
+                                            }
+
+                                            echo number_format($totalCurrent);
+                                            ?>
+                                        </h3>
+                                        <small class="<?php echo ($growth >= 0) ? 'text-success' : 'text-danger'; ?>">
+                                            <i class="bi <?php echo ($growth >= 0) ? 'bi-arrow-up' : 'bi-arrow-down'; ?>"></i>
+                                            <?php echo sprintf("%+.1f%%", $growth); ?>
                                         </small>
                                     </div>
                                 </div>
@@ -372,7 +433,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </footer>
-        </div> <!-- /.admin-wrapper -->
+    </div> <!-- /.admin-wrapper -->
     </div>
 
     <!-- Toast Container -->
@@ -397,22 +458,22 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="col-md-6">
                             <h6>Current Provider: <span class="badge bg-primary" x-text="currentProvider"></span></h6>
                             <div class="btn-group" role="group">
-                                <button type="button" 
-                                        class="btn btn-outline-primary"
-                                        @click="switchProvider('bootstrap')"
-                                        :class="{ 'active': currentProvider === 'bootstrap' }">
+                                <button type="button"
+                                    class="btn btn-outline-primary"
+                                    @click="switchProvider('bootstrap')"
+                                    :class="{ 'active': currentProvider === 'bootstrap' }">
                                     Bootstrap Icons
                                 </button>
-                                <button type="button" 
-                                        class="btn btn-outline-primary"
-                                        @click="switchProvider('lucide')"
-                                        :class="{ 'active': currentProvider === 'lucide' }">
+                                <button type="button"
+                                    class="btn btn-outline-primary"
+                                    @click="switchProvider('lucide')"
+                                    :class="{ 'active': currentProvider === 'lucide' }">
                                     Lucide Icons
                                 </button>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row g-3">
                         <div class="col-md-3 text-center">
                             <div class="p-3 border rounded">
@@ -439,7 +500,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <h6 class="mt-4">Icon Animations</h6>
                     <div class="row g-3">
                         <div class="col-md-3 text-center">
@@ -471,52 +532,52 @@ if (!isset($_SESSION['user_id'])) {
 
     <!-- Scripts -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggleButton = document.querySelector('[data-sidebar-toggle]');
-        const wrapper = document.getElementById('admin-wrapper');
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.querySelector('[data-sidebar-toggle]');
+            const wrapper = document.getElementById('admin-wrapper');
 
-        if (toggleButton && wrapper) {
-          // Set initial state from localStorage
-          const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
-          if (isCollapsed) {
-            wrapper.classList.add('sidebar-collapsed');
-            toggleButton.classList.add('is-active');
-          }
+            if (toggleButton && wrapper) {
+                // Set initial state from localStorage
+                const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+                if (isCollapsed) {
+                    wrapper.classList.add('sidebar-collapsed');
+                    toggleButton.classList.add('is-active');
+                }
 
-          // Attach click listener
-          toggleButton.addEventListener('click', () => {
-            const isCurrentlyCollapsed = wrapper.classList.contains('sidebar-collapsed');
-            
-            if (isCurrentlyCollapsed) {
-              wrapper.classList.remove('sidebar-collapsed');
-              toggleButton.classList.remove('is-active');
-              localStorage.setItem('sidebar-collapsed', 'false');
-            } else {
-              wrapper.classList.add('sidebar-collapsed');
-              toggleButton.classList.add('is-active');
-              localStorage.setItem('sidebar-collapsed', 'true');
+                // Attach click listener
+                toggleButton.addEventListener('click', () => {
+                    const isCurrentlyCollapsed = wrapper.classList.contains('sidebar-collapsed');
+
+                    if (isCurrentlyCollapsed) {
+                        wrapper.classList.remove('sidebar-collapsed');
+                        toggleButton.classList.remove('is-active');
+                        localStorage.setItem('sidebar-collapsed', 'false');
+                    } else {
+                        wrapper.classList.add('sidebar-collapsed');
+                        toggleButton.classList.add('is-active');
+                        localStorage.setItem('sidebar-collapsed', 'true');
+                    }
+                });
             }
-          });
-        }
-      });
+        });
     </script>
     <script>
-
         //clear cache on browser
-if (window.history && window.history.replaceState) {
-  window.history.replaceState(null, null, window.location.href);
-  window.onpopstate = function() {
-    window.location.href = '../../../auth/login.php'; // redirect to login
-  };
-}
-</script>
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.location.href = '../../../auth/login.php'; // redirect to login
+            };
+        }
+    </script>
 </body>
 <script>
-// Force reload on browser back navigation to trigger PHP session check
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-        window.location.reload();
-    }   
-});
+    // Force reload on browser back navigation to trigger PHP session check
+    window.addEventListener("pageshow", function(event) {
+        if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+            window.location.reload();
+        }
+    });
 </script>
+
 </html>
