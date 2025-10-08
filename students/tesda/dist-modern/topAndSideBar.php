@@ -10,6 +10,42 @@
 
 // // Store username from session
 // $username = $_SESSION['username'];
+require_once '../../../config/database.php';
+
+
+
+// Default avatar (inline SVG)
+$defaultAvatar = "data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20cx='16'%20cy='16'%20r='16'%20fill='%236b7280'/%3e%3ccircle%20cx='16'%20cy='12'%20r='5'%20fill='white'/%3e%3cpath%20d='M16%2018c-5.5%200-10%202.5-10%207v1h20v-1c0-4.5-4.5-7-10-7z'%20fill='white'/%3e%3c/svg%3e";
+
+// Get username and user ID from session
+$username = htmlspecialchars($_SESSION['username'] ?? 'Guest');
+$userId = $_SESSION['user_id'] ?? null;
+
+$profilePic = $defaultAvatar;
+
+// Fetch user's profile picture if logged in
+if ($userId) {
+    $sql = "SELECT p.picture 
+            FROM profiles p
+            LEFT JOIN users u ON p.acctId = u.id
+            WHERE u.id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if (!empty($row['picture'])) {
+            // Adjust path relative to this PHP file’s location
+            $filePath = "../../../uploads/" . $row['picture'];
+            if (file_exists($filePath)) {
+                $profilePic = $filePath;
+            }
+        }
+    }
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -187,21 +223,18 @@
 
                     <!-- User Menu -->
                     <div class="dropdown">
-                        <button class="btn btn-outline-secondary d-flex align-items-center"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='16'%20fill='url(%23avatarGradient)'/%3e%3c!--%20Person%20silhouette%20--%3e%3cg%20fill='white'%20opacity='0.9'%3e%3c!--%20Head%20--%3e%3ccircle%20cx='16'%20cy='12'%20r='5'/%3e%3c!--%20Body%20--%3e%3cpath%20d='M16%2018c-5.5%200-10%202.5-10%207v1h20v-1c0-4.5-4.5-7-10-7z'/%3e%3c/g%3e%3c!--%20Subtle%20border%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15.5'%20fill='none'%20stroke='rgba(255,255,255,0.2)'%20stroke-width='1'/%3e%3c!--%20Gradient%20definition%20--%3e%3cdefs%3e%3clinearGradient%20id='avatarGradient'%20x1='0%25'%20y1='0%25'%20x2='100%25'%20y2='100%25'%3e%3cstop%20offset='0%25'%20style='stop-color:%236b7280;stop-opacity:1'%20/%3e%3cstop%20offset='100%25'%20style='stop-color:%234b5563;stop-opacity:1'%20/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"
-                                alt="User Avatar"
-                                width="24"
-                                height="24"
-                                class="rounded-circle me-2">
-                            <span class="d-none d-md-inline">
-                                <?= htmlspecialchars($_SESSION['username'] ?? 'Guest') ?>
-                            </span>
-
-                            <i class="bi bi-chevron-down ms-1"></i>
-                        </button>
+                       <button class="btn btn-outline-secondary d-flex align-items-center"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+    <img src="<?= $profilePic ?>" 
+         alt="User Avatar" 
+         width="24" 
+         height="24" 
+         class="rounded-circle me-2">
+    <span class="d-none d-md-inline"><?= $username ?></span>
+    <i class="bi bi-chevron-down ms-1"></i>
+</button>
                         <ul class="dropdown-menu dropdown-menu-end">
                          <li><a class="dropdown-item" href="profile.php"><i class="bi bi-person me-2"></i>Profile</a></li>
 

@@ -7,96 +7,96 @@ require_once '../config/database.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username   = trim($_POST['username']);
-    $password   = trim($_POST['password']);
-    $rememberMe = isset($_POST['remember']); // checkbox
+  $username   = trim($_POST['username']);
+  $password   = trim($_POST['password']);
+  $rememberMe = isset($_POST['remember']); // checkbox
 
-    // Check if username exists in database
-    $sql = "SELECT id, userType, username, password, userId FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+  // Check if username exists in database
+  $sql = "SELECT id, userType, username, password, userId FROM users WHERE username = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $username);
+  $stmt->execute();
+  $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+  if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
 
-        // ✅ Password check (support plain text + hashed)
-        if ($password === $user['password'] || password_verify($password, $user['password'])) {
-            // Save user info in session
-            $_SESSION['user_id']   = $user['id'];
-            $_SESSION['username']  = $user['username'];
-            $_SESSION['userType']  = $user['userType'];
-            $_SESSION['userId']  = $user['userId'];
-            $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
+    // ✅ Password check (support plain text + hashed)
+    if ($password === $user['password'] || password_verify($password, $user['password'])) {
+      // Save user info in session
+      $_SESSION['user_id']   = $user['id'];
+      $_SESSION['username']  = $user['username'];
+      $_SESSION['userType']  = $user['userType'];
+      $_SESSION['userId']  = $user['userId'];
+      $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
 
-            // Handle Remember Me
-            if ($rememberMe) {
-                $token = bin2hex(random_bytes(32)); // secure random token
-                $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
+      // Handle Remember Me
+      if ($rememberMe) {
+        $token = bin2hex(random_bytes(32)); // secure random token
+        $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
 
-                // Store in DB
-                $insert = $conn->prepare("INSERT INTO user_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
-                $insert->bind_param("iss", $user['id'], $token, $expires);
-                $insert->execute();
+        // Store in DB
+        $insert = $conn->prepare("INSERT INTO user_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
+        $insert->bind_param("iss", $user['id'], $token, $expires);
+        $insert->execute();
 
-                // Store in cookie (30 days)
-                setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true);
-            }
+        // Store in cookie (30 days)
+        setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true);
+      }
 
-            // Redirect based on user type
-            switch ($user['userType']) {
-                case 'Admin':
-                    header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
-                    break;
+      // Redirect based on user type
+      switch ($user['userType']) {
+        case 'Admin':
+          header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
+          break;
 
-                case 'Teacher':
-                    header("Location: ../teacher/dashboard.php");
-                    break;
+        case 'Teacher':
+          header("Location: ../teacher/dashboard.php");
+          break;
 
-                case 'Student':
-                    // 🔎 Get student's education level
-                    $studentId = $user['userId'];
+        case 'Student':
+          // 🔎 Get student's education level
+          $studentId = $user['userId'];
 
-                    $sqlEdu = "
+          $sqlEdu = "
                         SELECT e.educationLevel
                         FROM students s
                         JOIN course c ON s.courseId = c.courseId
                         JOIN educationlevel e ON c.educationId = e.id
                         WHERE s.id = ?
                     ";
-                    $stmtEdu = $conn->prepare($sqlEdu);
-                    $stmtEdu->bind_param("i", $studentId);
-                    $stmtEdu->execute();
-                    $resEdu = $stmtEdu->get_result();
+          $stmtEdu = $conn->prepare($sqlEdu);
+          $stmtEdu->bind_param("i", $studentId);
+          $stmtEdu->execute();
+          $resEdu = $stmtEdu->get_result();
 
-                    if ($resEdu->num_rows > 0) {
-                        $eduRow = $resEdu->fetch_assoc();
-                        $educationLevel = $eduRow['educationLevel'];
+          if ($resEdu->num_rows > 0) {
+            $eduRow = $resEdu->fetch_assoc();
+            $educationLevel = $eduRow['educationLevel'];
 
-                        if (strcasecmp($educationLevel, "TESDA") === 0) {
-                            header("Location: ../students/tesda/dist-modern/");
-                        } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
-                            header("Location: ../students/seniorHigh/");
-                        } else {
-                            header("Location: ../students/dashboard.php"); // fallback
-                        }
-                    } else {
-                        header("Location: ../auth/login.php?error=" . urlencode("Education level not found"));
-                    }
-                    break;
-
-                default:
-                    header("Location: ../auth/login.php"); // fallback
-                    break;
+            if (strcasecmp($educationLevel, "TESDA") === 0) {
+              header("Location: ../students/tesda/dist-modern/");
+            } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
+              header("Location: ../students/seniorHigh/");
+            } else {
+              header("Location: ../students/dashboard.php"); // fallback
             }
-            exit();
-        } else {
-            $error = "Invalid username or password.";
-        }
+          } else {
+            header("Location: ../auth/login.php?error=" . urlencode("Education level not found"));
+          }
+          break;
+
+        default:
+          header("Location: ../auth/login.php"); // fallback
+          break;
+      }
+      exit();
     } else {
-        $error = "Invalid username or password.";
+      $error = "Invalid username or password.";
     }
+  } else {
+    $error = "Invalid username or password.";
+  }
 }
 ?>
 
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 
 
@@ -130,11 +130,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="login-dark">
 
-     <form method="post">
-      
-<a href="../index.php" class="btn btn-link text-decoration-none" style="color:#234C6A;">
-  <i class="bi bi-arrow-left"></i> Back
-</a>
+    <form method="post">
+
+      <a href="../index.php" class="btn btn-link text-decoration-none" style="color:#234C6A;">
+        <i class="bi bi-arrow-left"></i> Back
+      </a>
       <h2 class="sr-only">Login Form</h2>
       <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
       <?php if (!empty($error)): ?>
@@ -144,37 +144,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input class="form-control" type="text" name="username" placeholder="Username" required>
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" name="password" placeholder="Password" required >
+        <input class="form-control" type="password" name="password" placeholder="Password" required>
       </div>
       <div class="form-group">
-  <input type="checkbox" name="remember" id="remember">
-  <label for="remember">Remember Me</label>
-</div>
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">Remember Me</label>
+      </div>
 
       <div class="form-group">
         <button class="btn btn-primary btn-block" type="submit">Log In</button>
       </div>
       <a href="#" class="forgot">Forgot your email or password?</a>
     </form>
-</div>
+  </div>
 
-<script>
-window.addEventListener("pageshow", function(event) {
-  if (event.persisted || 
-      (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-    window.location.reload();
-  }
-});
-</script>
+  <script>
+    window.addEventListener("pageshow", function(event) {
+      if (event.persisted ||
+        (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+        window.location.reload();
+      }
+    });
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
   <footer>
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2025 ASLY International College. All rights reserved.</p>
-    <p class="mb-0">&copy; ShinzuoDev               @Kaneki(FE)</p>
-  </div>
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 ASLY International College. All rights reserved.</p>
+      <p class="mb-0">&copy; ShinzuoDev @Kaneki(FE)</p>
+    </div>
   </footer>
 </body>
 
