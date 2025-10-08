@@ -27,33 +27,43 @@ if (isset($_GET['id'])) {
         $resultLast = $stmtLast->get_result();
 
         if ($rowLast = $resultLast->fetch_assoc()) {
-            // Extract the numeric sequence from last ID
             $lastSeq = intval(substr($rowLast['id'], 2));
             $newSeq = $lastSeq + 1;
         } else {
-            $newSeq = 1; // first student of this year
+            $newSeq = 1;
         }
 
-        // Final Student ID format: YY + 5-digit padded sequence
         $studentId = $year . str_pad($newSeq, 5, '0', STR_PAD_LEFT);
 
         // -------------------------
-        // 3. Insert into students
+        // 3. Insert into students (NEW FIELDS INCLUDED)
         // -------------------------
-        $insertStudent = "INSERT INTO students 
-            (id, firstName, middleName, lastName, prefix, courseId, email, contactNumber, 
-            lastSchoolAttended, lastSchoolYr, birthDate, gender, dateEnrolled, educationalAttainment) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertStudent = "INSERT INTO students (
+            id, firstName, middleName, lastName, prefix, 
+            courseId, section, yearLevel, email,
+            street, barangay, district, city, province, region,
+            civilStatus, employmentStatus, contactNumber,
+            lastSchoolAttended, lastSchoolYr, birthDate, gender, 
+            dateEnrolled, educationalAttainment, motherName, fatherName
+        ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL)";
 
         $stmt2 = $conn->prepare($insertStudent);
-        $stmt2->bind_param("issssissssssss",
+        $stmt2->bind_param("issssisssssssssssssssss",
             $studentId,
             $enrollee['firstName'],
-            $enrollee['middleInitial'], // map middleInitial → middleName
+            $enrollee['middleInitial'], // old field name
             $enrollee['lastName'],
             $enrollee['prefix'],
             $enrollee['courseId'],
             $enrollee['email'],
+            $enrollee['street'],
+            $enrollee['barangay'],
+            $enrollee['district'],
+            $enrollee['city'],
+            $enrollee['province'],
+            $enrollee['region'],
+            $enrollee['civilStatus'],
+            $enrollee['employmentStatus'],
             $enrollee['contactNumber'],
             $enrollee['lastSchoolAttended'],
             $enrollee['lastSchoolYr'],
@@ -75,20 +85,19 @@ if (isset($_GET['id'])) {
             // -------------------------
             // 5. Create username & password
             // -------------------------
-            $username = $studentId; // student ID as username
+            $username = $studentId;
 
-            // password = first 2 letters of last name (capitalized) + '@' + year enrolled
             $lastName = ucfirst(strtolower($enrollee['lastName']));
             $firstTwo = substr($lastName, 0, 2);
             $yearFull = date('Y', strtotime($enrollee['dateEnrolled']));
             $rawPassword = $firstTwo . '@' . $yearFull;
-
             $hashedPassword = password_hash($rawPassword, PASSWORD_DEFAULT);
 
             // -------------------------
-            // 6. Insert into users table
+            // 6. Insert into users
             // -------------------------
-            $insertUser = "INSERT INTO users (userType, username, password, userId) VALUES (?, ?, ?, ?)";
+            $insertUser = "INSERT INTO users (userType, username, password, userId)
+                           VALUES (?, ?, ?, ?)";
             $stmt4 = $conn->prepare($insertUser);
             $userType = "Student";
             $stmt4->bind_param("sssi", $userType, $username, $hashedPassword, $studentId);
