@@ -37,16 +37,18 @@ $totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_
 $totalPages = ceil($totalRows / $limit);
 
 // Fetch paginated enrollees (with search + pending first + newest)
-$sql = "SELECT e.id, e.firstName, e.middleInitial, e.lastName, e.email, e.contactNumber, 
-               e.lastSchoolAttended, e.lastSchoolYr, e.birthDate, e.gender, e.dateEnrolled, 
-               e.courseId, c.course AS courseName, e.educationalAttainment, e.status 
-        FROM enrollees e 
-        LEFT JOIN course c ON e.courseId = c.courseId 
-        $where
-        ORDER BY 
-            CASE WHEN e.status = 'Pending' THEN 0 ELSE 1 END, 
-            e.dateEnrolled DESC 
-        LIMIT $limit OFFSET $offset";
+$sql = "SELECT e.id, e.firstName, e.middleInitial, e.lastName, e.prefix, e.street, 
+e.barangay, e.district, e.city, e.province, e.region, e.civilStatus, e.employmentStatus,
+ e.email, e.contactNumber, e.lastSchoolAttended, e.lastSchoolYr, e.birthDate, e.gender, 
+ e.dateEnrolled, e.courseId, c.course AS courseName, e.educationalAttainment, 
+ el.educationLevel AS educationLevelName, e.status FROM enrollees e 
+
+ LEFT JOIN course c ON e.courseId = c.courseId 
+ LEFT JOIN educationlevel el ON e.educationalAttainment = el.id
+ 
+  $where ORDER BY CASE WHEN e.status = 'Pending'
+  
+   THEN 0 ELSE 1 END, e.dateEnrolled DESC LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 ?>
 
@@ -186,6 +188,15 @@ $result = $conn->query($sql);
                                         $modals .= '<li class="list-group-item"><strong>First Name:</strong> ' . htmlspecialchars($row['firstName']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Middle Initial:</strong> ' . htmlspecialchars($row['middleInitial']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Last Name:</strong> ' . htmlspecialchars($row['lastName']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Prefix:</strong> ' . htmlspecialchars($row['prefix']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Street:</strong> ' . htmlspecialchars($row['street']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Barangay:</strong> ' . htmlspecialchars($row['barangay']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>District:</strong> ' . htmlspecialchars($row['district']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>City:</strong> ' . htmlspecialchars($row['city']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Province:</strong> ' . htmlspecialchars($row['province']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Region:</strong> ' . htmlspecialchars($row['region']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Civil Status:</strong> ' . htmlspecialchars($row['civilStatus']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>employmentStatus:</strong> ' . htmlspecialchars($row['employmentStatus']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Email:</strong> ' . htmlspecialchars($row['email']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Contact Number:</strong> ' . htmlspecialchars($row['contactNumber']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Last School Attended:</strong> ' . htmlspecialchars($row['lastSchoolAttended']) . '</li>';
@@ -193,8 +204,9 @@ $result = $conn->query($sql);
                                         $modals .= '<li class="list-group-item"><strong>Birth Date:</strong> ' . htmlspecialchars($row['birthDate']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Gender:</strong> ' . htmlspecialchars($row['gender']) . '</li>';
                                         $modals .= '<li class="list-group-item"><strong>Date Enrolled:</strong> ' . htmlspecialchars($row['dateEnrolled']) . '</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Course ID:</strong> ' . htmlspecialchars($row['courseId']) . '</li>';
-                                        $modals .= '<li class="list-group-item"><strong>Educational Attainment:</strong> ' . htmlspecialchars($row['educationalAttainment']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Application for:</strong> ' . htmlspecialchars($row['educationLevelName']) . '</li>';
+                                        $modals .= '<li class="list-group-item"><strong>Course ID:</strong> ' . htmlspecialchars($row['courseName']) . '</li>';
+                                        
                                         $modals .= '<li class="list-group-item"><strong>Status:</strong> ' . htmlspecialchars($row['status']) . '</li>';
                                         $modals .= '</ul>';
                                         $modals .= '</div>';
