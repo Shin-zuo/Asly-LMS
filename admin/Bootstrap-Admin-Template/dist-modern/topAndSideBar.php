@@ -283,13 +283,6 @@
                             <span>Course Management</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./forms.html">
-                            <i class="bi bi-ui-checks"></i>
-                            <span>Forms</span>
-                            <span class="badge bg-success rounded-pill ms-auto">New</span>
-                        </a>
-                    </li>
                     <!-- <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#elementsSubmenu" aria-expanded="false">
                                 <i class="bi bi-puzzle"></i>
@@ -350,29 +343,12 @@
                                 </ul>
                             </div>
                         </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="./reports.html">
-                            <i class="bi bi-file-earmark-text"></i>
-                            <span>Reports</span>
-                        </a>
-                    </li>
+                
                     <li class="nav-item">
                         <a class="nav-link" href="./messages.html">
                             <i class="bi bi-chat-dots"></i>
                             <span>Messages</span>
                             <span class="badge bg-danger rounded-pill ms-auto">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./calendar.html">
-                            <i class="bi bi-calendar-event"></i>
-                            <span>Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./files.html">
-                            <i class="bi bi-folder2-open"></i>
-                            <span>Files</span>
                         </a>
                     </li>
                     <li class="nav-item mt-3">
@@ -384,12 +360,7 @@
                             <span>Settings</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./security.html">
-                            <i class="bi bi-shield-check"></i>
-                            <span>Security</span>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="./help.html">
                             <i class="bi bi-question-circle"></i>

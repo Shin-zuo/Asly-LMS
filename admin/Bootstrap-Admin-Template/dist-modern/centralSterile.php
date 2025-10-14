@@ -477,7 +477,7 @@ $exams = $conn->query($sql);
         </div>
         </div>
 
-
+<!-- add chapter -->
         <div class="modal fade" id="addChapterModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="functions/addChapter.php" method="POST" enctype="multipart/form-data" class="modal-content">

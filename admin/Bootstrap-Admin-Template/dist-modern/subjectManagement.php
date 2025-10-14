@@ -8,10 +8,6 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 require_once '../../../config/database.php';
 
-// Fetch enrollees
-$sql = "SELECT id, firstName, middleInitial, lastName, email, courseId, dateEnrolled 
-        FROM enrollees";
-$result = $conn->query($sql);
 
 
 ?>
@@ -52,25 +48,19 @@ $result = $conn->query($sql);
                             <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
                                 <i class="bi bi-plus-lg me-2"></i>
-                                New Item
+                                Add Subject
                             </button>
-                            <button type="button" class="btn btn-outline-secondary"
+                            <button type="button"
+                                class="btn btn-outline-secondary"
                                 data-bs-toggle="tooltip"
-                                title="Refresh data">
+                                title="Refresh data"
+                                onclick="location.reload();">
                                 <i class="bi bi-arrow-clockwise icon-hover"></i>
                             </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Export data">
-                                <i class="bi bi-download icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Settings">
-                                <i class="bi bi-gear icon-hover"></i>
-                            </button>
+
+
                         </div>
                     </div>
 
@@ -79,48 +69,107 @@ $result = $conn->query($sql);
                         <div class="col-md-3"></div>
 
 
-                        <span>Enrollees</span>
-                        <table class="table table-striped">
-                            <thead>
+
+                        <span>Senior High School Subjects</span>
+                        <!-- Success/Error Alerts -->
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['success'];
+                                unset($_SESSION['success']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php elseif (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['error'];
+                                unset($_SESSION['error']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($_GET['error'])): ?>
+                            <div class="alert alert-danger"> <?= htmlspecialchars($_GET['error']) ?></div>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['success']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['success']);
+                        endif; ?>
+
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['error']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['error']);
+                        endif; ?>
+
+                        <table class="table table-striped ">
+                            <thead class="">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Course</th>
-                                    <th>Date Enrolled</th>
-                                    <th>Actions</th> <!-- New column -->
+                                    <th>id</th>
+                                    <th>Subject</th>
+                                    <th>Course Code</th>
+                                    <th>Education Level</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($result && $result->num_rows > 0): ?>
-                                    <?php while ($row = $result->fetch_assoc()): ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($row['id']) ?></td>
-                                            <td>
-                                                <?= htmlspecialchars($row['firstName'] . ' ' . $row['middleInitial'] . '. ' . $row['lastName']) ?>
-                                            </td>
-                                            <td><?= htmlspecialchars($row['email']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                            <td><?= htmlspecialchars($row['dateEnrolled']) ?></td>
-                                            <td>
-                                                <!-- Accept Button -->
-                                                <a href="accept.php?id=<?= $row['id'] ?>" class="btn btn-success btn-sm">
-                                                    Accept
-                                                </a>
-                                                <!-- Delete Button -->
-                                                <a href="delete.php?id=<?= $row['id'] ?>"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this enrollee?');">
-                                                    Delete
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                <?php else: ?>
+                                <?php
+
+                                $sql = "SELECT 
+    s.id,
+    s.subject,
+    s.courseCode,
+    s.educationId,
+    s.description,
+    e.educationLevel
+FROM subjects AS s
+LEFT JOIN educationlevel AS e 
+    ON s.educationId = e.id
+WHERE e.educationLevel = 'Senior High School';";
+                                $result = $conn->query($sql);
+
+
+                                $result = $conn->query($sql);
+                                $i = 1;
+
+                                while ($row = $result->fetch_assoc()):
+                                ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">No enrollees found</td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= htmlspecialchars($row['subject']) ?></td>
+                                        <td><?= htmlspecialchars($row['courseCode']); ?></td>
+                                        <td><?= htmlspecialchars($row['educationLevel']) ?></td>
+                                        <td><?= htmlspecialchars($row['description']) ?></td>
+
+                                        <td>
+                                            <!-- ✅ Edit Button -->
+                                            <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                                data-id="<?= $row['id'] ?>"
+                                                data-subject="<?= htmlspecialchars($row['subject']) ?>"
+                                                data-code="<?= htmlspecialchars($row['courseCode']) ?>"
+                                                data-educationId="<?= htmlspecialchars($row['educationId']) ?>"
+                                                data-description="<?= htmlspecialchars($row['description']) ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editSubjectModal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+
+                                            <!-- ✅ Delete Button -->
+                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                                onsubmit="return confirm('Are you sure you want to delete this subject?');">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                <?php endif; ?>
+                                <?php endwhile; ?>
                             </tbody>
                         </table>
 
@@ -129,6 +178,176 @@ $result = $conn->query($sql);
 
 
                 </div>
+
+                <div class="container-fluid p-4 p-lg-5">
+                    <div class="row g-3 align-items-end">
+                        <span>College Subjects</span>
+                        <table class="table table-striped ">
+                            <thead class="">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Subject</th>
+                                    <th>Course Code</th>
+                                    <th>Education Level</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                $sql = "SELECT 
+    s.id,
+    s.subject,
+    s.courseCode,
+    s.educationId,
+    s.description,
+    e.educationLevel
+FROM subjects AS s
+LEFT JOIN educationlevel AS e 
+    ON s.educationId = e.id
+WHERE e.educationLevel = 'College';";
+                                $result = $conn->query($sql);
+
+
+                                $result = $conn->query($sql);
+                                $i = 1;
+
+                                while ($row = $result->fetch_assoc()):
+                                ?>
+                                    <tr>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= htmlspecialchars($row['subject']) ?></td>
+                                        <td><?= htmlspecialchars($row['courseCode']); ?></td>
+                                        <td><?= htmlspecialchars($row['educationLevel']) ?></td>
+                                        <td><?= htmlspecialchars($row['description']) ?></td>
+
+                                        <td>
+                                            <!-- ✅ Edit Button -->
+                                            <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                                data-id="<?= $row['id'] ?>"
+                                                data-subject="<?= htmlspecialchars($row['subject']) ?>"
+                                                data-code="<?= htmlspecialchars($row['courseCode']) ?>"
+                                                data-educationId="<?= htmlspecialchars($row['educationId']) ?>"
+                                                data-description="<?= htmlspecialchars($row['description']) ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editSubjectModal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+
+                                            <!-- ✅ Delete Button -->
+                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                                onsubmit="return confirm('Are you sure you want to delete this subject?');">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <!-- add subject modal -->
+                <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="functions/addSubject.php" method="POST">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addSubjectModalLabel">Add New Subject</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="firstName" class="form-label">Subject Name</label>
+                                        <input type="text" class="form-control" name="subjectName" id="subjectName" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="middleName" class="form-label">Course Code</label>
+                                        <input type="text" class="form-control" name="courseCode" id="courseCode">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="educationId" class="form-label">Education Level</label>
+                                        <select class="form-select" name="educationId" id="educationId" required>
+                                            <option value="">-- Select Education Level --</option>
+                                            <?php
+                                            $res = $conn->query("SELECT id, educationLevel FROM educationlevel");
+                                            while ($row = $res->fetch_assoc()):
+                                            ?>
+                                                <option value="<?= $row['id'] ?>"><?= htmlspecialchars($row['educationLevel']) ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="middleName" class="form-label">Description</label>
+                                        <input type="text" class="form-control" name="description" id="description">
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Subject</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- edit subject modal -->
+                <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="functions/update_subject.php" method="POST" class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Course</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="courseId" id="editCourseId">
+
+                                <div class="mb-3">
+                                    <label for="editCourseCode" class="form-label">Subject</label>
+                                    <input type="text" name="courseCode" id="editSubjectName" class="form-control" required>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="editCourseCode" class="form-label">Course Code</label>
+                                    <input type="text" name="courseCode" id="editCourseCode" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="editEducationId" class="form-label">Education Level</label>
+                                    <select name="educationId" id="editEducationId" class="form-select" required>
+                                        <?php
+                                        $eduRes = $conn->query("SELECT id, educationLevel FROM educationlevel");
+                                        while ($edu = $eduRes->fetch_assoc()):
+                                        ?>
+                                            <option value="<?= $edu['id'] ?>"><?= htmlspecialchars($edu['educationLevel']) ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="editCourseName" class="form-label">Description</label>
+                                    <input type="text" name="course" id="editDescription" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </main>
 
             <!-- Footer -->
@@ -271,16 +490,40 @@ $result = $conn->query($sql);
                     });
                 }
             });
+
+            // Edit Subject Modal Population
+            document.addEventListener('DOMContentLoaded', function() {
+                const editBtns = document.querySelectorAll('.editBtn');
+
+                // Get modal input fields
+                const editCourseId = document.getElementById('editCourseId');
+                const editSubjectName = document.getElementById('editSubjectName');
+                const editCourseCode = document.getElementById('editCourseCode');
+                const editEducationId = document.getElementById('editEducationId');
+                const editDescription = document.getElementById('editDescription');
+
+                // Loop through all edit buttons
+                editBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Populate modal fields with data attributes from the clicked button
+                        editCourseId.value = this.dataset.id;
+                        editSubjectName.value = this.dataset.subject;
+                        editCourseCode.value = this.dataset.code;
+                        editEducationId.value = this.dataset.educationId;
+                        editDescription.value = this.dataset.description;
+                    });
+                });
+            });
         </script>
 
         <script>
-// Force reload on browser back navigation to trigger PHP session check
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-        window.location.reload();
-    }   
-});
-</script>
+            // Force reload on browser back navigation to trigger PHP session check
+            window.addEventListener("pageshow", function(event) {
+                if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+                    window.location.reload();
+                }
+            });
+        </script>
     </body>
 </body>
 

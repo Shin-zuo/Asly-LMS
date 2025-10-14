@@ -46,7 +46,7 @@ require_once '../../../config/database.php';
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <h1 class="h3 mb-0">Teachers Management</h1>
-            
+
                         </div>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
@@ -93,89 +93,233 @@ require_once '../../../config/database.php';
                         <?php endif; ?>
 
                         <?php if (isset($_SESSION['success'])): ?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <?= htmlspecialchars($_SESSION['success']) ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-<?php unset($_SESSION['success']); endif; ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['success']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['success']);
+                        endif; ?>
 
-<?php if (isset($_SESSION['error'])): ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <?= htmlspecialchars($_SESSION['error']) ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-<?php unset($_SESSION['error']); endif; ?>
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['error']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['error']);
+                        endif; ?>
 
-<table class="table table-striped ">
-    <thead class="">
-        <tr>
-            <th>#</th>
-            <th>Employee ID</th>
-            <th>Teacher Name</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+                        <table class="table table-striped ">
+                            <thead class="">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Employee ID</th>
+                                    <th>Teacher Name</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
 
-        $sql = "SELECT `id`, `firstName`, `middleName`, `lastName`, `employeeId`, `status` FROM `teachers`";
-        $result = $conn->query($sql);
-        $i = 1;
+                                $sql = "SELECT `id`, `firstName`, `middleName`, `lastName`, `employeeId`, `status` FROM `teachers`";
+                                $result = $conn->query($sql);
+                                $i = 1;
 
-        while ($row = $result->fetch_assoc()):
-        ?>
-            <tr>
-                <td><?= $i++ ?></td>
-                <td><?= htmlspecialchars($row['employeeId']) ?></td>
-                <td>
-    <?php
-    $middleInitial = !empty($row['middleName']) ? strtoupper(substr($row['middleName'], 0, 1)) . '.' : '';
-    echo htmlspecialchars(trim($row['firstName'] . ' ' . $middleInitial . ' ' . $row['lastName']));
-    ?>
-</td>
-                <td>
-                    <span class="badge <?= $row['status'] === 'active' ? 'bg-success' : 'bg-secondary' ?>">
-                        <?= ucfirst($row['status']) ?>
-                    </span>
-                </td>
-                <td>
-                    <!-- ✅ Toggle Status -->
-                    <form action="functions/updateTeacherStatus.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                        <input type="hidden" name="status"
-                            value="<?= ($row['status'] === 'active') ? 'inactive' : 'active' ?>">
-                        <button type="submit"
-                            class="btn btn-sm <?= ($row['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                            <?= ($row['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
-                        </button>
-                    </form>
+                                while ($row = $result->fetch_assoc()):
+                                ?>
+                                    <tr>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= htmlspecialchars($row['employeeId']) ?></td>
+                                        <td>
+                                            <?php
+                                            $middleInitial = !empty($row['middleName']) ? strtoupper(substr($row['middleName'], 0, 1)) . '.' : '';
+                                            echo htmlspecialchars(trim($row['firstName'] . ' ' . $middleInitial . ' ' . $row['lastName']));
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <span class="badge <?= $row['status'] === 'active' ? 'bg-success' : 'bg-secondary' ?>">
+                                                <?= ucfirst($row['status']) ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <!-- ✅ Toggle Status -->
+                                            <form action="functions/updateTeacherStatus.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <input type="hidden" name="status"
+                                                    value="<?= ($row['status'] === 'active') ? 'inactive' : 'active' ?>">
+                                                <button type="submit"
+                                                    class="btn btn-sm <?= ($row['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                                                    <?= ($row['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                                                </button>
+                                            </form>
 
-                    <!-- ✅ Edit Button -->
-                    <button type="button" class="btn btn-sm btn-outline-primary editBtn"
-                        data-id="<?= $row['id'] ?>"
-                        data-firstname="<?= htmlspecialchars($row['firstName']) ?>"
-                        data-middlename="<?= htmlspecialchars($row['middleName']) ?>"
-                        data-lastname="<?= htmlspecialchars($row['lastName']) ?>"
-                        data-employeeid="<?= htmlspecialchars($row['employeeId']) ?>"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editTeacherModal">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
+                                            <!-- ✅ Edit Button -->
+                                            <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                                data-id="<?= $row['id'] ?>"
+                                                data-firstname="<?= htmlspecialchars($row['firstName']) ?>"
+                                                data-middlename="<?= htmlspecialchars($row['middleName']) ?>"
+                                                data-lastname="<?= htmlspecialchars($row['lastName']) ?>"
+                                                data-employeeid="<?= htmlspecialchars($row['employeeId']) ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editTeacherModal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
 
-                    <!-- ✅ Delete Button -->
-<form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
-    onsubmit="return confirm('Are you sure you want to delete this teacher?');">
-    <input type="hidden" name="id" value="<?= $row['id'] ?>">
-    <button type="submit" class="btn btn-sm btn-outline-danger">
-        <i class="bi bi-trash"></i>
-    </button>
-</form>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </tbody>
-</table>
+                                            <!-- ✅ Delete Button -->
+                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                                onsubmit="return confirm('Are you sure you want to delete this teacher?');">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+                <div class="container-fluid p-4 p-lg-5">
+                    <!-- Page Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h1 class="h3 mb-0">Teachers Management</h1>
+
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
+                                <i class="bi bi-plus-lg me-2"></i>
+                                Add Teacher
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Refresh data">
+                                <i class="bi bi-arrow-clockwise icon-hover"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Export data">
+                                <i class="bi bi-download icon-hover"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Settings">
+                                <i class="bi bi-gear icon-hover"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards with Alpine.js -->
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-3"></div>
+
+
+                        <span>Teachers</span>
+                        <!-- Success/Error Alerts -->
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['success'];
+                                unset($_SESSION['success']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php elseif (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['error'];
+                                unset($_SESSION['error']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['success']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['success']);
+                        endif; ?>
+
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($_SESSION['error']) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php unset($_SESSION['error']);
+                        endif; ?>
+
+                        <table class="table table-striped ">
+                            <thead class="">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Employee ID</th>
+                                    <th>Teacher Name</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                $sql = "SELECT `id`, `firstName`, `middleName`, `lastName`, `employeeId`, `status` FROM `teachers`";
+                                $result = $conn->query($sql);
+                                $i = 1;
+
+                                while ($row = $result->fetch_assoc()):
+                                ?>
+                                    <tr>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= htmlspecialchars($row['employeeId']) ?></td>
+                                        <td>
+                                            <?php
+                                            $middleInitial = !empty($row['middleName']) ? strtoupper(substr($row['middleName'], 0, 1)) . '.' : '';
+                                            echo htmlspecialchars(trim($row['firstName'] . ' ' . $middleInitial . ' ' . $row['lastName']));
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <span class="badge <?= $row['status'] === 'active' ? 'bg-success' : 'bg-secondary' ?>">
+                                                <?= ucfirst($row['status']) ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <!-- ✅ Toggle Status -->
+                                            <form action="functions/updateTeacherStatus.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <input type="hidden" name="status"
+                                                    value="<?= ($row['status'] === 'active') ? 'inactive' : 'active' ?>">
+                                                <button type="submit"
+                                                    class="btn btn-sm <?= ($row['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                                                    <?= ($row['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                                                </button>
+                                            </form>
+
+                                            <!-- ✅ Edit Button -->
+                                            <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                                data-id="<?= $row['id'] ?>"
+                                                data-firstname="<?= htmlspecialchars($row['firstName']) ?>"
+                                                data-middlename="<?= htmlspecialchars($row['middleName']) ?>"
+                                                data-lastname="<?= htmlspecialchars($row['lastName']) ?>"
+                                                data-employeeid="<?= htmlspecialchars($row['employeeId']) ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editTeacherModal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+
+                                            <!-- ✅ Delete Button -->
+                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                                onsubmit="return confirm('Are you sure you want to delete this teacher?');">
+                                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
 
                     </div>
 
@@ -183,7 +327,7 @@ require_once '../../../config/database.php';
                 </div>
 
 
-<!-- add teacher modal -->
+                <!-- add teacher modal -->
                 <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -231,47 +375,47 @@ require_once '../../../config/database.php';
                         </div>
                     </div>
                 </div>
-<!-- edit teacher modal -->
+                <!-- edit teacher modal -->
 
-<!-- ✅ Edit Teacher Modal -->
-<div class="modal fade" id="editTeacherModal" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="functions/updateTeacher.php" method="POST" class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="editTeacherModalLabel">Edit Teacher</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" name="id" id="editTeacherId">
+                <!-- ✅ Edit Teacher Modal -->
+                <div class="modal fade" id="editTeacherModal" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="functions/updateTeacher.php" method="POST" class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="editTeacherModalLabel">Edit Teacher</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="editTeacherId">
 
-                <div class="mb-3">
-                    <label class="form-label">Employee ID</label>
-                    <input type="text" class="form-control" name="employeeId" id="editEmployeeId" required>
+                                <div class="mb-3">
+                                    <label class="form-label">Employee ID</label>
+                                    <input type="text" class="form-control" name="employeeId" id="editEmployeeId" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" name="firstName" id="editFirstName" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Middle Name <small class="text-muted">(optional)</small></label>
+                                    <input type="text" class="form-control" name="middleName" id="editMiddleName">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" name="lastName" id="editLastName" required>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="editFirstName" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Middle Name <small class="text-muted">(optional)</small></label>
-                    <input type="text" class="form-control" name="middleName" id="editMiddleName">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="editLastName" required>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
 
             </main>
 
@@ -304,13 +448,6 @@ require_once '../../../config/database.php';
         </div>
         </div>
         </div>
-
-
-
-
-
-
-
 
 
         <!-- Scripts -->
@@ -381,15 +518,15 @@ require_once '../../../config/database.php';
             });
 
             //edit modal trigger
-          document.querySelectorAll('.editBtn').forEach(button => {
-    button.addEventListener('click', function() {
-        document.getElementById('editTeacherId').value = this.dataset.id;
-        document.getElementById('editFirstName').value = this.dataset.firstname;
-        document.getElementById('editMiddleName').value = this.dataset.middlename;
-        document.getElementById('editLastName').value = this.dataset.lastname;
-        document.getElementById('editEmployeeId').value = this.dataset.employeeid;
-    });
-});
+            document.querySelectorAll('.editBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.getElementById('editTeacherId').value = this.dataset.id;
+                    document.getElementById('editFirstName').value = this.dataset.firstname;
+                    document.getElementById('editMiddleName').value = this.dataset.middlename;
+                    document.getElementById('editLastName').value = this.dataset.lastname;
+                    document.getElementById('editEmployeeId').value = this.dataset.employeeid;
+                });
+            });
         </script>
     </body>
 </body>
