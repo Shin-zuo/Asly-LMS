@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Redirect based on user type
       switch ($user['userType']) {
         case 'Admin':
-          header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
+           header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
           break;
 
         case 'Teacher':
