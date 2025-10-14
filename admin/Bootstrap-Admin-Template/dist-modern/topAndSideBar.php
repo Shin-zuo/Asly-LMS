@@ -245,7 +245,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./elements-tables.html">
+                                    <a class="nav-link" href="./teachersManagement.php">
                                         <i class="bi bi-table"></i>
                                         <span>Teachers</span>
                                     </a>

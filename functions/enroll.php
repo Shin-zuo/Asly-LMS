@@ -1,6 +1,13 @@
 <?php
 require_once '../config/database.php'; // make sure this connects to your DB
 
+require __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+require __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect all inputs
     $firstName         = $_POST['firstName'] ?? '';
@@ -110,6 +117,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     if ($stmt->execute()) {
+        // -------------------------------
+        // ✅ Automatic weekday schedule
+        // -------------------------------
+        $assignedDate = new DateTime('now +1 week');
+        $dayOfWeek = $assignedDate->format('N');
+        if ($dayOfWeek >= 6) {
+            $assignedDate->modify('next Monday');
+        }
+        $assignedTime = '10:00 AM';
+
+        // -------------------------------
+        // ✅ Send email using PHPMailer
+        // -------------------------------
+        $mail = new PHPMailer(true);
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'mail.aici.edu.ph';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'jeff-ict@aici.edu.ph';       // your dummy Gmail
+            $mail->Password   = 'nksk mblr yciy xvxd ';    // Gmail app password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            // Recipients
+            $mail->setFrom('torlaokenneth35@gmail.com', 'AITCI');
+            $mail->addAddress($email, $firstName);
+
+            // Content
+            $mail->isHTML(false);
+            $mail->Subject = 'AITCI Enrollment Schedule';
+            $mail->Body = "Hi $firstName,\n\n"
+                . "Thank you for enrolling at AITCI!\n\n"
+                . "Please be informed that your scheduled visit for the submission of enrollment requirements is on "
+                . $assignedDate->format('l, F j, Y') . " at $assignedTime.\n\n"
+                . "Kindly bring all the necessary documents for verification.\n\n"
+                . "We look forward to seeing you soon!\n\n"
+                . "- AITCI Admissions Office";
+            $mail->send();
+        } catch (Exception $e) {
+            error_log("Mailer Error: " . $mail->ErrorInfo);
+        }
+
+        // -------------------------------
+        // Redirect to success
+        // -------------------------------
         header("Location: ../index.php?success=1#enroll");
         exit();
     } else {
@@ -117,4 +170,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 }
-?>

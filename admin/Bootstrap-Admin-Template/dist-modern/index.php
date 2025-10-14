@@ -280,20 +280,14 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- Chart Section -->
                 <div class="row g-4 mb-4">
                     <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Revenue Overview</h5>
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <button type="button" class="btn btn-outline-primary active" data-chart-period="7d">7D</button>
-                                    <button type="button" class="btn btn-outline-primary" data-chart-period="30d">30D</button>
-                                    <button type="button" class="btn btn-outline-primary" data-chart-period="90d">90D</button>
-                                    <button type="button" class="btn btn-outline-primary" data-chart-period="1y">1Y</button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="revenueChart" height="250"></canvas>
-                            </div>
-                        </div>
+                       <div class="card">
+<div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Yearly Enrollment Trend per Course</h5>
+    </div>
+    <div class="card-body">
+        <canvas id="enrolleeTrendChart" height="250"></canvas>
+    </div>
+</div>
                     </div>
 
                     <div class="col-lg-4">
@@ -571,6 +565,10 @@ if (!isset($_SESSION['user_id'])) {
         }
     </script>
 </body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
     // Force reload on browser back navigation to trigger PHP session check
     window.addEventListener("pageshow", function(event) {
@@ -578,6 +576,73 @@ if (!isset($_SESSION['user_id'])) {
             window.location.reload();
         }
     });
+
+    //line chart for enrollees per course
+    document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('enrolleeTrendChart').getContext('2d');
+    let chart;
+
+    fetch('functions/getEnrolleeStats.php')
+        .then(res => res.json())
+        .then(data => {
+            // Group data by course
+            const grouped = {};
+            data.forEach(row => {
+                if (!grouped[row.course_name]) grouped[row.course_name] = {};
+                grouped[row.course_name][row.year] = parseInt(row.total_enrollees);
+            });
+
+            // Extract all unique years and sort them
+            const years = [...new Set(data.map(row => row.year))].sort();
+
+            // Generate a random color palette for each course
+            const colors = [
+                '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b',
+                '#858796', '#fd7e14', '#20c997', '#6610f2', '#6f42c1'
+            ];
+
+            // Convert grouped data into Chart.js dataset format
+            const datasets = Object.keys(grouped).map((course, index) => ({
+                label: course,
+                data: years.map(year => grouped[course][year] || 0),
+                borderColor: colors[index % colors.length],
+                backgroundColor: colors[index % colors.length] + "33", // transparent fill
+                fill: false,
+                tension: 0.3,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }));
+
+            // Create chart
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Year' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Number of Enrollees' },
+                            ticks: { precision: 0 }
+                        }
+                    }
+                }
+            });
+        });
+});
 </script>
+
 
 </html>
