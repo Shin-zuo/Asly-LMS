@@ -87,9 +87,9 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
-                                <li class="nav-item"><a class="nav-link" href="Features.php">FEATURES</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="Gallery.php">GALLERY</a></li>
-                                <li class="nav-item"><a class="nav-link" href="Enroll.php">ENROLL</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="Gallery.php">BLOG</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
                                 <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
                                 <li class="nav-item">
                                     <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
@@ -103,40 +103,194 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     </div>
     </br>
     </br>
-<h1 class="text-center my-5" style="color: #f9a825;">Gallery</h1>
-<div class="container py-5">
-  <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Boat on Calm Water" />
+<header id="home">
+  <div class="container text-center mt-5">
 
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Wintry Mountain Landscape" />
-    </div>
-
-    <div class="col-lg-4 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Mountains in the Clouds" />
-
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Boat on Calm Water" />
-    </div>
-
-    <div class="col-lg-4 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Waves at Sea" />
-
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Yosemite National Park" />
+    <div class="img-holder mt-4">
+    </br>
+      <img src="../images/ASLYLOGO3.png" alt="Asly" class="img-fluid" style="max-width: 250px;">
     </div>
   </div>
-</div>
+</header>
+
+<style>
+#home {
+  height: 70vh; /* trimmed height but still full width */
+  background: url('../images/grad.jfif') no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* optional: make text readable if background is bright */
+#home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 74vh;
+  background: rgba(0, 0, 0, 0.3); /* dark overlay */
+  z-index: 0;
+}
+
+#home * {
+  position: relative;
+  z-index: 1;
+}
+</style>
+
+
+        <div class="container my-5">
+        <h1 style="color: #1b7420; text-align: center;">What we offer</h1>
+        <br>
+        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
+
+            <!-- Card 1 -->
+            <div class="col">
+                <a href="empowering.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/asd.jpg" class="card-img-top rounded-top-4" alt="Central Sterile Processing Technology">
+                        <div class="card-body">
+                            <h5 class="card-title">Empowering Students Through Technology: Hands-On Computer Learning at Asly International College Inc.</h5>
+                            <p class="card-text">In today’s fast-paced digital world, understanding technology isn’t just an advantage — it’s a necessity. At Asly International College Inc., we believe that learning should go beyond textbooks and theories. That’s why our computer-related courses are designed to give students real, hands-on experience using modern computer systems and software tools used by professionals today.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col">
+                <a href="precision.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/asds.avif" class="card-img-top rounded-top-4" alt="Central Sterile Services">
+                        <div class="card-body">
+                            <h5 class="card-title">Precision, Safety, and Care: The Vital Role of Central Sterile Services Technicians</h5>
+                            <p class="card-text">Behind every successful surgery or medical procedure is a team that ensures every instrument is clean, sterile, and safe to use. At Asly International College Inc., our Central Sterile Services program trains students to become one of the most essential — yet often unseen — heroes in the healthcare field.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col">
+                <a href="building.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/asd1.jpg" class="card-img-top rounded-top-4" alt="Computer Systems Servicing">
+                        <div class="card-body">
+                            <h5 class="card-title">Building the Future, One Website at a Time: Web Development at Asly International College Inc.</h5>
+                            <p class="card-text">In today’s digital age, almost everything happens online — from communication and education to shopping and business. Behind every beautiful, functional website is a skilled web developer who brings ideas to life through creativity and code.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col">
+                <a href="mastering.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/12345.jpg" class="card-img-top rounded-top-4" alt="Web Development NC III">
+                        <div class="card-body">
+                            <h5 class="card-title">Mastering Java: Building a Strong Foundation in Programming at Asly International College Inc.</h5>
+                            <p class="card-text">In the ever-evolving world of technology, one programming language continues to stand tall — Java. Known for its versatility, reliability, and power, Java has become a cornerstone of software development across industries. At Asly International College Inc., our Java Programming course prepares students to become skilled developers capable of creating dynamic applications, websites, and software solutions.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col">
+                <a href="powering.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/DSC_1055.jpg" class="card-img-top rounded-top-4" alt="Java Programming NC III">
+                        <div class="card-body">
+                            <h5 class="card-title">Powering Innovation: Why Good Computers Matter in Coding Education</h5>
+                            <p class="card-text">In the digital world we live in today, computers are more than just tools — they’re the gateway to creativity, logic, and innovation. At Asly International College Inc., we believe that students deserve the best possible resources to develop their skills and bring their ideas to life. That’s why our computer laboratories are equipped with modern, high-performance computers designed to keep up with the fast-paced world of coding and technology.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+                        <div class="col">
+                <a href="learning.html" class="text-decoration-none">
+                    <div class="card h-100 hover-scale text-center gradient-bg border-0">
+                        <img src="../images/pop.jpg" class="card-img-top rounded-top-4" alt="Java Programming NC III">
+                        <div class="card-body">
+                            <h5 class="card-title">Learning Beyond the Classroom: Embracing Alternative Learning at Asly International College Inc.</h5>
+                            <p class="card-text">Education is not a one-size-fits-all journey — every learner has a unique story, pace, and goal. At Asly International College Inc., we believe that everyone deserves the opportunity to learn, grow, and succeed, no matter their background or circumstances. That’s why we proudly offer Alternative Learning Programs designed to make education more flexible, accessible, and meaningful.</p>   
+                    </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- Additional CSS -->
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
+
+<style>
+    /* --- Card Container Styles --- */
+    .gradient-bg {
+        background: linear-gradient(135deg, #e8f5e9, #f5fff7); /* soft green gradient */
+        border-radius: 20px;
+        color: #333;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .gradient-bg:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(27, 116, 32, 0.3);
+        background: linear-gradient(135deg, #d0f5d8, #f5fff7);
+    }
+
+    /* --- Title Styles --- */
+    .card-body h5 {
+        font-family: 'Knewave', cursive;
+        font-weight: 900;
+        color: #1b7420;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        text-shadow: 2px 2px 5px rgba(27, 116, 32, 0.3);
+        margin-bottom: 10px;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .gradient-bg:hover .card-body h5 {
+        color: #136617;
+        text-shadow: 3px 3px 10px rgba(27, 116, 32, 0.4);
+    }
+
+    /* --- Paragraph Styles --- */
+    .card-body p {
+        color: #5b5b5b;
+        font-size: 15px;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+    }
+
+    .gradient-bg:hover .card-body p {
+        color: #333;
+    }
+
+    /* --- Image --- */
+    .card-img-top {
+        object-fit: cover;
+        height: 220px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        transition: transform 0.4s ease;
+    }
+
+    .gradient-bg:hover .card-img-top {
+        transform: scale(1.05);
+    }
+</style>
+
 
     <!-- Contact & Footer -->
     <div class="light-bg py-5">

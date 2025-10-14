@@ -110,9 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $applyFor,
         $status
     );
-
-    if ($stmt->execute()) {
-<<<<<<< HEAD
+    // -------------------------------
+    // ✅ If insert successful        
+                    if ($stmt->execute()) {
         // -------------------------------
         // ✅ Automatic weekday schedule
         // -------------------------------
@@ -160,9 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redirect to success
         // -------------------------------
         header("Location: ../index.php?success=1#enroll");
-=======
-        header("Location: ../Landing Page/Enroll.php?success=1#enroll");
->>>>>>> 02e5f753f12623a395d822a7bad1e5854a2a9172
+            header("Location: ../Landing Page/Enroll.php?success=1#enroll");
         exit();
     } else {
         header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Something went wrong: " . $stmt->error) . "#enroll");
