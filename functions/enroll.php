@@ -1,5 +1,5 @@
 <?php
-require_once '../config/database.php'; // make sure this connects to your DB
+require_once '../config/database.php'; // ✅ correct path to database
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect all inputs
@@ -25,33 +25,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birthdate         = $_POST['birthdate'] ?? '';
     $birthplace        = $_POST['birthplace'] ?? '';
 
-    // Optional columns
-    $dateEnrolled = date('Y-m-d'); // current date
-    $status = 'Pending'; // default status
+    $dateEnrolled = date('Y-m-d');
+    $status = 'Pending';
 
     // -------------------------------
     // ✅ Basic validation
     // -------------------------------
     if (empty($firstName) || empty($lastName) || empty($email) || empty($gender) || empty($birthdate) || empty($course)) {
-        header("Location: ../index.php?error=" . urlencode("Please fill in all required fields.") . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Please fill in all required fields.") . "#enroll");
         exit();
     }
 
-    // ✅ Email format validation
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../index.php?error=" . urlencode("Invalid email format.") . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Invalid email format.") . "#enroll");
         exit();
     }
 
-    // ✅ Contact number validation (10–15 digits)
     if (!empty($contactNumber) && !preg_match('/^[0-9]{10,15}$/', $contactNumber)) {
-        header("Location: ../index.php?error=" . urlencode("Invalid contact number format.") . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Invalid contact number format.") . "#enroll");
         exit();
     }
 
-    // ✅ Birthdate validation (must not be in the future)
     if (strtotime($birthdate) > time()) {
-        header("Location: ../index.php?error=" . urlencode("Birthdate cannot be in the future.") . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Birthdate cannot be in the future.") . "#enroll");
         exit();
     }
 
@@ -63,13 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($check->num_rows > 0) {
         $check->close();
-        header("Location: ../index.php?error=" . urlencode("Email already registered!") . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Email already registered!") . "#enroll");
         exit();
     }
     $check->close();
 
     // -------------------------------
-    // ✅ Prepare SQL statement
+    // ✅ Insert data
     // -------------------------------
     $sql = "INSERT INTO enrollees 
         (firstName, middleInitial, lastName, prefix, street, barangay, district, city, province, region, 
@@ -77,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         birthDate, gender, dateEnrolled, courseId, educationalAttainment, status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // Use prepared statement to prevent SQL injection
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Error preparing statement: " . $conn->error);
@@ -110,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     if ($stmt->execute()) {
-        header("Location: ../index.php?success=1#enroll");
+        header("Location: ../Landing Page/Enroll.php?success=1#enroll");
         exit();
     } else {
-        header("Location: ../index.php?error=" . urlencode("Something went wrong: " . $stmt->error) . "#enroll");
+        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Something went wrong: " . $stmt->error) . "#enroll");
         exit();
     }
 }
