@@ -828,8 +828,8 @@ URI     : https://colorlib.com
         <footer class="my-5 text-center">
             <!-- Copyright removal is not prohibited! -->
             <p class="mb-2"><small>Copyright © Asly International College Inc. All Rights Reserved. (2025)</small></p>
-            <H1 style="color: white;">KANEKI(FE)</H1>
-            <h1 style="color: white;">ShinzuoDEV</h1>
+            <H5 style="color: white;">KANEKI(FE)</H5>
+            <h5 style="color: white;">ShinzuoDEV</h5>
             <!-- JavaScript to dynamically load courses -->
             <script>
                 document.getElementById('applyFor').addEventListener('change', function() {
