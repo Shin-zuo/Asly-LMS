@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $desc = ($_POST['description']);
 
 
-    // ✅ Check for duplicate email
+    // ✅ Check for duplicate subjects
     $check = $conn->prepare("SELECT courseCode FROM subjects WHERE courseCode = ?");
     $check->bind_param("s", $code);
     $check->execute();

@@ -8,6 +8,9 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 require_once '../../../config/database.php';
 
+// chapter query for exam form
+$chapters = $conn->query("SELECT id, chapterNum, title FROM sterilechapters ORDER BY chapterNum ASC");
+
 
 // --- Pagination Settings ---
 $limit = 10; // rows per page
@@ -672,6 +675,68 @@ $exams = $conn->query($sql);
             </div>
         </form>
     </div>
+</div>
+
+<!-- Add Exam Modal -->
+<div class="modal fade" id="addExamModal" tabindex="-1" aria-labelledby="addExamModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="functions/addExam.php" method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addExamModalLabel">Add New Exam</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+           <div class="modal-body">
+          <!-- Chapter Selection -->
+          <div class="mb-3">
+            <label for="chapterId" class="form-label">Select Chapter</label>
+            <select name="chapterId" id="chapterId" class="form-select" required>
+              <option value="">-- Choose Chapter --</option>
+              <?php while ($row = $chapters->fetch_assoc()): ?>
+                <option value="<?= $row['id'] ?>">
+                  Chapter <?= htmlspecialchars($row['chapterNum']) ?> — <?= htmlspecialchars($row['title']) ?>
+                </option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Exam Title</label>
+            <input type="text" name="title" id="title" class="form-control" placeholder="Enter exam title" required>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter exam description"></textarea>
+          </div>
+
+          <!-- Status -->
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" id="status" class="form-select" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <!-- Time Limit -->
+          <div class="mb-3">
+            <label for="timeLimit" class="form-label">Time Limit (in minutes)</label>
+            <input type="number" name="timeLimit" id="timeLimit" class="form-control" min="1" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Exam</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 

@@ -44,8 +44,8 @@ require_once '../../../config/database.php';
                     <!-- Page Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                            <h1 class="h3 mb-0">Dashboard</h1>
-                            <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
+                            <h1 class="h3 mb-0">Subject Management</h1>
+                       
                         </div>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
@@ -68,9 +68,6 @@ require_once '../../../config/database.php';
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3"></div>
 
-
-
-                        <span>Senior High School Subjects</span>
                         <!-- Success/Error Alerts -->
                         <?php if (isset($_SESSION['success'])): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -105,6 +102,9 @@ require_once '../../../config/database.php';
                             </div>
                         <?php unset($_SESSION['error']);
                         endif; ?>
+
+
+                        <span>Senior High School Subjects</span>
 
                         <table class="table table-striped ">
                             <thead class="">
@@ -160,7 +160,7 @@ WHERE e.educationLevel = 'Senior High School';";
                                             </button>
 
                                             <!-- ✅ Delete Button -->
-                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                            <form action="functions/deleteSubject.php" method="POST" style="display:inline;"
                                                 onsubmit="return confirm('Are you sure you want to delete this subject?');">
                                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">
@@ -236,7 +236,7 @@ WHERE e.educationLevel = 'College';";
                                             </button>
 
                                             <!-- ✅ Delete Button -->
-                                            <form action="functions/deleteTeacher.php" method="POST" style="display:inline;"
+                                            <form action="functions/deleteSubject.php" method="POST" style="display:inline;"
                                                 onsubmit="return confirm('Are you sure you want to delete this subject?');">
                                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">
