@@ -149,7 +149,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
             <!-- Card 1 -->
             <div class="col">
-                <a href="empowering.html" class="text-decoration-none">
+                <a href="empowering.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/asd.jpg" class="card-img-top rounded-top-4" alt="Central Sterile Processing Technology">
                         <div class="card-body">
@@ -162,12 +162,12 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
             <!-- Card 2 -->
             <div class="col">
-                <a href="precision.html" class="text-decoration-none">
+                <a href="precision.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/asds.avif" class="card-img-top rounded-top-4" alt="Central Sterile Services">
                         <div class="card-body">
-                            <h5 class="card-title">Precision, Safety, and Care: The Vital Role of Central Sterile Services Technicians</h5>
-                            <p class="card-text">Behind every successful surgery or medical procedure is a team that ensures every instrument is clean, sterile, and safe to use. At Asly International College Inc., our Central Sterile Services program trains students to become one of the most essential — yet often unseen — heroes in the healthcare field.</p>
+                            <h5 class="card-title">Why Asly International College Leads in Central Sterile Services Education</h5>
+                            <p class="card-text">At Asly International College Inc., our Central Sterile Services program equips students with the knowledge and hands-on training to become essential members of the healthcare team — the unseen professionals who make every operation possible</p>
                         </div>
                     </div>
                 </a>
@@ -175,7 +175,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
             <!-- Card 3 -->
             <div class="col">
-                <a href="building.html" class="text-decoration-none">
+                <a href="building.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/asd1.jpg" class="card-img-top rounded-top-4" alt="Computer Systems Servicing">
                         <div class="card-body">
@@ -188,12 +188,13 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
             <!-- Card 4 -->
             <div class="col">
-                <a href="mastering.html" class="text-decoration-none">
+                <a href="mastering.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/12345.jpg" class="card-img-top rounded-top-4" alt="Web Development NC III">
                         <div class="card-body">
-                            <h5 class="card-title">Mastering Java: Building a Strong Foundation in Programming at Asly International College Inc.</h5>
-                            <p class="card-text">In the ever-evolving world of technology, one programming language continues to stand tall — Java. Known for its versatility, reliability, and power, Java has become a cornerstone of software development across industries. At Asly International College Inc., our Java Programming course prepares students to become skilled developers capable of creating dynamic applications, websites, and software solutions.</p>
+                            <h5 class="card-title">Asly International College Inc.: Advancing Java Programming NC III Training in San Jose del Monte, Bulacan</h5>
+                            <p class="card-text">Behind every innovative app or digital solution is a skilled programmer who turns ideas into reality.
+At Asly International College Inc., our Java Programming NC III program trains students to become proficient coders and problem solvers — the creative minds who power today’s technology and shape the future of software development.</p>
                         </div>
                     </div>
                 </a>
@@ -201,7 +202,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
             <!-- Card 5 -->
             <div class="col">
-                <a href="powering.html" class="text-decoration-none">
+                <a href="powering.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/DSC_1055.jpg" class="card-img-top rounded-top-4" alt="Java Programming NC III">
                         <div class="card-body">
@@ -212,7 +213,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                 </a>
             </div>
                         <div class="col">
-                <a href="learning.html" class="text-decoration-none">
+                <a href="learning.php" class="text-decoration-none">
                     <div class="card h-100 hover-scale text-center gradient-bg border-0">
                         <img src="../images/pop.jpg" class="card-img-top rounded-top-4" alt="Java Programming NC III">
                         <div class="card-body">
@@ -252,7 +253,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     .card-body h5 {
         font-family: 'Knewave', cursive;
         font-weight: 900;
-        color: #1b7420;
+        color: #464646ff;
         text-transform: uppercase;
         letter-spacing: 1.5px;
         text-shadow: 2px 2px 5px rgba(27, 116, 32, 0.3);
