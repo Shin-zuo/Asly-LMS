@@ -198,25 +198,25 @@
                     }
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('index.php') ?>" href="./index.php">
+                        <a class="nav-link <?= isActive('index.php') ?>" href="./index">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('analytics.php') ?>" href="./analytics.php">
+                        <a class="nav-link <?= isActive('analytics.php') ?>" href="./analytics">
                             <i class="bi bi-graph-up"></i>
                             <span>Analytics</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('users.php') ?>" href="./users.php">
+                        <a class="nav-link <?= isActive('users.php') ?>" href="./users">
                             <i class="bi bi-people"></i>
                             <span>Users</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('products.php') ?>" href="./products.php">
+                        <a class="nav-link <?= isActive('products.php') ?>" href="./products">
                             <i class="bi bi-box"></i>
                             <span>Products</span>
                         </a>
@@ -233,7 +233,7 @@
                         <div class="collapse" id="elementsSubmenu">
                             <ul class="nav nav-submenu">
                                 <li class="nav-item">
-                                    <a class="nav-link <?= isActive('userManagement.php') ?>" href="./userManagement.php">
+                                    <a class="nav-link <?= isActive('userManagement.php') ?>" href="./userManagement">
                                         <i class="bi bi-grid"></i>
                                         <span>Enrollees</span>
                                     </a>
@@ -245,13 +245,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./teachersManagement.php">
+                                    <a class="nav-link" href="./teachersManagement">
                                         <i class="bi bi-table"></i>
                                         <span>Teachers</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./elements-tables.html">
+                                    <a class="nav-link" href="./userAccounts">
                                         <i class="bi bi-table"></i>
                                         <span>Users</span>
                                     </a>
@@ -266,19 +266,19 @@
                             </a>
                         </li> -->
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('subjectManagement.php') ?>" href="./subjectManagement.php">
+                        <a class="nav-link <?= isActive('subjectManagement.php') ?>" href="./subjectManagement">
                             <i class="bi bi-bag-check"></i>
                             <span>Subject Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('centralSterile.php') ?>" href="./centralSterile.php">
+                        <a class="nav-link <?= isActive('centralSterile.php') ?>" href="./centralSterile">
                             <i class="bi bi-bag-check"></i>
                             <span>Central Sterile Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isActive('courseManagement.php') ?>" href="./courseManagement.php">
+                        <a class="nav-link <?= isActive('courseManagement.php') ?>" href="./courseManagement">
                             <i class="bi bi-ui-checks"></i>
                             <span>Course Management</span>
                         </a>
