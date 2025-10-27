@@ -69,9 +69,9 @@ URI     : https://colorlib.com
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item"> <a class="nav-link active" href="#">HOME <span
                                             class="sr-only">(current)</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="Landing Page/Gallery.php">BLOG</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="Landing Page/Enroll.php">ADMISSION  </a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="Landing Page/Features.php">ABOUT US</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="LandingPage/Gallery.php">BLOG</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="LandingPage/Enroll.php">ADMISSION  </a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="LandingPage/Features.php">ABOUT US</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="#contact">FAQs</a> </li>
                                 <li class="nav-item"><a href="auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log
                                         In</a></li>
