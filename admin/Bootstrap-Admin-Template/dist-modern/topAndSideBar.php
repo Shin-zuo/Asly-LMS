@@ -239,7 +239,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./elements-forms.html">
+                                    <a class="nav-link <?= isActive('students.php') ?>" href="./students">
                                         <i class="bi bi-ui-checks"></i>
                                         <span>Students</span>
                                     </a>

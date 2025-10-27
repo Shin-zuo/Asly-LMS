@@ -118,7 +118,7 @@ $result = $conn->query($sql);
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3"></div>
 
-<!-- Enrollee's table -->
+<!-- Student's table -->
                         <span>Students</span>
 
                         <table class="table table-striped" id="enrolleeTable">
@@ -127,6 +127,7 @@ $result = $conn->query($sql);
                                     <th>ID</th>
                                     <th>Full Name</th>
                                     <th>Email</th>
+                                    <th>Course</th>
                                     <th>Course</th>
                                     <th>Date Enrolled</th>
                                     <th>Actions</th>
