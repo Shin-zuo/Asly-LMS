@@ -89,7 +89,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
         <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
         <li class="nav-item"><a class="nav-link" href="Gallery.php">BLOG</a></li>
         <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">ABOUT US</a></li>
         <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
         <li class="nav-item">
             <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
@@ -306,7 +306,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
   <!-- ===== ROW 3: OUR SERVICES ===== -->
   <div class="hero-section">
     <div class="hero-left">
-      <img src="../images/services.jpg" alt="Our Services" class="img-fluid">
+      <img src="../images/our.webp" alt="Our Services" class="img-fluid">
     </div>
     <div class="hero-right p-5 bg-white">
       <h3 class="fw-semibold mb-3">💼 Our Services</h3>
@@ -323,7 +323,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
   <!-- ===== ROW 4: SOCIAL PROOF ===== -->
   <div class="hero-section flex-md-row-reverse">
     <div class="hero-left">
-      <img src="../images/socialproof.jpg" alt="Social Proof" class="img-fluid">
+      <img src="../images/social.png" alt="Social Proof" class="img-fluid">
     </div>
     <div class="hero-right p-5 bg-white">
       <h3 class="fw-semibold mb-3">🌟 Our Social Proof</h3>
