@@ -20,6 +20,13 @@ require_once '../../../config/database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
+
+    
+   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -238,7 +245,8 @@ FROM teachers_subject AS ts
 LEFT JOIN teachers AS t ON ts.teachersId = t.id
 LEFT JOIN course AS c ON ts.courseId = c.courseId
 LEFT JOIN subjects AS s ON ts.subjectId = s.id
-LEFT JOIN sections AS sc ON ts.sectionId = sc.id";
+LEFT JOIN sections AS sc ON ts.sectionId = sc.id
+ ";
 $result = $conn->query($sql);
 $i = 1;
 ?>

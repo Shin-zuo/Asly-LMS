@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                     <!-- Page Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                            <h1 class="h3 mb-0">Dashboard</h1>
-                            <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
+                            <h1 class="h3 mb-0">Course Management</h1>
+                            
                         </div>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addCourseModal">
@@ -79,16 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                 title="Refresh data">
                                 <i class="bi bi-arrow-clockwise icon-hover"></i>
                             </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Export data">
-                                <i class="bi bi-download icon-hover"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Settings">
-                                <i class="bi bi-gear icon-hover"></i>
-                            </button>
+                            
                         </div>
                     </div>
 

@@ -36,6 +36,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -45,7 +47,7 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#6366f1">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
 
 
     <!-- PWA Manifest -->
@@ -53,8 +55,8 @@
     <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -68,8 +70,8 @@
             <div class="container-fluid">
                 <!-- Logo/Brand - Now first on the left -->
                 <a class="navbar-brand d-flex align-items-center" href="./index.html">
-                    <img src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3c!--%20Background%20circle%20for%20the%20M%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='16'%20fill='url(%23logoGradient)'/%3e%3c!--%20Centered%20Letter%20M%20--%3e%3cpath%20d='M10%2024V8h2.5l2.5%206.5L17.5%208H20v16h-2V12.5L16.5%2020h-1L14%2012.5V24H10z'%20fill='white'%20font-weight='700'/%3e%3c!--%20Gradient%20definition%20--%3e%3cdefs%3e%3clinearGradient%20id='logoGradient'%20x1='0%25'%20y1='0%25'%20x2='100%25'%20y2='100%25'%3e%3cstop%20offset='0%25'%20style='stop-color:%236366f1;stop-opacity:1'%20/%3e%3cstop%20offset='100%25'%20style='stop-color:%238b5cf6;stop-opacity:1'%20/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e" alt="Logo" height="32" class="d-inline-block align-text-top me-2">
-                    <h1 class="h4 mb-0 fw-bold text-primary">Metis</h1>
+                    <img src="../../../images/ASLYLOGO4.png" alt="Logo" height="52" class="d-inline-block align-text-top me-2">
+                    <h1 class="h4 mb-0 fw-bold text-primary">ASLY</h1>
                 </a>
 
                 <!-- Search Bar with Alpine.js -->
