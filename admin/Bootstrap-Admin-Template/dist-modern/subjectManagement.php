@@ -18,6 +18,22 @@ require_once '../../../config/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ASLY International College Inc">
+    <meta name="keywords" content="ASLY, AICI, College, TESDA, Senior High School">
+    <meta name="author" content="Shinzuo">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Modern Bootstrap Admin Template">
+    <meta property="og:description" content="Clean and modern admin dashboard template built with Bootstrap 5">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
+    <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
+
+
     <title>Document</title>
 </head>
 
