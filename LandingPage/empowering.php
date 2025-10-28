@@ -34,14 +34,6 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     <link rel="stylesheet" href="../css/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
-    <!-- Bootstrap CDN (Optional, ensures up-to-date support) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
     <style>
         .active-course {
             text-decoration: underline;
@@ -84,18 +76,17 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-<div class="collapse navbar-collapse" id="navbar">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
-        <li class="nav-item"><a class="nav-link" href="Gallery.php">BLOG</a></li>
-        <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
-        <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
-        <li class="nav-item">
-            <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
-        </li>
-    </ul>
-</div>
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"> <a class="nav-link" href="../index.php">HOME</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Gallery.php">BLOG</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Enroll.php">ADMISSION  </a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Features.php">ABOUT US</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="../index.php#contact">FAQs</a> </li>
+                                <li class="nav-item"><a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log
+                                        In</a></li>
+                            </ul>
+                        </div>
 
                                 </li>
                             </ul>

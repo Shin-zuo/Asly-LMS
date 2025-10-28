@@ -34,14 +34,6 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     <link rel="stylesheet" href="../css/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
-    <!-- Bootstrap CDN (Optional, ensures up-to-date support) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
     <style>
         .active-course {
             text-decoration: underline;
@@ -80,63 +72,36 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
                         <a class="navbar-brand" href="#"><img src="../images/AICI.png" class="img-fluid" alt="logo"></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
                             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbar">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="Gallery.php">BLOG</a></li>
-                                <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
-                                <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
-                                <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
-                                <li class="nav-item">
-                                    <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"> <a class="nav-link" href="../index.php">HOME</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Gallery.php">BLOG</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Enroll.php">ADMISSION  </a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="Features.php">ABOUT US</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="../index.php#contact">FAQs</a> </li>
+                                <li class="nav-item"><a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log
+                                        In</a></li>
+                            </ul>
+                        </div>
+
                                 </li>
                             </ul>
                         </div>
-                </nav>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
     </br>
     </br>
-<h1 class="text-center my-5" style="color: #f9a825;">Gallery</h1>
-<div class="container py-5">
-  <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Boat on Calm Water" />
+    </br>
 
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Wintry Mountain Landscape" />
-    </div>
 
-    <div class="col-lg-4 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Mountains in the Clouds" />
 
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Boat on Calm Water" />
-    </div>
-
-    <div class="col-lg-4 mb-4">
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Waves at Sea" />
-
-      <img src="../images/iphonex.png"
-           class="img-fluid shadow rounded mb-4"
-           alt="Yosemite National Park" />
-    </div>
-  </div>
-</div>
 
     <!-- Contact & Footer -->
     <div class="light-bg py-5">
@@ -182,5 +147,4 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     <script src="../js/script.js"></script>
 
 </body>
-
 </html>
