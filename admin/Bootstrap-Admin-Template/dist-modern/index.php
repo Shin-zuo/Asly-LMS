@@ -45,10 +45,9 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Modern Bootstrap 5 Admin Template - Clean, responsive dashboard">
-    <meta name="keywords" content="bootstrap, admin, dashboard, template, modern, responsive">
-    <meta name="author" content="Bootstrap Admin Template">
-
+    <meta name="description" content="ASLY International College Inc">
+    <meta name="keywords" content="ASLY, AICI, College, TESDA, Senior High School">
+    <meta name="author" content="Shinzuo">
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Modern Bootstrap Admin Template">
     <meta property="og:description" content="Clean and modern admin dashboard template built with Bootstrap 5">
@@ -523,6 +522,17 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     </div>
+
+    <!-- Fallback Loading Screen Hide -->
+    <script>
+        // Hide loading screen after 5 seconds as fallback
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen && loadingScreen.style.display !== 'none') {
+                loadingScreen.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 
     <!-- Scripts -->
     <script>

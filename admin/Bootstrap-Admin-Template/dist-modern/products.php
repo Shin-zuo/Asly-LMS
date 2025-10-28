@@ -27,10 +27,30 @@
 </head>
 
 <body data-page="products" class="product-management">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fallback Loading Screen Hide -->
+    <script>
+        // Hide loading screen after 5 seconds as fallback
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen && loadingScreen.style.display !== 'none') {
+                loadingScreen.style.display = 'none';
+            }
+        }, 5000);
+    </script>
+
     <!-- Admin App Container -->
     <div class="admin-app">
         <div class="admin-wrapper" id="admin-wrapper">
-            
+
             <?php include 'topAndSidebar.php'; ?>
             <!-- Main Content -->
             <main class="admin-main">

@@ -80,7 +80,7 @@ $result = $conn->query($sql);
 <body>
 
     <body data-page="dashboard" class="admin-layout">
-        <!-- Loading Screen -->
+    <!-- Loading Screen -->
         <div id="loading-screen" class="loading-screen">
             <div class="loading-spinner">
                 <div class="spinner-border text-primary" role="status">
@@ -88,6 +88,17 @@ $result = $conn->query($sql);
                 </div>
             </div>
         </div>
+
+        <!-- Fallback Loading Screen Hide -->
+        <script>
+            // Hide loading screen after 5 seconds as fallback
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    loadingScreen.style.display = 'none';
+                }
+            }, 5000);
+        </script>
 
         <!-- Main Wrapper -->
         <div class="admin-wrapper" id="admin-wrapper">

@@ -1,15 +1,5 @@
 <?php
-// session_start();
 
-// // Debug: check session contents
-// // Check if user is logged in
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: ../../../auth/login.php");
-//     exit();
-// }
-
-// // Store username from session
-// $username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -247,26 +237,20 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./teachersManagement">
-                                        <i class="bi bi-table"></i>
+                                    <a class="nav-link <?= isActive('teachersManagement.php') ?>" href="./teachersManagement">
+                                        <i class="bi bi-ui-checks"></i>
                                         <span>Teachers</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./userAccounts">
-                                        <i class="bi bi-table"></i>
+                                   <a class="nav-link <?= isActive('userAccounts.php') ?>" href="./userAccounts">
+                                        <i class="bi bi-ui-checks"></i>
                                         <span>Users</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <!-- <li class="nav-item">
-                            <a class="nav-link <?= isActive('userManagement.php') ?>" href="./userManagement.php">
-                                <i class="bi bi-bag-check"></i>
-                                <span>Users Management</span>
-                            </a>
-                        </li> -->
                     <li class="nav-item">
                         <a class="nav-link <?= isActive('subjectManagement.php') ?>" href="./subjectManagement">
                             <i class="bi bi-bag-check"></i>
@@ -284,68 +268,7 @@
                             <i class="bi bi-ui-checks"></i>
                             <span>Course Management</span>
                         </a>
-                    </li>
-                    <!-- <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#elementsSubmenu" aria-expanded="false">
-                                <i class="bi bi-puzzle"></i>
-                                <span>Elements</span>
-                                <span class="badge bg-primary rounded-pill me-2">New</span>
-                                <i class="bi bi-chevron-down ms-auto"></i>
-                            </a>
-                            <div class="collapse" id="elementsSubmenu">
-                                <ul class="nav nav-submenu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements.html">
-                                            <i class="bi bi-grid"></i>
-                                            <span>Overview</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-buttons.html">
-                                            <i class="bi bi-square"></i>
-                                            <span>Buttons</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-alerts.html">
-                                            <i class="bi bi-exclamation-triangle"></i>
-                                            <span>Alerts</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-badges.html">
-                                            <i class="bi bi-award"></i>
-                                            <span>Badges</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-cards.html">
-                                            <i class="bi bi-card-text"></i>
-                                            <span>Cards</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-modals.html">
-                                            <i class="bi bi-window"></i>
-                                            <span>Modals</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-forms.html">
-                                            <i class="bi bi-ui-checks"></i>
-                                            <span>Forms</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
-                                            <span>Tables</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> -->
-                
+                    </li>                
                     <li class="nav-item">
                         <a class="nav-link" href="./messages.html">
                             <i class="bi bi-chat-dots"></i>

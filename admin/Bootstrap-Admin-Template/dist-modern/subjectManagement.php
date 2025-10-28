@@ -49,6 +49,17 @@ require_once '../../../config/database.php';
             </div>
         </div>
 
+        <!-- Fallback Loading Screen Hide -->
+        <script>
+            // Hide loading screen after 5 seconds as fallback
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    loadingScreen.style.display = 'none';
+                }
+            }, 5000);
+        </script>
+
         <!-- Main Wrapper -->
         <div class="admin-wrapper" id="admin-wrapper">
 

@@ -75,9 +75,20 @@ $exams = $conn->query($sql);
     <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
+    <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
 
     <title>Document</title>
-    
+
 </head>
 
 <body>
@@ -120,10 +131,10 @@ $exams = $conn->query($sql);
 
                     <!-- Stats Cards with Alpine.js -->
                     <div class="row g-3 align-items-end">
-                        <div class="col-md-3"></div>
+                        
 
-                        <!-- 
-                    Central Sterile Chapters Management Table -->
+                       
+                           <!--  Central Sterile Chapters Management Table -->
 
                         <table class="table table-striped" id="chapterTable">
                             <thead>
@@ -254,89 +265,89 @@ $exams = $conn->query($sql);
                     <div class="row g-3 align-items-end">
                         <!-- <div class="col-md-3"></div> -->
 
-                        <!-- 
-                    Central Sterile Chapters Management Table -->
+                         
+                              <!--Central Sterile Chapters Management Table -->
 
 
                         <!-- Exams Table -->
-<!-- Exams Table -->
-<table class="table table-striped" id="examTable">
-    <thead>
-        <tr>
-            <th>Chapter</th>
-            <th>Exam Title</th>
-            <th>Description</th>
-            <th>Time Limit</th>
-            <th>Total Items</th>
-            <th>Status</th>
-            <th>Questions</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        // Query exams with question count
-       $exams = $conn->query("SELECT * FROM exams");
+                        <!-- Exams Table -->
+                        <table class="table table-striped" id="examTable">
+                            <thead>
+                                <tr>
+                                    <th>Chapter</th>
+                                    <th>Exam Title</th>
+                                    <th>Description</th>
+                                    <th>Time Limit</th>
+                                    <th>Total Items</th>
+                                    <th>Status</th>
+                                    <th>Questions</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Query exams with question count
+                                $exams = $conn->query("SELECT * FROM exams");
 
-        if ($exams && $exams->num_rows > 0):
-            while ($exam = $exams->fetch_assoc()):
-        ?>
-                <tr>
-                    <td>Chapter <?= htmlspecialchars($exam['chapterId'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($exam['title'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($exam['description'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($exam['timeLimit'] ?? '') ?><?= $exam['timeLimit'] ? ' Minutes' : '' ?></td>
-                   <td><?= htmlspecialchars($exam['totalItems'] ?? 0) ?></td>
+                                if ($exams && $exams->num_rows > 0):
+                                    while ($exam = $exams->fetch_assoc()):
+                                ?>
+                                        <tr>
+                                            <td>Chapter <?= htmlspecialchars($exam['chapterId'] ?? '') ?></td>
+                                            <td><?= htmlspecialchars($exam['title'] ?? '') ?></td>
+                                            <td><?= htmlspecialchars($exam['description'] ?? '') ?></td>
+                                            <td><?= htmlspecialchars($exam['timeLimit'] ?? '') ?><?= $exam['timeLimit'] ? ' Minutes' : '' ?></td>
+                                            <td><?= htmlspecialchars($exam['totalItems'] ?? 0) ?></td>
 
-                    <td>
-                        <?php if (($exam['status'] ?? '') === 'active'): ?>
-                            <span class="badge bg-success">Active</span>
-                        <?php else: ?>
-                            <span class="badge bg-secondary">Inactive</span>
-                        <?php endif; ?>
-                    </td>
+                                            <td>
+                                                <?php if (($exam['status'] ?? '') === 'active'): ?>
+                                                    <span class="badge bg-success">Active</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-secondary">Inactive</span>
+                                                <?php endif; ?>
+                                            </td>
 
-                    <td>
-                        <a href="questions.php?examId=<?= $exam['id'] ?>" class="btn btn-sm btn-outline-info">
-                            Manage Questions
-                        </a>
-                    </td>
+                                            <td>
+                                                <a href="questions.php?examId=<?= $exam['id'] ?>" class="btn btn-sm btn-outline-info">
+                                                    Manage Questions
+                                                </a>
+                                            </td>
 
-                    <td>
-                        <form action="functions/toggleExam.php" method="POST" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $exam['id'] ?>">
-                            <button type="submit"
-                                class="btn btn-sm <?= ($exam['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                                <?= ($exam['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
-                            </button>
-                        </form>
+                                            <td>
+                                                <form action="functions/toggleExam.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                                                    <button type="submit"
+                                                        class="btn btn-sm <?= ($exam['status'] === 'active') ? 'btn-outline-warning' : 'btn-outline-success' ?>">
+                                                        <?= ($exam['status'] === 'active') ? 'Deactivate' : 'Activate' ?>
+                                                    </button>
+                                                </form>
 
-                        <form action="functions/deleteExam.php" method="POST" style="display:inline;"
-                            onsubmit="return confirm('Delete this exam?');">
-                            <input type="hidden" name="id" value="<?= $exam['id'] ?>">
-                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </form>
+                                                <form action="functions/deleteExam.php" method="POST" style="display:inline;"
+                                                    onsubmit="return confirm('Delete this exam?');">
+                                                    <input type="hidden" name="id" value="<?= $exam['id'] ?>">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                                </form>
 
-                        <button type="button" class="btn btn-sm btn-outline-primary editExamBtn"
-                            data-id="<?= $exam['id'] ?>"
-                            data-chapter="<?= htmlspecialchars($exam['chapterId'] ?? '') ?>"
-                            data-title="<?= htmlspecialchars($exam['title'] ?? '') ?>"
-                            data-description="<?= htmlspecialchars($exam['description'] ?? '') ?>"
-                            data-timelimit="<?= htmlspecialchars($exam['timeLimit'] ?? '') ?>"
-                            data-status="<?= htmlspecialchars($exam['status'] ?? '') ?>"
-                            data-bs-toggle="modal" data-bs-target="#editExamModal">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                    </td>
-                </tr>
-        <?php endwhile;
-        else: ?>
-            <tr>
-                <td colspan="8" class="text-center">No exams found</td>
-            </tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+                                                <button type="button" class="btn btn-sm btn-outline-primary editExamBtn"
+                                                    data-id="<?= $exam['id'] ?>"
+                                                    data-chapter="<?= htmlspecialchars($exam['chapterId'] ?? '') ?>"
+                                                    data-title="<?= htmlspecialchars($exam['title'] ?? '') ?>"
+                                                    data-description="<?= htmlspecialchars($exam['description'] ?? '') ?>"
+                                                    data-timelimit="<?= htmlspecialchars($exam['timeLimit'] ?? '') ?>"
+                                                    data-status="<?= htmlspecialchars($exam['status'] ?? '') ?>"
+                                                    data-bs-toggle="modal" data-bs-target="#editExamModal">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile;
+                                else: ?>
+                                    <tr>
+                                        <td colspan="8" class="text-center">No exams found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
 
 
 
@@ -369,6 +380,7 @@ $exams = $conn->query($sql);
                     </div>
 
 
+
                 </div>
             </main>
 
@@ -377,7 +389,7 @@ $exams = $conn->query($sql);
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="mb-0 text-muted">© 2025 Modern Bootstrap Admin Template</p>
+                            <p class="mb-0 text-muted">© 2025 ASLY International College Inc.</p>
                         </div>
                         <div class="col-md-6 text-md-end">
                             <p class="mb-0 text-muted">Built with Bootstrap 5.3.7</p>
@@ -394,110 +406,9 @@ $exams = $conn->query($sql);
         </div>
 
 
-        <!-- Icon Demo Modal -->
-        <div class="modal fade" id="iconDemoModal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Course ID</th>
-                                <th>Education Level</th>
-                                <th>Course Code</th>
-                                <th>Course</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if ($result && $result->num_rows > 0):
-                                while ($row = $result->fetch_assoc()):
-                            ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                        <td><?= htmlspecialchars($row['educationLevel']) ?></td>
-                                        <td><?= htmlspecialchars($row['courseCode']) ?></td>
-                                        <td><?= htmlspecialchars($row['course']) ?></td>
-                                        <td>
-                                            <!-- Edit button -->
-                                            <button type="button"
-                                                class="btn btn-sm btn-outline-primary editBtn"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editCourseModal"
-                                                data-id="<?= $row['courseId'] ?>"
-                                                data-education="<?= $row['educationId'] ?>"
-                                                data-code="<?= htmlspecialchars($row['courseCode']) ?>"
-                                                data-course="<?= htmlspecialchars($row['course']) ?>">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
 
-                                            <!-- Delete button (opens modal) -->
-                                            <button type="button"
-                                                class="btn btn-sm btn-outline-danger"
-                                                title="Delete"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteCourseModal"
-                                                data-id="<?= $row['courseId'] ?>">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-
-                                        </td>
-                                    </tr>
-                                <?php
-                                endwhile;
-                            else:
-                                ?>
-                                <tr>
-                                    <td colspan="5" class="text-center">No courses found</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-
-                    <!-- Pagination Controls -->
-                    <?php if ($totalPages > 1): ?>
-                        <nav aria-label="Course table pagination">
-                            <ul class="pagination justify-content-center">
-                                <!-- Previous -->
-                                <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
-                                </li>
-                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                    <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
-                                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                                    </li>
-                                <?php endfor; ?>
-                                <!-- Next -->
-                                <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-3 text-center">
-                    <i class="bi bi-heart icon-xl icon-pulse text-danger"></i>
-                    <br><small>Pulse</small>
-                </div>
-                <div class="col-md-3 text-center">
-                    <i class="bi bi-star icon-xl icon-hover text-warning"></i>
-                    <br><small>Hover Effect</small>
-                </div>
-                <div class="col-md-3 text-center">
-                    <i class="bi bi-check-circle icon-xl text-success"></i>
-                    <br><small>Static</small>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-
-        </div>
-        </div>
-        </div>
-        </div>
-
-<!-- add chapter -->
+        <!-- add chapter -->
         <div class="modal fade" id="addChapterModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="functions/addChapter.php" method="POST" enctype="multipart/form-data" class="modal-content">
@@ -539,52 +450,52 @@ $exams = $conn->query($sql);
         </div>
 
 
-<!-- Edit Exam Modal -->
-<div class="modal fade" id="editExamModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="functions/updateExam.php" method="POST" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Exam</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <!-- Edit Exam Modal -->
+        <div class="modal fade" id="editExamModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="functions/updateExam.php" method="POST" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Exam</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editExamId">
+
+                        <div class="mb-3">
+                            <label class="form-label">Chapter</label>
+                            <input type="number" name="chapterId" id="editChapterId" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" id="editExamTitle" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" id="editExamDescription" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Time Limit (minutes)</label>
+                            <input type="number" name="timeLimit" id="editTimeLimit" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="editStatus" class="form-select" required>
+                                <option value="inactive">Inactive</option>
+                                <option value="active">Active</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-                <input type="hidden" name="id" id="editExamId">
-
-                <div class="mb-3">
-                    <label class="form-label">Chapter</label>
-                    <input type="number" name="chapterId" id="editChapterId" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input type="text" name="title" id="editExamTitle" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" id="editExamDescription" class="form-control" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Time Limit (minutes)</label>
-                    <input type="number" name="timeLimit" id="editTimeLimit" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <select name="status" id="editStatus" class="form-select" required>
-                        <option value="inactive">Inactive</option>
-                        <option value="active">Active</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 
         <!-- Delete Course Modal -->
@@ -647,132 +558,151 @@ $exams = $conn->query($sql);
         </div>
 
 
-<!-- Edit Exam Modal -->
-<div class="modal fade" id="editExamModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="functions/updateExam.php" method="POST" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Exam</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <!-- Edit Exam Modal -->
+        <div class="modal fade" id="editExamModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="functions/updateExam.php" method="POST" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Exam</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editExamId">
+
+                        <div class="mb-3">
+                            <label class="form-label">Chapter</label>
+                            <input type="number" name="chapterId" id="editChapterId" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" id="editExamTitle" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" id="editExamDescription" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Time Limit (minutes)</label>
+                            <input type="number" name="timeLimit" id="editTimeLimit" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="editStatus" class="form-select" required>
+                                <option value="inactive">Inactive</option>
+                                <option value="active">Active</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-                <input type="hidden" name="id" id="editExamId">
-
-                <div class="mb-3">
-                    <label class="form-label">Chapter</label>
-                    <input type="number" name="chapterId" id="editChapterId" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input type="text" name="title" id="editExamTitle" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" id="editExamDescription" class="form-control" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Time Limit (minutes)</label>
-                    <input type="number" name="timeLimit" id="editTimeLimit" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <select name="status" id="editStatus" class="form-select" required>
-                        <option value="inactive">Inactive</option>
-                        <option value="active">Active</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Add Exam Modal -->
-<div class="modal fade" id="addExamModal" tabindex="-1" aria-labelledby="addExamModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <form action="functions/addExam.php" method="POST">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addExamModalLabel">Add New Exam</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body">
-           <div class="modal-body">
-          <!-- Chapter Selection -->
-          <div class="mb-3">
-            <label for="chapterId" class="form-label">Select Chapter</label>
-            <select name="chapterId" id="chapterId" class="form-select" required>
-              <option value="">-- Choose Chapter --</option>
-              <?php while ($row = $chapters->fetch_assoc()): ?>
-                <option value="<?= $row['id'] ?>">
-                  Chapter <?= htmlspecialchars($row['chapterNum']) ?> — <?= htmlspecialchars($row['title']) ?>
-                </option>
-              <?php endwhile; ?>
-            </select>
-          </div>
+        <!-- Add Exam Modal -->
+        <div class="modal fade" id="addExamModal" tabindex="-1" aria-labelledby="addExamModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="functions/addExam.php" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addExamModalLabel">Add New Exam</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
-          <!-- Title -->
-          <div class="mb-3">
-            <label for="title" class="form-label">Exam Title</label>
-            <input type="text" name="title" id="title" class="form-control" placeholder="Enter exam title" required>
-          </div>
+                        <div class="modal-body">
+                            <div class="modal-body">
+                                <!-- Chapter Selection -->
+                                <div class="mb-3">
+                                    <label for="chapterId" class="form-label">Select Chapter</label>
+                                    <select name="chapterId" id="chapterId" class="form-select" required>
+                                        <option value="">-- Choose Chapter --</option>
+                                        <?php while ($row = $chapters->fetch_assoc()): ?>
+                                            <option value="<?= $row['id'] ?>">
+                                                Chapter <?= htmlspecialchars($row['chapterNum']) ?> — <?= htmlspecialchars($row['title']) ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
 
-          <!-- Description -->
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter exam description"></textarea>
-          </div>
+                                <!-- Title -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Exam Title</label>
+                                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter exam title" required>
+                                </div>
 
-          <!-- Status -->
-          <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-select" required>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
+                                <!-- Description -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter exam description"></textarea>
+                                </div>
 
-          <!-- Time Limit -->
-          <div class="mb-3">
-            <label for="timeLimit" class="form-label">Time Limit (in minutes)</label>
-            <input type="number" name="timeLimit" id="timeLimit" class="form-control" min="1" required>
-          </div>
+                                <!-- Status -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select name="status" id="status" class="form-select" required>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+
+                                <!-- Time Limit -->
+                                <div class="mb-3">
+                                    <label for="timeLimit" class="form-label">Time Limit (in minutes)</label>
+                                    <input type="number" name="timeLimit" id="timeLimit" class="form-control" min="1" required>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Exam</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Exam</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 
+        <script>
+            //clear cache on browser
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+                window.onpopstate = function() {
+                    window.location.href = '../../../auth/login.php'; // redirect to login
+                };
+            }
+        </script>
+
+        <!-- JavaScript Files -->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/admin.js"></script>
+
+        <!-- Chart.js CDN -->
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- Scripts -->
         <script>
             //edit exam modal population
-      document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.editExamBtn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            document.getElementById('editExamId').value = this.dataset.id;
-            document.getElementById('editChapterId').value = this.dataset.chapter;
-            document.getElementById('editExamTitle').value = this.dataset.title;
-            document.getElementById('editExamDescription').value = this.dataset.description;
-            document.getElementById('editTimeLimit').value = this.dataset.timelimit;
-            document.getElementById('editStatus').value = this.dataset.status;
-        });
-    });
-});
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.editExamBtn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.getElementById('editExamId').value = this.dataset.id;
+                        document.getElementById('editChapterId').value = this.dataset.chapter;
+                        document.getElementById('editExamTitle').value = this.dataset.title;
+                        document.getElementById('editExamDescription').value = this.dataset.description;
+                        document.getElementById('editTimeLimit').value = this.dataset.timelimit;
+                        document.getElementById('editStatus').value = this.dataset.status;
+                    });
+                });
+            });
 
 
             // Edit Chapter Modal Population
@@ -812,6 +742,49 @@ $exams = $conn->query($sql);
             window.addEventListener("pageshow", function(event) {
                 if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
                     window.location.reload();
+                }
+            });
+        </script>
+
+        <!-- Fallback Loading Screen Hide -->
+        <script>
+            // Hide loading screen after 5 seconds as fallback
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    loadingScreen.style.display = 'none';
+                }
+            }, 5000);
+        </script>
+
+        <!-- Sidebar Toggle Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggleButton = document.querySelector('[data-sidebar-toggle]');
+                const wrapper = document.getElementById('admin-wrapper');
+
+                if (toggleButton && wrapper) {
+                    // Set initial state from localStorage
+                    const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+                    if (isCollapsed) {
+                        wrapper.classList.add('sidebar-collapsed');
+                        toggleButton.classList.add('is-active');
+                    }
+
+                    // Attach click listener
+                    toggleButton.addEventListener('click', () => {
+                        const isCurrentlyCollapsed = wrapper.classList.contains('sidebar-collapsed');
+
+                        if (isCurrentlyCollapsed) {
+                            wrapper.classList.remove('sidebar-collapsed');
+                            toggleButton.classList.remove('is-active');
+                            localStorage.setItem('sidebar-collapsed', 'false');
+                        } else {
+                            wrapper.classList.add('sidebar-collapsed');
+                            toggleButton.classList.add('is-active');
+                            localStorage.setItem('sidebar-collapsed', 'true');
+                        }
+                    });
                 }
             });
         </script>
