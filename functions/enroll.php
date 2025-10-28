@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $civilStatus       = $_POST['civilStatus'] ?? '';
     $employmentStatus  = $_POST['EmploymentStatus'] ?? '';
     $applyFor          = $_POST['applyFor'] ?? '';
+    $studentType       = $_POST['studentType'] ?? '';
+    $yrLevel           = $_POST['yearLevel'] ?? '';
     $course            = $_POST['course'] ?? '';
     $lastSchool        = $_POST['lastSchool'] ?? '';
     $schoolYear        = $_POST['schoolYear'] ?? '';
@@ -34,6 +36,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $dateEnrolled = date('Y-m-d');
     $status = 'Pending';
+
+// -------------------------------
+// Fetch education level name from the database
+// -------------------------------
+$eduData = $conn->prepare("SELECT educationLevel FROM educationlevel WHERE id = ?");
+$eduData->bind_param("i", $applyFor);
+$eduData->execute();
+$result = $eduData->get_result();
+$eduRow = $result->fetch_assoc();
+$educationalAttainment = !empty($applyFor) ? $applyFor : 'N/A';
+
+// -------------------------------
+// Store the education level ID directly
+// -------------------------------
+$educationalAttainment = $applyFor; // store ID instead of name
+
+// -------------------------------
+// TESDA check: override values
+// -------------------------------
+if ($applyFor == 3) { // TESDA
+    $studentType = 'N/A';
+    $yrLevel     = 'N/A';
+} else {
+    // For SHS / College: make sure values are not empty
+    if (empty($studentType)) $studentType = 'N/A';
+    if (empty($yrLevel))     $yrLevel   = 'N/A'; // yrLevel comes from the frontend select
+}
 
     // -------------------------------
     // ✅ Basic validation
@@ -66,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($check->num_rows > 0) {
         $check->close();
-        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Email already registered!") . "#enroll");
+        header("Location: ../LandingPage/Enroll.php?error=" . urlencode("Email already registered!") . "#enroll");
         exit();
     }
     $check->close();
@@ -76,9 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // -------------------------------
     $sql = "INSERT INTO enrollees 
         (firstName, middleInitial, lastName, prefix, street, barangay, district, city, province, region, 
-        civilStatus, employmentStatus, email, contactNumber, lastSchoolAttended, lastSchoolYr, 
-        birthDate, gender, dateEnrolled, courseId, educationalAttainment, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        civilStatus, employmentStatus, email, contactNumber, lastSchoolAttended, lastSchoolYr, yrLevel,
+        birthDate, gender, dateEnrolled, courseId, educationalAttainment, studentType, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -86,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->bind_param(
-        "ssssssssssssssssssssss",
+        "ssssssssssssssssssssssss",
         $firstName,
         $middleInitial,
         $lastName,
@@ -103,11 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contactNumber,
         $lastSchool,
         $schoolYear,
+        $yrLevel,
         $birthdate,
         $gender,
         $dateEnrolled,
         $course,
-        $applyFor,
+        $educationalAttainment,
+        $studentType,
         $status
     );
 
@@ -159,10 +190,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redirect to success
         // -------------------------------
         header("Location: ../index.php?success=1#enroll");
-        header("Location: ../Landing Page/Enroll.php?success=1#enroll");
+        header("Location: ../LandingPage/Enroll.php?success=1#enroll");
         exit();
     } else {
-        header("Location: ../Landing Page/Enroll.php?error=" . urlencode("Something went wrong: " . $stmt->error) . "#enroll");
+        header("Location: ../LandingPage/Enroll.php?error=" . urlencode("Something went wrong: " . $stmt->error) . "#enroll");
         exit();
     }
 }

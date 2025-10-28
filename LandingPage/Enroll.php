@@ -3,6 +3,9 @@ require 'C:\wamp64\www\Asly-LMS\config\database.php';
 
 // Fetch education levels
 $educationLevels = $conn->query("SELECT id, educationLevel FROM educationlevel");
+$yearLevels = $conn->query("SELECT id, yearName FROM yearlevel");
+// Detect what user selected (if any)
+$selectedApplyFor = $_POST['applyFor'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,51 +87,51 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-<div class="collapse navbar-collapse" id="navbar">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
-        <li class="nav-item"><a class="nav-link" href="Gallery.php">BLOG</a></li>
-        <li class="nav-item"><a class="nav-link active" href="../index.php#enroll">ADMISSION</a></li>
-       <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
-        <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
-        <li class="nav-item">
-            <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
-        </li>
-    </ul>
-</div>
-
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Gallery.php">BLOG</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="../index.php#enroll">ADMISSION</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
+                                <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
+                                <li class="nav-item">
+                                    <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
                                 </li>
                             </ul>
                         </div>
-                    </nav>
+
+                        </li>
+                        </ul>
                 </div>
+                </nav>
             </div>
         </div>
     </div>
-  <!-- // end .section -->
+    </div>
+    <!-- // end .section -->
     </br>
     </br>
-        <div class="section" id="enroll">
-            <div class="container">
-                <div class="section-title">
-                    <!-- <small>Enroll</small> -->
-                    <h1 style="color: #f9a82f">Enroll Now</h3>
+    <div class="section" id="enroll">
+        <div class="container">
+            <div class="section-title">
+                <!-- <small>Enroll</small> -->
+                <h1 style="color: #f9a82f">Enroll Now</h3>
+            </div>
+
+            <!-- ✅ Display Messages -->
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($_GET['error']) ?>
                 </div>
+            <?php endif; ?>
 
-                <!-- ✅ Display Messages -->
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="alert alert-danger">
-                        <?= htmlspecialchars($_GET['error']) ?>
-                    </div>
-                <?php endif; ?>
+            <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success">
+                    Enrollment successful!
+                </div>
+            <?php endif; ?>
 
-                <?php if (isset($_GET['success'])): ?>
-                    <div class="alert alert-success">
-                        Enrollment successful!
-                    </div>
-                <?php endif; ?>
-
-                <!-- ✅ Enrollment Form -->
+            <!-- ✅ Enrollment Form -->
             <form action="../functions/enroll.php" method="POST" id="enrollmentForm">
                 <div class="mb-3 row">
                     <div class="col-md-5">
@@ -216,18 +219,41 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                         </select>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="applyFor" class="form-label">Apply For</label>
-                        <select id="applyFor" name="applyFor" class="form-select" required>
-                            <option value="" disabled selected>-- Select Admission --</option>
-                            <?php while ($row = $educationLevels->fetch_assoc()): ?>
-                                <option value="<?= $row['id'] ?>">
-                                    <?= htmlspecialchars($row['educationLevel']) ?>
-                                </option>
-                            <?php endwhile; ?>
-                        </select>
-                    </div>
+<div class="mb-3 row">
+    <div class="col-md-6">
+        <label for="applyFor" class="form-label">Apply For</label>
+        <select id="applyFor" name="applyFor" class="form-select" required>
+            <option value="" disabled selected>-- Select Admission --</option>
+            <?php $educationLevels->data_seek(0); while ($row = $educationLevels->fetch_assoc()): ?>
+                <option value="<?= $row['id'] ?>">
+                    <?= htmlspecialchars($row['educationLevel']) ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label for="studentType" class="form-label">Student Type</label>
+        <select id="studentType" name="studentType" class="form-select" required>
+            <option value="" disabled selected>-- Select Student Type --</option>
+            <option value="New Student">New Student</option>
+            <option value="Transferee">Transferee</option>
+            <option value="Returnee">Returnee</option>
+        </select>
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <div class="col-md-6">
+        <label for="yearLevel" class="form-label">Year Level</label>
+        <select id="yearLevel" name="yearLevel" class="form-select" required>
+            <option value="" disabled selected>-- Select Year Level --</option>
+            <?php while ($row = $yearLevels->fetch_assoc()): ?>
+                <option value="<?= $row['id'] ?>"><?= htmlspecialchars($row['yearName']) ?></option>
+            <?php endwhile; ?>
+        </select>
+    </div>
+
                     <div class="col-md-6">
                         <label for="course" class="form-label">Course</label>
                         <select id="course" name="course" class="form-select" required>
@@ -257,9 +283,9 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            </div>
-
         </div>
+
+    </div>
 
     <!-- Contact & Footer -->
     <div class="light-bg py-5">
@@ -283,7 +309,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
             </div>
         </div>
     </div>
-  
+
     <footer class="my-5 text-center">
         <p class="mb-2"><small>Copyright © Asly International College Inc. All Rights
                 Reserved. (2025)</small></p>
@@ -293,35 +319,102 @@ Author  : Colorlib (Modified for Asly International College Inc.)
             <a href="#" class="m-2">PRIVACY</a>
         </small>
     </footer>
-            <!-- JavaScript to dynamically load courses -->
-            <script>
-                document.getElementById('applyFor').addEventListener('change', function() {
-                    let educationId = this.value;
+    <!-- JavaScript to dynamically load courses -->
+    <script>
+        document.getElementById('applyFor').addEventListener('change', function() {
+            let educationId = this.value;
 
-                    fetch('../functions/get_courses.php?educationId=' + educationId)
-                        .then(response => response.json())
-                        .then(data => {
-                            let courseSelect = document.getElementById('course');
-                            courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
-                            data.forEach(course => {
-                                let option = document.createElement('option');
-                                option.value = course.courseId;
-                                option.textContent = course.courseCode + " - " + course.course;
-                                courseSelect.appendChild(option);
-                            });
-                        });
+            fetch('../functions/get_courses.php?educationId=' + educationId)
+                .then(response => response.json())
+                .then(data => {
+                    let courseSelect = document.getElementById('course');
+                    courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
+                    data.forEach(course => {
+                        let option = document.createElement('option');
+                        option.value = course.courseId;
+                        option.textContent = course.courseCode + " - " + course.course;
+                        courseSelect.appendChild(option);
+                    });
                 });
-            </script>
+        });
+        document.getElementById('applyFor').addEventListener('change', function() {
+    let educationId = this.value;
 
-            <!-- jQuery and Bootstrap -->
-            <script src="js/jquery-3.2.1.min.js"></script>
-            <script src="js/bootstrap.bundle.min.js"></script>
-            <!-- Plugins JS -->
-            <script src="js/owl.carousel.min.js"></script>
-            <!-- Custom JS -->
-            <script src="js/script.js"></script>
+    // --- Fetch Courses ---
+    fetch('../functions/get_courses.php?educationId=' + educationId)
+        .then(response => response.json())
+        .then(data => {
+            let courseSelect = document.getElementById('course');
+            courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
+            data.forEach(course => {
+                let option = document.createElement('option');
+                option.value = course.courseId;
+                option.textContent = course.courseCode + " - " + course.course;
+                courseSelect.appendChild(option);
+            });
+        });
+
+    let yearSelect = document.getElementById('yearLevel');
+    let studentTypeSelect = document.getElementById('studentType');
+    yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year Level --</option>';
+
+    // --- If TESDA (ID = 3) ---
+    if (educationId == 3) {
+        // ✅ Set Year Level to N/A
+        let option = document.createElement('option');
+        option.value = 'N/A';
+        option.textContent = 'N/A';
+        option.selected = true;
+        yearSelect.appendChild(option);
+        yearSelect.setAttribute('disabled', 'disabled'); // disable Year Level
+
+        // ✅ Set Student Type to N/A
+        studentTypeSelect.innerHTML = '';
+        let stOption = document.createElement('option');
+        stOption.value = 'N/A';
+        stOption.textContent = 'N/A';
+        stOption.selected = true;
+        studentTypeSelect.appendChild(stOption);
+        studentTypeSelect.setAttribute('disabled', 'disabled'); // disable Student Type
+        return;
+    } else {
+        // --- Re-enable if not TESDA ---
+        yearSelect.removeAttribute('disabled');
+        studentTypeSelect.removeAttribute('disabled');
+
+        // Restore normal Student Type options
+        studentTypeSelect.innerHTML = `
+            <option value="" disabled selected>-- Select Student Type --</option>
+            <option value="New Student">New Student</option>
+            <option value="Transferee">Transferee</option>
+            <option value="Returnee">Returnee</option>
+        `;
+    }
+
+    // --- Fetch Year Levels for Senior High or College ---
+    fetch('../functions/get_yearlevel.php?educationId=' + educationId)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(year => {
+                let option = document.createElement('option');
+                option.value = year.yearLevel;
+                option.textContent = year.yearName;
+                yearSelect.appendChild(option);
+            });
+        });
+});
+    </script>
+
+    <!-- jQuery and Bootstrap -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
 
 </body>
 
 </body>
+
 </html>

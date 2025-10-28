@@ -848,7 +848,9 @@ URI     : https://colorlib.com
                             });
                         });
                 });
+                
             </script>
+
 
             <!-- jQuery and Bootstrap -->
             <script src="js/jquery-3.2.1.min.js"></script>
