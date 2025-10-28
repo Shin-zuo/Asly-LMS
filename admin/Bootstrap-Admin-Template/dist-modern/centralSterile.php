@@ -688,6 +688,38 @@ $exams = $conn->query($sql);
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        <!-- Hamburger Menu Toggle Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggleButton = document.querySelector('[data-sidebar-toggle]');
+                const wrapper = document.getElementById('admin-wrapper');
+
+                if (toggleButton && wrapper) {
+                    // Set initial state from localStorage
+                    const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+                    if (isCollapsed) {
+                        wrapper.classList.add('sidebar-collapsed');
+                        toggleButton.classList.add('is-active');
+                    }
+
+                    // Attach click listener
+                    toggleButton.addEventListener('click', () => {
+                        const isCurrentlyCollapsed = wrapper.classList.contains('sidebar-collapsed');
+
+                        if (isCurrentlyCollapsed) {
+                            wrapper.classList.remove('sidebar-collapsed');
+                            toggleButton.classList.remove('is-active');
+                            localStorage.setItem('sidebar-collapsed', 'false');
+                        } else {
+                            wrapper.classList.add('sidebar-collapsed');
+                            toggleButton.classList.add('is-active');
+                            localStorage.setItem('sidebar-collapsed', 'true');
+                        }
+                    });
+                }
+            });
+        </script>
+
         <!-- Scripts -->
         <script>
             //edit exam modal population
@@ -757,37 +789,7 @@ $exams = $conn->query($sql);
             }, 5000);
         </script>
 
-        <!-- Sidebar Toggle Script -->
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const toggleButton = document.querySelector('[data-sidebar-toggle]');
-                const wrapper = document.getElementById('admin-wrapper');
 
-                if (toggleButton && wrapper) {
-                    // Set initial state from localStorage
-                    const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
-                    if (isCollapsed) {
-                        wrapper.classList.add('sidebar-collapsed');
-                        toggleButton.classList.add('is-active');
-                    }
-
-                    // Attach click listener
-                    toggleButton.addEventListener('click', () => {
-                        const isCurrentlyCollapsed = wrapper.classList.contains('sidebar-collapsed');
-
-                        if (isCurrentlyCollapsed) {
-                            wrapper.classList.remove('sidebar-collapsed');
-                            toggleButton.classList.remove('is-active');
-                            localStorage.setItem('sidebar-collapsed', 'false');
-                        } else {
-                            wrapper.classList.add('sidebar-collapsed');
-                            toggleButton.classList.add('is-active');
-                            localStorage.setItem('sidebar-collapsed', 'true');
-                        }
-                    });
-                }
-            });
-        </script>
     </body>
 </body>
 

@@ -3,6 +3,7 @@
 $requiredRole = 'Admin'; // only Admins can access this page
 require_once '../../../auth/auth_check.php';
 
+
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -452,7 +453,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
         </div>
 
 
-        <!-- Scripts -->
+        <!-- Hamburger Menu Toggle Script -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const toggleButton = document.querySelector('[data-sidebar-toggle]');

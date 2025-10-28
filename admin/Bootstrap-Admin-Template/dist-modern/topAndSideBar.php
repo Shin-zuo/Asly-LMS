@@ -1,5 +1,6 @@
 <?php
-
+// Define base URL for the project
+$baseUrl = '/Asly-LMS'; // Change this to your actual base URL when deploying
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +20,14 @@
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/assets/ASLYLOGO3.png">
-    <link rel="icon" type="image/png" href="/assets/favicon-B_cwPWBd.png">
+    <link rel="icon" type="image/svg+xml" href="<?php echo $baseUrl; ?>/assets/ASLYLOGO3.png">
+    <link rel="icon" type="image/png" href="<?php echo $baseUrl; ?>/assets/favicon-B_cwPWBd.png">
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -37,20 +38,20 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#7bdb9bff">
 
-<link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
 
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
-    <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
+    <link rel="manifest" href="assets/manifest-DTaoG9pG.json">
+    <script type="module" crossorigin src="assets/main-BPhDq89w.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/main-D9K-blpF.css">
 
-   <!-- <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
 <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 </head>
 
-<body>
+<body class="admin-wrapper">
     <!-- Header -->
 
 
@@ -60,7 +61,7 @@
             <div class="container-fluid">
                 <!-- Logo/Brand - Now first on the left -->
                 <a class="navbar-brand d-flex align-items-center" href="./index.html">
-                    <img src="../../../images/ASLYLOGO4.png" alt="Logo" height="52" class="d-inline-block align-text-top me-2">
+                    <img src="<?php echo $baseUrl; ?>/images/ASLYLOGO4.png" alt="Logo" height="52" class="d-inline-block align-text-top me-2">
                     <h1 class="h4 mb-0 fw-bold text-primary">ASLY</h1>
                 </a>
 
@@ -168,7 +169,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../auth/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl; ?>/auth/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -222,7 +223,7 @@
                             <span>User Management</span>
                             <i class="bi bi-chevron-down ms-auto"></i>
                         </a>
-                        <div class="collapse" id="elementsSubmenu">
+                        <div class="collapse show" id="elementsSubmenu">
                             <ul class="nav nav-submenu">
                                 <li class="nav-item">
                                     <a class="nav-link <?= isActive('userManagement.php') ?>" href="./userManagement">
@@ -243,7 +244,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                   <a class="nav-link <?= isActive('userAccounts.php') ?>" href="./userAccounts">
+                                    <a class="nav-link <?= isActive('userAccounts.php') ?>" href="./userAccounts">
                                         <i class="bi bi-ui-checks"></i>
                                         <span>Users</span>
                                     </a>
@@ -268,7 +269,7 @@
                             <i class="bi bi-ui-checks"></i>
                             <span>Course Management</span>
                         </a>
-                    </li>                
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./messages.html">
                             <i class="bi bi-chat-dots"></i>
@@ -285,7 +286,7 @@
                             <span>Settings</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="./help.html">
                             <i class="bi bi-question-circle"></i>
@@ -304,6 +305,28 @@
         aria-label="Toggle sidebar">
         <i class="bi bi-list"></i>
     </button>
+
+    <!-- Sidebar Toggle and User Management Dropdown Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Bootstrap collapse for User Management dropdown
+            const userManagementLink = document.querySelector('[data-bs-target="#elementsSubmenu"]');
+            if (userManagementLink) {
+                userManagementLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const submenu = document.getElementById('elementsSubmenu');
+                    if (submenu) {
+                        const bsCollapse = new bootstrap.Collapse(submenu, {
+                            toggle: false
+                        });
+                        bsCollapse.toggle();
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
+
 
 </html>

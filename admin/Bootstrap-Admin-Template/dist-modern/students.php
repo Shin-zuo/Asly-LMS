@@ -399,7 +399,7 @@ $result = $conn->query($sql);
             </div>
         </div>
 
-        <!-- Scripts -->
+        <!-- Hamburger Menu Toggle Script -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const toggleButton = document.querySelector('[data-sidebar-toggle]');

@@ -534,7 +534,7 @@ if (!isset($_SESSION['user_id'])) {
         }, 5000);
     </script>
 
-    <!-- Scripts -->
+    <!-- Hamburger Menu Toggle Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleButton = document.querySelector('[data-sidebar-toggle]');
