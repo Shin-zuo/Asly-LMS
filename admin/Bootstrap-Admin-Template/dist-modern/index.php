@@ -55,8 +55,8 @@ if (!isset($_SESSION['user_id'])) {
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon-CvUZKS4z.svg">
-    <link rel="icon" type="image/png" href="./assets/favicon-B_cwPWBd.png">
+    <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
+    <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

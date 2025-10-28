@@ -19,17 +19,17 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Modern Bootstrap 5 Admin Template - Clean, responsive dashboard">
-    <meta name="keywords" content="bootstrap, admin, dashboard, template, modern, responsive">
-    <meta name="author" content="Bootstrap Admin Template">
+    <meta name="description" content="ASLY International College Inc">
+    <meta name="keywords" content="ASLY, AICI, College, TESDA, Senior High School">
+    <meta name="author" content="Shinzuo">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Modern Bootstrap Admin Template">
-    <meta property="og:description" content="Clean and modern admin dashboard template built with Bootstrap 5">
+    <meta property="og:title" content="ASLY International College Inc">
+    <meta property="og:description" content="A school where education meets technology for the digital age.">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon-CvUZKS4z.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="/assets/favicon-B_cwPWBd.png">
 
     <!-- Preconnect to external domains -->
@@ -45,7 +45,7 @@
     <title>Dashboard - Modern Bootstrap Admin</title>
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#7bdb9bff">
 
 <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
 
@@ -55,8 +55,8 @@
     <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
 
-   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 </head>
 

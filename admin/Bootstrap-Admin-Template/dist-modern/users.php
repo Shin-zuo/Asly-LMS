@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management - Modern Bootstrap Admin</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Advanced user management with data tables, CRUD operations, and bulk actions">
-    <meta name="keywords" content="bootstrap, admin, dashboard, users, data tables, CRUD">
-    
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ASLY International College Inc">
+    <meta name="keywords" content="ASLY, AICI, College, TESDA, Senior High School">
+    <meta name="author" content="Shinzuo">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Modern Bootstrap Admin Template">
+    <meta property="og:description" content="Clean and modern admin dashboard template built with Bootstrap 5">
+    <meta property="og:type" content="website">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon-CvUZKS4z.svg">
-    <link rel="icon" type="image/png" href="./assets/favicon-B_cwPWBd.png">
+    <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
+    <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
+
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
