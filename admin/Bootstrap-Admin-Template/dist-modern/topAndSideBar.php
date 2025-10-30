@@ -10,7 +10,7 @@ $baseUrl = '/Asly-LMS';
             <!-- Logo/Brand -->
             <a class="navbar-brand d-flex align-items-center" href="./index.php">
                 <img src="<?php echo $baseUrl; ?>/images/ASLYLOGO4.png" alt="Logo" height="52" class="d-inline-block align-text-top me-2">
-                <h1 class="h4 mb-0 fw-bold text-primary">ASLY</h1>
+                <h1 class="h4 mb-0 fw-bold " style="color:#6366f1">ASLY</h1>
             </a>
 
             <!-- Search Bar -->

@@ -169,10 +169,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Course ID</th>
-                                    <th>Education Level</th>
-                                    <th>Course Code</th>
-                                    <th>Course</th>
+                                    <th>ID</th>
+                                    <th>User Type</th>
+                                    <th>Username</th>
+                                    <th>UserId</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -185,16 +185,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                 $offset = ($page - 1) * $limit;
 
                                 // Get total count
-                                $countSql = "SELECT COUNT(*) as total FROM course";
+                                $countSql = "SELECT COUNT(*) as total FROM users";
                                 $countResult = $conn->query($countSql);
                                 $totalRows = ($countResult && $countResult->num_rows > 0) ? $countResult->fetch_assoc()['total'] : 0;
                                 $totalPages = ceil($totalRows / $limit);
 
                                 // Fetch paginated courses
-                                $sql = "SELECT c.courseId, e.educationLevel, c.courseCode, c.course, c.educationId 
-                                    FROM course c
-                                    JOIN educationlevel e ON c.educationId = e.id
-                                    ORDER BY c.courseId DESC
+                                $sql = "SELECT 
+                                u.id AS ID, u.userType AS userType, u.username AS username, u.userId AS userId,
+                                s.id, s.firstName, s.lastName
+                                    FROM users u
+                                    JOIN students s ON u.userId = s.id
+                                    ORDER BY u.id DESC
                                     LIMIT $limit OFFSET $offset";
                                 $result = $conn->query($sql);
 
@@ -202,30 +204,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                     while ($row = $result->fetch_assoc()):
                                 ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                            <td><?= htmlspecialchars($row['educationLevel']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseCode']) ?></td>
-                                            <td><?= htmlspecialchars($row['course']) ?></td>
+                                            <td><?= htmlspecialchars($row['ID']) ?></td>
+                                            <td><?= htmlspecialchars($row['userType']) ?></td>
+                                            <td><?= htmlspecialchars($row['username']) ?></td>
+                                            <td><?= htmlspecialchars($row['userId']) ?></td>
                                             <td>
                                                 <!-- Edit button -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-primary editBtn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>"
-                                                    data-education="<?= $row['educationId'] ?>"
-                                                    data-code="<?= htmlspecialchars($row['courseCode']) ?>"
-                                                    data-course="<?= htmlspecialchars($row['course']) ?>">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </button>
-
+                                                <button 
+    type="button" 
+    class="btn btn-sm btn-outline-primary editBtn" 
+    style="border-radius: 10px; padding: 2px 8px;"
+    data-bs-toggle="modal" 
+    data-bs-target="#editCourseModal" 
+    data-id="<?= $row['ID'] ?>" 
+   >
+    <i class="bi bi-pencil-square"></i>
+</button>
                                                 <!-- Delete button (opens modal) -->
                                                 <button type="button"
                                                     class="btn btn-sm btn-outline-danger"
                                                     title="Delete"
+                                                    style="border-radius: 10px; padding: 2px 8px;"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>">
+                                                    data-id="<?= $row['ID'] ?>">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
@@ -380,7 +382,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
             <div class="modal-dialog">
                 <form action="functions/update_course.php" method="POST" class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Course</h5>
+                        <h5 class="modal-title">Edit User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
@@ -399,14 +401,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                         </div>
 
                         <div class="mb-3">
-                            <label for="editCourseCode" class="form-label">Course Code</label>
+                            <label for="editCourseCode" class="form-label">Username</label>
                             <input type="text" name="courseCode" id="editCourseCode" class="form-control" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="editCourseName" class="form-label">Course Name</label>
-                            <input type="text" name="course" id="editCourseName" class="form-control" required>
-                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update</button>
