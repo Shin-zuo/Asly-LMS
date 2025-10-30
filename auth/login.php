@@ -6,97 +6,164 @@ header("Pragma: no-cache");
 require_once '../config/database.php';
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username   = trim($_POST['username']);
-  $password   = trim($_POST['password']);
-  $rememberMe = isset($_POST['remember']); // checkbox
-
-  // Check if username exists in database
-  $sql = "SELECT id, userType, username, password, userId FROM users WHERE username = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $username);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  if ($result->num_rows === 1) {
-    $user = $result->fetch_assoc();
-
-    // ✅ Password check (support plain text + hashed)
-    if ($password === $user['password'] || password_verify($password, $user['password'])) {
-      // Save user info in session
-      $_SESSION['user_id']   = $user['id'];
-      $_SESSION['username']  = $user['username'];
-      $_SESSION['userType']  = $user['userType'];
-      $_SESSION['userId']  = $user['userId'];
-      $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
-
-      // Handle Remember Me
-      if ($rememberMe) {
-        $token = bin2hex(random_bytes(32)); // secure random token
-        $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
-
-        // Store in DB
-        $insert = $conn->prepare("INSERT INTO user_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
-        $insert->bind_param("iss", $user['id'], $token, $expires);
-        $insert->execute();
-
-        // Store in cookie (30 days)
-        setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true);
-      }
-
-      // Redirect based on user type
-      switch ($user['userType']) {
+// If already logged in, redirect to appropriate dashboard
+if (isset($_SESSION['user_id'])) {
+    switch ($_SESSION['userType']) {
         case 'Admin':
-           header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
-          break;
-
+            header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
+            break;
         case 'Teacher':
-          header("Location: ../teacher/dashboard.php");
-          break;
-
+            header("Location: ../teacher/dashboard.php");
+            break;
         case 'Student':
-          // 🔎 Get student's education level
-          $studentId = $user['userId'];
+            // Get student's education level
+            $studentId = $_SESSION['userId'];
 
-          $sqlEdu = "
-                        SELECT e.educationLevel
-                        FROM students s
-                        JOIN course c ON s.courseId = c.courseId
-                        JOIN educationlevel e ON c.educationId = e.id
-                        WHERE s.id = ?
-                    ";
-          $stmtEdu = $conn->prepare($sqlEdu);
-          $stmtEdu->bind_param("i", $studentId);
-          $stmtEdu->execute();
-          $resEdu = $stmtEdu->get_result();
+            $sqlEdu = "
+                SELECT e.educationLevel
+                FROM students s
+                JOIN course c ON s.courseId = c.courseId
+                JOIN educationlevel e ON c.educationId = e.id
+                WHERE s.id = ?
+            ";
+            $stmtEdu = $conn->prepare($sqlEdu);
+            $stmtEdu->bind_param("i", $studentId);
+            $stmtEdu->execute();
+            $resEdu = $stmtEdu->get_result();
 
-          if ($resEdu->num_rows > 0) {
-            $eduRow = $resEdu->fetch_assoc();
-            $educationLevel = $eduRow['educationLevel'];
+            if ($resEdu->num_rows > 0) {
+                $eduRow = $resEdu->fetch_assoc();
+                $educationLevel = $eduRow['educationLevel'];
 
-            if (strcasecmp($educationLevel, "TESDA") === 0) {
-              header("Location: ../students/tesda/dist-modern/");
-            } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
-              header("Location: ../students/seniorHigh/");
+                if (strcasecmp($educationLevel, "TESDA") === 0) {
+                    header("Location: ../students/tesda/dist-modern/");
+                } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
+                    header("Location: ../students/seniorHigh/");
+                } else {
+                    header("Location: ../students/dashboard.php"); // fallback
+                }
             } else {
-              header("Location: ../students/dashboard.php"); // fallback
+                header("Location: ../students/dashboard.php"); // fallback
             }
-          } else {
-            header("Location: ../auth/login.php?error=" . urlencode("Education level not found"));
-          }
-          break;
-
+            break;
         default:
-          header("Location: ../auth/login.php"); // fallback
-          break;
-      }
-      exit();
-    } else {
-      $error = "Invalid username or password.";
+            // Fallback: stay on login or redirect to home
+            break;
     }
-  } else {
-    $error = "Invalid username or password.";
-  }
+    exit();
+}
+
+// Generate CSRF token if not exists
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verify CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "CSRF token validation failed.";
+    } else {
+        $username   = trim($_POST['username']);
+        $password   = trim($_POST['password']);
+        $rememberMe = isset($_POST['remember']); // checkbox
+
+        // Check if username exists in database and is active
+        $sql = "SELECT id, userType, username, password, userId, status FROM users WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
+
+            // Check if user is active
+            if ($user['status'] !== 'active') {
+                $error = "Your account is inactive. Please contact administrator.";
+            } elseif ($password === $user['password'] || password_verify($password, $user['password'])) {
+                // Save user info in session
+                $_SESSION['user_id']   = $user['id'];
+                $_SESSION['username']  = $user['username'];
+                $_SESSION['userType']  = $user['userType'];
+                $_SESSION['userId']  = $user['userId'];
+                $_SESSION['welcome_msg'] = "Welcome, " . $user['username'] . "!";
+
+                // Update last login
+                $updateLogin = $conn->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
+                $updateLogin->bind_param("i", $user['id']);
+                $updateLogin->execute();
+
+                // Regenerate CSRF token
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+                // Handle Remember Me
+                if ($rememberMe) {
+                    $token = bin2hex(random_bytes(32)); // secure random token
+                    $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
+
+                    // Store in DB
+                    $insert = $conn->prepare("INSERT INTO user_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
+                    $insert->bind_param("iss", $user['id'], $token, $expires);
+                    $insert->execute();
+
+                    // Store in cookie (30 days)
+                    setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true);
+                }
+
+                // Redirect based on user type
+                switch ($user['userType']) {
+                    case 'Admin':
+                        header("Location: ../admin/Bootstrap-Admin-Template/dist-modern/index.php");
+                        break;
+
+                    case 'Teacher':
+                        header("Location: ../teacher/dashboard.php");
+                        break;
+
+                    case 'Student':
+                        // 🔎 Get student's education level
+                        $studentId = $user['userId'];
+
+                        $sqlEdu = "
+                            SELECT e.educationLevel
+                            FROM students s
+                            JOIN course c ON s.courseId = c.courseId
+                            JOIN educationlevel e ON c.educationId = e.id
+                            WHERE s.id = ?
+                        ";
+                        $stmtEdu = $conn->prepare($sqlEdu);
+                        $stmtEdu->bind_param("i", $studentId);
+                        $stmtEdu->execute();
+                        $resEdu = $stmtEdu->get_result();
+
+                        if ($resEdu->num_rows > 0) {
+                            $eduRow = $resEdu->fetch_assoc();
+                            $educationLevel = $eduRow['educationLevel'];
+
+                            if (strcasecmp($educationLevel, "TESDA") === 0) {
+                                header("Location: ../students/tesda/dist-modern/");
+                            } elseif (strcasecmp($educationLevel, "Senior High School") === 0) {
+                                header("Location: ../students/seniorHigh/");
+                            } else {
+                                header("Location: ../students/dashboard.php"); // fallback
+                            }
+                        } else {
+                            header("Location: ../auth/login.php?error=" . urlencode("Education level not found"));
+                        }
+                        break;
+
+                    default:
+                        header("Location: ../auth/login.php"); // fallback
+                        break;
+                }
+                exit();
+            } else {
+                $error = "Invalid username or password.";
+            }
+        } else {
+            $error = "Invalid username or password.";
+        }
+    }
 }
 ?>
 
@@ -131,6 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="login-dark">
 
     <form method="post">
+      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
       <a href="../index.php" class="btn btn-link text-decoration-none" style="color:#234C6A;">
         <i class="bi bi-arrow-left"></i> Back
@@ -179,3 +247,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+

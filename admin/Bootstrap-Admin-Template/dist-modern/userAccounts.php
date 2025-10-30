@@ -55,31 +55,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
     <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
-     <!-- PWA Manifest -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
-<script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
+    <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
 
-<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Bootstrap Icons CSS -->
-<link rel="stylesheet" href="./assets/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="./assets/bootstrap-icons/font/bootstrap-icons.css">
 
-<style>
-/* Change active nav link color */
-.nav-link.active {
-  color: #ffffff !important; /* text color when active */
-  background-color: #6366f1 !important; /* background color when active */
-  border-radius: 0.375rem; /* optional: adds rounded corners */
-}
+    <style>
+        /* Change active nav link color */
+        .nav-link.active {
+            color: #ffffff !important;
+            /* text color when active */
+            background-color: #6366f1 !important;
+            /* background color when active */
+            border-radius: 0.375rem;
+            /* optional: adds rounded corners */
+        }
 
-/* Optional: make hover consistent */
-.nav-link:hover {
-  color: #ffffff !important;
-  background-color: #6366f1 !important;
-}
-</style>
+        /* Optional: make hover consistent */
+        .nav-link:hover {
+            color: #ffffff !important;
+            background-color: #6366f1 !important;
+        }
+    </style>
 
 
     <title>Course Management</title>
@@ -123,9 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                             <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addCourseModal">
+                            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addUserModal">
                                 <i class="bi bi-plus-lg me-2"></i>
-                                Add Course
+                                Add User
                             </button>
                             <button type="button" class="btn btn-outline-secondary"
                                 data-bs-toggle="tooltip"
@@ -150,7 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                         <div class="col-md-3"></div>
 
 
-                        <span>Courses</span>
+                        <span>Users</span>
+                        <select name="" id="" class="form-select form-select-sm">User Type</select>
                         <!-- Success/Error alerts -->
                         <?php if (isset($_SESSION['success'])): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -172,7 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                     <th>ID</th>
                                     <th>User Type</th>
                                     <th>Username</th>
-                                    <th>UserId</th>
+                                    <th>User Id</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -192,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
 
                                 // Fetch paginated courses
                                 $sql = "SELECT 
-                                u.id AS ID, u.userType AS userType, u.username AS username, u.userId AS userId,
+                                u.id AS ID, u.userType AS userType, u.username AS username, u.userId AS userId, u.status,
                                 s.id, s.firstName, s.lastName
                                     FROM users u
                                     JOIN students s ON u.userId = s.id
@@ -208,18 +213,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                             <td><?= htmlspecialchars($row['userType']) ?></td>
                                             <td><?= htmlspecialchars($row['username']) ?></td>
                                             <td><?= htmlspecialchars($row['userId']) ?></td>
+                                            <td><?= htmlspecialchars($row['status']) ?></td>
                                             <td>
                                                 <!-- Edit button -->
-                                                <button 
-    type="button" 
-    class="btn btn-sm btn-outline-primary editBtn" 
-    style="border-radius: 10px; padding: 2px 8px;"
-    data-bs-toggle="modal" 
-    data-bs-target="#editCourseModal" 
-    data-id="<?= $row['ID'] ?>" 
-   >
-    <i class="bi bi-pencil-square"></i>
-</button>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-sm btn-outline-primary editBtn"
+                                                    style="border-radius: 10px; padding: 2px 8px;"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editCourseModal"
+                                                    data-id="<?= $row['ID'] ?>">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </button>
                                                 <!-- Delete button (opens modal) -->
                                                 <button type="button"
                                                     class="btn btn-sm btn-outline-danger"
@@ -238,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                                 else:
                                     ?>
                                     <tr>
-                                        <td colspan="5" class="text-center">No courses found</td>
+                                        <td colspan="5" class="text-center">No users00 found</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
@@ -257,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="mb-0 text-muted">© 2025 Modern Bootstrap Admin Template</p>
+                            <p class="mb-0 text-muted">© 2025 ASLY International College Inc.</p>
                         </div>
                         <div class="col-md-6 text-md-end">
                             <p class="mb-0 text-muted">Built with Bootstrap 5.3.7</p>
@@ -275,106 +280,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
 
 
         <!-- Icon Demo Modal -->
-        <div class="modal fade" id="iconDemoModal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+      
+        <div class="modal-footer">
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Course ID</th>
-                                    <th>Education Level</th>
-                                    <th>Course Code</th>
-                                    <th>Course</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if ($result && $result->num_rows > 0):
-                                    while ($row = $result->fetch_assoc()):
-                                ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($row['courseId']) ?></td>
-                                            <td><?= htmlspecialchars($row['educationLevel']) ?></td>
-                                            <td><?= htmlspecialchars($row['courseCode']) ?></td>
-                                            <td><?= htmlspecialchars($row['course']) ?></td>
-                                            <td>
-                                                <!-- Edit button -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-primary editBtn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>"
-                                                    data-education="<?= $row['educationId'] ?>"
-                                                    data-code="<?= htmlspecialchars($row['courseCode']) ?>"
-                                                    data-course="<?= htmlspecialchars($row['course']) ?>">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </button>
-
-                                                <!-- Delete button (opens modal) -->
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-danger"
-                                                    title="Delete"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteCourseModal"
-                                                    data-id="<?= $row['courseId'] ?>">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endwhile;
-                                else:
-                                    ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center">No courses found</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-
-                        <!-- Pagination Controls -->
-                        <?php if ($totalPages > 1): ?>
-                        <nav aria-label="Course table pagination">
-                            <ul class="pagination justify-content-center">
-                                <!-- Previous -->
-                                <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
-                                </li>
-                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                    <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
-                                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                                    </li>
-                                <?php endfor; ?>
-                                <!-- Next -->
-                                <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <?php endif; ?>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-heart icon-xl icon-pulse text-danger"></i>
-                                <br><small>Pulse</small>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-star icon-xl icon-hover text-warning"></i>
-                                <br><small>Hover Effect</small>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <i class="bi bi-check-circle icon-xl text-success"></i>
-                                <br><small>Static</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
+        </div>
+        </div>
+        </div>
         </div>
 
         <!-- Edit Course Modal -->
@@ -405,7 +316,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
                             <input type="text" name="courseCode" id="editCourseCode" class="form-control" required>
                         </div>
 
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -488,17 +399,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addCourse'])) {
 
         <!-- Scripts -->
         <script>
-           
+
         </script>
 
         <script>
-// Force reload on browser back navigation to trigger PHP session check
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-        window.location.reload();
-    }   
-});
-</script>
+            // Force reload on browser back navigation to trigger PHP session check
+            window.addEventListener("pageshow", function(event) {
+                if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+                    window.location.reload();
+                }
+            });
+        </script>
     </body>
 </body>
 

@@ -581,12 +581,9 @@ if (!isset($_SESSION['user_id'])) {
         });
     </script>
     <script>
-        //clear cache on browser
+        // Clear cache on browser back navigation to ensure fresh page load
         if (window.history && window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
-            window.onpopstate = function() {
-                window.location.href = '../../../auth/login.php'; // redirect to login
-            };
         }
     </script>
 </body>
@@ -595,13 +592,6 @@ if (!isset($_SESSION['user_id'])) {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // Force reload on browser back navigation to trigger PHP session check
-    window.addEventListener("pageshow", function(event) {
-        if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
-            window.location.reload();
-        }
-    });
-
     //line chart for enrollees per course
     document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('enrolleeTrendChart').getContext('2d');
