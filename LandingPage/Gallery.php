@@ -90,7 +90,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
                                 <li class="nav-item"><a class="nav-link active" href="Gallery.php">BLOG</a></li>
                                 <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
                                 <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
-                                <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
+                                <li class="nav-item"><a class="nav-link" href="FAQs.php">FAQs</a></li>
                                 <li class="nav-item">
                                     <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
                                 </li>

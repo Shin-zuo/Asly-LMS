@@ -152,8 +152,8 @@ URI     : https://colorlib.com
                 <li>
                   <a href="sterile1.php" class="text-decoration-none active-course" style="font-size:1.1rem;">Central Sterile Processing Technology</a>
                   <ul class="list-unstyled ms-3">
-                    <li><a href="#Functions" style="color:#959094; font-size:0.98rem; text-decoration:none;">Functions of CSSD</a></li>
-                    <li><a href="#Importance" style="color:#959094; font-size:0.98rem; text-decoration:none;">Importance of Central Sterile Processing Technology</a></li>
+                    <li><a href="#AboutCSPT" style="color:#959094; font-size:0.98rem; text-decoration:none;">Central Sterile Processing Technology (CSPT)</a></li>
+                    <li><a href="#DifferenceCSS_CSPT" style="color:#959094; font-size:0.98rem; text-decoration:none;">Difference Between Central Sterile Services (CSS) and Central Sterile Processing Technology (CSPT)</a></li>
     <style>
       .ms-3 a:hover {
         font-weight: bold;

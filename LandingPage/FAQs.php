@@ -122,10 +122,10 @@ body {
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link" href="../index.php">HOME</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="Gallery.php">BLOG</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Gallery.php">BLOG</a></li>
                                 <li class="nav-item"><a class="nav-link" href="Enroll.php">ADMISSION</a></li>
                                 <li class="nav-item"><a class="nav-link" href="Features.php">ABOUT US</a></li>
-                                <li class="nav-item"><a class="nav-link" href="../index.php#contact">FAQs</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#">FAQs</a></li>
                                 <li class="nav-item">
                                     <a href="../auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log In</a>
                                 </li>
@@ -138,57 +138,44 @@ body {
     </div>
     </br>
     </br>
-    <main class="container mx-auto px-4 py-12">
-        <section class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Find answers to common questions about our school, programs, admissions, and more.</p>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <faq-item 
-                    question="What are the school hours?" 
-                    answer="Our school operates from 8:00 AM to 3:00 PM, Monday through Friday. Early drop-off is available starting at 7:30 AM, and after-school care is offered until 5:30 PM.">
-                </faq-item>
-                
-                <faq-item 
-                    question="What is the admission process?" 
-                    answer="Admission involves four steps: 1) Submit an online application, 2) Attend an interview, 3) Complete an assessment test, and 4) Provide previous school records. The entire process typically takes 2-3 weeks.">
-                </faq-item>
-                
-                <faq-item 
-                    question="What extracurricular activities are offered?" 
-                    answer="We offer a wide range of activities including sports (soccer, basketball, swimming), arts (drama, painting, choir), STEM clubs, debate team, and community service programs. New activities are added each semester based on student interest.">
-                </faq-item>
-                
-                <faq-item 
-                    question="How does the school handle bullying?" 
-                    answer="We have a zero-tolerance policy for bullying. Our approach includes prevention programs, immediate intervention, counseling for all involved parties, and progressive disciplinary measures. All incidents are documented and parents are notified.">
-                </faq-item>
-                
-                <faq-item 
-                    question="What technology is used in classrooms?" 
-                    answer="Each classroom is equipped with interactive smart boards, tablets for student use, and a 1:1 laptop program for grades 5-12. We use various educational platforms including Google Classroom, Khan Academy, and specialized subject-specific software.">
-                </faq-item>
-                
-                <faq-item 
-                    question="Is financial aid available?" 
-                    answer="Yes, we offer need-based financial aid to approximately 30% of our student body. Applications are reviewed annually and awards range from 25% to full tuition coverage based on demonstrated need and available funds.">
-                </faq-item>
-                
-                <faq-item 
-                    question="What are the lunch options?" 
-                    answer="Our cafeteria offers daily hot meals (including vegetarian options), a salad bar, and à la carte items. Menus are planned by a nutritionist and posted monthly. Students may also bring lunch from home.">
-                </faq-item>
-                
-                <faq-item 
-                    question="How are parents involved in school activities?" 
-                    answer="Parents can join our PTA, volunteer in classrooms, chaperone field trips, participate in parent-teacher conferences, and attend various school events throughout the year. We also have a parent portal for ongoing communication.">
-                </faq-item>
-            </div>
-        </section>
-    </main>
+        </br>
     </br>
+        </br>
+    </br>
+   <main class="container mx-auto px-4 py-12">
+    <section class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Find answers to common questions about our programs, admissions, and opportunities at AICI.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <faq-item 
+                question="What courses does AICI offer?" 
+                answer="AICI offers specialized programs in Healthcare and Information Technology. These include <strong>Central Sterile Services (1-year program)</strong>, <strong>Central Sterile Processing Technology (2-year program)</strong>, <strong>Computer Systems Servicing NC II</strong>, <strong>Java Programming NC III</strong>, and <strong>Web Development NC III</strong>. All programs are TESDA-accredited, ensuring that graduates receive nationally recognized certifications aligned with industry standards.">
+            </faq-item>
+
+            <faq-item 
+                question="Who can enroll in AICI programs?" 
+                answer="Our programs are open to high school graduates, college undergraduates, professionals, out-of-school youth, and overseas Filipino workers (OFWs) who wish to gain new skills, upgrade their credentials, or pursue career advancement.">
+            </faq-item>
+
+            <faq-item 
+                question="Do you recognize prior learning or work experience?" 
+                answer="Yes. Through TESDA’s <strong>Recognition of Prior Learning (RPL)</strong>, relevant work experience and previously acquired skills may be credited toward certification, allowing learners to complete programs more efficiently.">
+            </faq-item>
+
+            <faq-item 
+                question="Why should I choose AICI?" 
+                answer="AICI is committed to providing globally aligned, competency-based training rooted in the values of honesty, integrity, and service. As the only institution in the Philippines offering specialized Central Sterile programs alongside ICT courses, AICI ensures quality education through experienced instructors and strong industry partnerships—leading to better employment opportunities.">
+            </faq-item>
+        </div>
+    </section>
+</main>
+</br>
+
         <script>
             
 document.addEventListener('DOMContentLoaded', () => {
