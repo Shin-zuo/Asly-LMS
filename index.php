@@ -42,6 +42,7 @@ URI     : https://colorlib.com
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 
@@ -72,7 +73,7 @@ URI     : https://colorlib.com
                                 <li class="nav-item"> <a class="nav-link" href="LandingPage/Gallery.php">BLOG</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="LandingPage/Enroll.php">ADMISSION  </a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="LandingPage/Features.php">ABOUT US</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#contact">FAQs</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="LandingPage/FAQs.php">FAQs</a> </li>
                                 <li class="nav-item"><a href="auth/login.php" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Log
                                         In</a></li>
                             </ul>
@@ -577,175 +578,7 @@ URI     : https://colorlib.com
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- // end .section -->
-
-        <!-- // end .section -->
-
-
-
-
-        <!-- // end .section -->
-        <div class="section" id="enroll">
-            <div class="container">
-                <div class="section-title">
-                    <!-- <small>Enroll</small> -->
-                    <h3>Enroll Now</h3>
-                </div>
-
-                <!-- ✅ Display Messages -->
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="alert alert-danger">
-                        <?= htmlspecialchars($_GET['error']) ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($_GET['success'])): ?>
-                    <div class="alert alert-success">
-                        Enrollment successful!
-                    </div>
-                <?php endif; ?>
-
-                <!-- ✅ Enrollment Form -->
-            <form action="functions/enroll.php" method="POST" id="enrollmentForm">
-                <div class="mb-3 row">
-                    <div class="col-md-5">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" required>
-                    </div>
-                    <div class="col-md-1">
-                        <label for="middleInitial">M.I.</label>
-                        <input type="text" id="middleInitial" name="middleInitial" class="form-control text-center" maxlength="2">
-                    </div>
-                    <div class="col-md-5">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" required>
-                    </div>
-                    <div class="col-md-1">
-                        <label for="prefix">Prefix</label>
-                        <input type="text" id="prefix" name="prefix" class="form-control text-center" maxlength="3">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-5">
-                        <label for="street" class="form-label">Number, Street</label>
-                        <input type="text" name="street" class="form-control" id="street" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="barangay" class="form-label">Barangay</label>
-                        <input type="text" name="barangay" class="form-control" id="barangay" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="district" class="form-label">District</label>
-                        <input type="text" name="district" class="form-control" id="district" required>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-5">
-                        <label for="city" class="form-label">City/Municipality</label>
-                        <input type="text" name="city" class="form-control" id="city" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="province" class="form-label">Province</label>
-                        <input type="text" name="province" class="form-control" id="province" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="region" class="form-label">Region</label>
-                        <input type="text" name="region" class="form-control" id="region" required>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="contact" class="form-label">Contact Number</label>
-                        <input type="text" name="contact" class="form-control" id="contact">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-3">
-                        <label for="gender" class="form-label">Gender</label>
-                        <select id="gender" name="gender" class="form-select" required>
-                            <option value="" disabled selected>-- Select Gender --</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="civilStatus" class="form-label">Civil Status</label>
-                        <select id="civilStatus" name="civilStatus" class="form-select" required>
-                            <option value="" disabled selected>-- Select Civil Status --</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Widowed">Widowed</option>
-                            <option value="Separated">Separated</option>
-                            <option value="Divorced">Divorced</option>
-                        </select>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="EmploymentStatus" class="form-label">Employment Status</label>
-                        <select id="EmploymentStatus" name="EmploymentStatus" class="form-select" required>
-                            <option value="" disabled selected>-- Select Employment Status --</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Self-Employed">Self-Employed</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="applyFor" class="form-label">Apply For</label>
-                        <select id="applyFor" name="applyFor" class="form-select" required>
-                            <option value="" disabled selected>-- Select Admission --</option>
-                            <?php while ($row = $educationLevels->fetch_assoc()): ?>
-                                <option value="<?= $row['id'] ?>">
-                                    <?= htmlspecialchars($row['educationLevel']) ?>
-                                </option>
-                            <?php endwhile; ?>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="course" class="form-label">Course</label>
-                        <select id="course" name="course" class="form-select" required>
-                            <option value="" disabled selected>-- Select Course --</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="lastSchool" class="form-label">Last School Attended</label>
-                        <input type="text" name="lastSchool" class="form-control" id="lastSchool">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="schoolYear" class="form-label">Last School Year</label>
-                        <input type="text" name="schoolYear" class="form-control" id="schoolYear">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <div class="col-md-6">
-                        <label for="birthdate" class="form-label">Birth Date</label>
-                        <input type="date" name="birthdate" class="form-control" id="birthdate">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="birthplace" class="form-label">Place of Birth</label>
-                        <input type="text" name="birthplace" class="form-control" id="birthplace">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-
-                <!-- // end .enroll -->
-
-
-            </div>
-
-        </div>
-        <!-- // end .section -->
-
 
         <div class="section pt-0">
             <div class="container">
@@ -789,7 +622,6 @@ URI     : https://colorlib.com
             </div>
 
         </div>
-        <!-- // end .section -->
         <div class="light-bg py-5">
             <div class="container">
                 <div class="row align-items-center text-center text-lg-start">
