@@ -61,6 +61,10 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
      <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
 <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
