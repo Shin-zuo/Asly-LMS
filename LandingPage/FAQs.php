@@ -60,6 +60,41 @@ Author  : Colorlib (Modified for Asly International College Inc.)
         .text-decoration-none {
             color: #959094 !important;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+/* Animation for FAQ items */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.faq-animate {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Custom scrollbar for FAQ answers */
+.faq-answer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.faq-answer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.faq-answer::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 10px;
+}
+
+.faq-answer::-webkit-scrollbar-thumb:hover {
+    background: #a5b4fc;
+}
     </style>
 </head>
 
@@ -103,7 +138,91 @@ Author  : Colorlib (Modified for Asly International College Inc.)
     </div>
     </br>
     </br>
+    <main class="container mx-auto px-4 py-12">
+        <section class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Find answers to common questions about our school, programs, admissions, and more.</p>
+            </div>
 
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <faq-item 
+                    question="What are the school hours?" 
+                    answer="Our school operates from 8:00 AM to 3:00 PM, Monday through Friday. Early drop-off is available starting at 7:30 AM, and after-school care is offered until 5:30 PM.">
+                </faq-item>
+                
+                <faq-item 
+                    question="What is the admission process?" 
+                    answer="Admission involves four steps: 1) Submit an online application, 2) Attend an interview, 3) Complete an assessment test, and 4) Provide previous school records. The entire process typically takes 2-3 weeks.">
+                </faq-item>
+                
+                <faq-item 
+                    question="What extracurricular activities are offered?" 
+                    answer="We offer a wide range of activities including sports (soccer, basketball, swimming), arts (drama, painting, choir), STEM clubs, debate team, and community service programs. New activities are added each semester based on student interest.">
+                </faq-item>
+                
+                <faq-item 
+                    question="How does the school handle bullying?" 
+                    answer="We have a zero-tolerance policy for bullying. Our approach includes prevention programs, immediate intervention, counseling for all involved parties, and progressive disciplinary measures. All incidents are documented and parents are notified.">
+                </faq-item>
+                
+                <faq-item 
+                    question="What technology is used in classrooms?" 
+                    answer="Each classroom is equipped with interactive smart boards, tablets for student use, and a 1:1 laptop program for grades 5-12. We use various educational platforms including Google Classroom, Khan Academy, and specialized subject-specific software.">
+                </faq-item>
+                
+                <faq-item 
+                    question="Is financial aid available?" 
+                    answer="Yes, we offer need-based financial aid to approximately 30% of our student body. Applications are reviewed annually and awards range from 25% to full tuition coverage based on demonstrated need and available funds.">
+                </faq-item>
+                
+                <faq-item 
+                    question="What are the lunch options?" 
+                    answer="Our cafeteria offers daily hot meals (including vegetarian options), a salad bar, and à la carte items. Menus are planned by a nutritionist and posted monthly. Students may also bring lunch from home.">
+                </faq-item>
+                
+                <faq-item 
+                    question="How are parents involved in school activities?" 
+                    answer="Parents can join our PTA, volunteer in classrooms, chaperone field trips, participate in parent-teacher conferences, and attend various school events throughout the year. We also have a parent portal for ongoing communication.">
+                </faq-item>
+            </div>
+        </section>
+    </main>
+    </br>
+        <script>
+            
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('EduQuest Answers Explorer is ready!');
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Close all FAQs when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('faq-item')) {
+            document.querySelectorAll('faq-item').forEach(item => {
+                if (item.isOpen) {
+                    item.isOpen = false;
+                    const answer = item.shadowRoot.querySelector('.faq-answer');
+                    const toggle = item.shadowRoot.querySelector('.faq-toggle');
+                    if (answer && toggle) {
+                        answer.style.maxHeight = '0';
+                        toggle.classList.remove('open');
+                    }
+                }
+            });
+        }
+    });
+});
+
+        </script>
 
     <!-- Contact & Footer -->
     <div class="light-bg py-5">
@@ -127,6 +246,7 @@ Author  : Colorlib (Modified for Asly International College Inc.)
             </div>
         </div>
     </div>
+    
 
     <footer class="my-5 text-center">
         <p class="mb-2"><small>Copyright © Asly International College Inc. All Rights
@@ -147,6 +267,8 @@ Author  : Colorlib (Modified for Asly International College Inc.)
 
     <!-- Custom JS -->
     <script src="../js/script.js"></script>
+
+    <Script src="faqitem.js"></Script>
 
 </body>
 
