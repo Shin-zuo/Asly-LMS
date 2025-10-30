@@ -104,7 +104,7 @@ $result = $conn->query($sql);
 <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Bootstrap Icons CSS -->
-<link rel="stylesheet" href="./assets/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 <style>
 /* Change active nav link color */
