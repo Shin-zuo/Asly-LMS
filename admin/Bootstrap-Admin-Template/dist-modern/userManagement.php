@@ -170,10 +170,25 @@ $result = $conn->query($sql);
 
                     <!-- Stats Cards with Alpine.js -->
                     <div class="row g-3 align-items-end">
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['success'];
+                                unset($_SESSION['success']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php elseif (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['error'];
+                                unset($_SESSION['error']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php endif; ?>
+                        </div>
 
 <!-- Enrollee's table -->
                         <span>Enrollees</span>
+                        
 
                         <table class="table table-striped" id="enrolleeTable">
                             <thead>
@@ -215,7 +230,7 @@ $result = $conn->query($sql);
 
                                                 <!-- Delete Button -->
                                                 <button type="button" class="btn btn-sm btn-outline-danger" title="Delete"
-                                                    onclick="if(confirm('Are you sure you want to delete this enrollee?')) window.location.href='delete.php?id=<?= $row['id'] ?>';">
+                                                    onclick="if(confirm('Are you sure you want to delete this enrollee?')) window.location.href='./functions/delete_enrollee.php?id=<?= $row['id'] ?>';">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
