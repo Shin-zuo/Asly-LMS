@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management - Modern Bootstrap Admin</title>
-    
-   <meta charset="UTF-8">
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ASLY International College Inc">
     <meta name="keywords" content="ASLY, AICI, College, TESDA, Senior High School">
@@ -19,22 +18,35 @@
     <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
-    
-    <!-- PWA Manifest -->
+     <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
-    
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- ApexCharts CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
-    <!-- Styles now in SCSS files -->
-
 <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
-<script type="module" crossorigin src="./assets/users-Dmkc6S2W.js"></script>
-<link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
+    <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
+
+<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap Icons CSS -->
+<link rel="stylesheet" href="./assets/bootstrap-icons/font/bootstrap-icons.css">
+
+<style>
+/* Change active nav link color */
+.nav-link.active {
+  color: #ffffff !important; /* text color when active */
+  background-color: #6366f1 !important; /* background color when active */
+  border-radius: 0.375rem; /* optional: adds rounded corners */
+}
+
+/* Optional: make hover consistent */
+.nav-link:hover {
+  color: #ffffff !important;
+  background-color: #6366f1 !important;
+}
+</style>
+
+
+    <title>Course Management</title>
+</head>
 
 <body data-page="users" class="user-management">
     <!-- Admin App Container -->

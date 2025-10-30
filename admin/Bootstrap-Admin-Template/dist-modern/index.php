@@ -9,6 +9,8 @@ header("Pragma: no-cache");
 
 require_once '../../../config/database.php';
 
+
+
 // If no active session, try auto-login with remember_token
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
     $token = $_COOKIE['remember_token'];
@@ -42,7 +44,9 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en" data-bs-theme="light">
 
 <head>
-    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ASLY International College Inc">
@@ -57,23 +61,34 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="icon" type="image/svg+xml" href="./assets/ASLYLOGO3.png">
     <link rel="icon" type="image/png" href="./assets/ASLYLOGO3.png">
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Title -->
-    <title>Dashboard - Modern Bootstrap Admin</title>
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#6366f1">
-
-    <!-- PWA Manifest -->
+     <!-- PWA Manifest -->
     <link rel="manifest" href="./assets/manifest-DTaoG9pG.json">
-    <script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
+<script type="module" crossorigin src="./assets/main-BPhDq89w.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-D9K-blpF.css">
+
+<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+<script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap Icons CSS -->
+<link rel="stylesheet" href="./assets/bootstrap-icons/font/bootstrap-icons.css">
+
+<style>
+/* Change active nav link color */
+.nav-link.active {
+  color: #ffffff !important; /* text color when active */
+  background-color: #6366f1 !important; /* background color when active */
+  border-radius: 0.375rem; /* optional: adds rounded corners */
+}
+
+/* Optional: make hover consistent */
+.nav-link:hover {
+  color: #ffffff !important;
+  background-color: #6366f1 !important;
+}
+</style>
+
+
+    <title>Course Management</title>
 </head>
 
 <body data-page="dashboard" class="admin-layout">
